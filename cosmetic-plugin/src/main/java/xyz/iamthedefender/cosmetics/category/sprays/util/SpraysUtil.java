@@ -43,12 +43,12 @@ public class SpraysUtil
      * @param player The player for whom to spawn the spray.
      * @param itemFrame The item frame in which to display the spray.
      */
-    public static void spawnSprays(Player player, ItemFrame itemFrame) {
+    public static void spawnSprays(Player player, ItemFrame itemFrame, boolean isPreview) {
         HCore.syncScheduler().run(() -> {
             MapView view = Bukkit.createMap(player.getWorld());
             String spray = Cosmetics.getInstance().getApi().getSelectedCosmetic(player, CosmeticsType.Sprays);
             ConfigManager config = ConfigUtils.getSprays();
-            if (SpraysUtil.cooldown.containsKey(player.getName())) {
+            if (SpraysUtil.cooldown.containsKey(player.getName()) && !isPreview) {
                 // Player is in cooldown
                 long cooldownEndTime = SpraysUtil.cooldown.get(player.getName());
                 if (cooldownEndTime > System.currentTimeMillis() && cooldownEndTime != 0) {
@@ -82,7 +82,7 @@ public class SpraysUtil
                 player.sendMessage(ColorUtil.colored("&cLooks like there's an error rendering the Spray, contact the admin!"));
                 Logger.getLogger("Minecraft").log(Level.SEVERE, "Could not load the File for the " + spray + ". Check if the File in Sprays.yml is valid: " + file.getPath());
             } else {
-                addRendererAndShowSpray(player, itemFrame, renderer, view);
+                addRendererAndShowSpray(player, itemFrame, renderer, view, isPreview);
             }
         });
     }
@@ -95,10 +95,14 @@ public class SpraysUtil
      * @param renderer The custom renderer to add.
      * @param view The map view to render.
      */
-    private static void addRendererAndShowSpray(Player player, ItemFrame itemFrame, CustomRenderer renderer, MapView view) {
+    private static void addRendererAndShowSpray(Player player, ItemFrame itemFrame, CustomRenderer renderer, MapView view, boolean isPreview) {
         ItemStack map = Cosmetics.getInstance().getApi().getVersionSupport().applyRenderer(renderer, view);
         itemFrame.setItem(map);
         itemFrame.setRotation(Rotation.NONE);
+        if(isPreview){
+            player.getInventory().addItem(map);
+            player.getInventory().setItem(0, map);
+        }
 
         Particle particle = new Particle(ParticleType.ASH, 10, new Vector());
         HCore.playParticle(player, itemFrame.getLocation(), particle);

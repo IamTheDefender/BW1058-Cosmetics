@@ -2,6 +2,7 @@
 
 package xyz.iamthedefender.cosmetics.listener;
 
+import com.hakan.core.HCore;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.*;
@@ -64,8 +65,10 @@ public class PlayerJoinListener implements Listener {
             }
 
             if (!Cosmetics.getInstance().getPlayerManager().getPlayerOwnedDataHashMap().containsKey(event.getPlayer().getUniqueId())) {
-                PlayerOwnedData playerOwnedData = Cosmetics.getInstance().getPlayerManager().getPlayerOwnedData(event.getPlayer().getUniqueId());
-                playerOwnedData.updateOwned();
+                HCore.asyncScheduler().run(() -> {
+                    PlayerOwnedData playerOwnedData = Cosmetics.getInstance().getPlayerManager().getPlayerOwnedData(event.getPlayer().getUniqueId());
+                    playerOwnedData.updateOwned();
+                });
             } else {
               Cosmetics.getInstance().getPlayerManager().getPlayerOwnedData(event.getPlayer().getUniqueId()).updateOwned();
             }

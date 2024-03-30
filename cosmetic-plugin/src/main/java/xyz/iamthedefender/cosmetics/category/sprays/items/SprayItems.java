@@ -62,7 +62,7 @@ public class SprayItems {
 
                 @Override
                 public void execute(Player player, ItemFrame frame) {
-                    SpraysUtil.spawnSprays(player, frame);
+                    SpraysUtil.spawnSprays(player, frame, false);
                 }
             };
             spray.register();

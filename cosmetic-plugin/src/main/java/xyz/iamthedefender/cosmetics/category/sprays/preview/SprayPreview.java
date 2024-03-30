@@ -16,6 +16,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.Spray;
 import xyz.iamthedefender.cosmetics.category.sprays.util.CustomRenderer;
+import xyz.iamthedefender.cosmetics.category.sprays.util.SpraysUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import org.bukkit.Bukkit;
@@ -124,9 +125,9 @@ public class SprayPreview {
         HCore.syncScheduler().after(5, TimeUnit.SECONDS).run(() -> {
             if (!as.isDead()) as.remove();
 
-            PacketContainer itemFrameDestroyPacket = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.ENTITY_DESTROY);
-            itemFrameDestroyPacket.getIntegerArrays().write(0, new int[]{currentID});
-            Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, itemFrameDestroyPacket);
+            //PacketContainer itemFrameDestroyPacket = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.ENTITY_DESTROY);
+            //itemFrameDestroyPacket.getIntegerArrays().write(0, new int[]{currentID});
+            //Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, itemFrameDestroyPacket);
             frame.setItem(new ItemStack(Material.AIR));
             frame.remove();
             Cosmetics.getInstance().getProtocolManager().removePacketListener(adapter);
@@ -157,6 +158,7 @@ public class SprayPreview {
         view = Bukkit.createMap(player.getWorld());
         playerLocation = playerLocation.clone();
 
+        /**
         CustomRenderer renderer = new CustomRenderer();
         ConfigManager config = ConfigUtils.getSprays();
 
@@ -169,7 +171,7 @@ public class SprayPreview {
                 return;
             }
         } else {
-            File file = new File(System.getProperty("user.dir") + "/plugins/BW1058-Cosmetics/" + Cosmetics.getInstance().getConfig().getString("Spray-Dir") + "/" + sprayFile);
+            File file = new File(Cosmetics.getInstance().getHandler().getAddonPath() + "/" + Cosmetics.getInstance().getConfig().getString("Spray-Dir") + "/" + sprayFile);
             if (!renderer.load(file)) {
                 player.sendMessage(ColorUtil.colored("&cLooks like there's an error rendering the Spray, contact the admin!"));
                 Logger.getLogger("Minecraft").log(Level.SEVERE, "Could not load the File for the " + selected + " Check if the File in Sprays.yml is valid!");
@@ -179,6 +181,7 @@ public class SprayPreview {
         }
 
         view.addRenderer(renderer);
+         **/
 
 
         org.bukkit.inventory.ItemStack mapItem = createMapItem();
@@ -201,18 +204,15 @@ public class SprayPreview {
         };
         Cosmetics.getInstance().getProtocolManager().addPacketListener(adapter);
         frame.setFacingDirection(getCardinalDirection(playerLocation), true);
-        frame.setItem(mapItem);
-
-        player.sendMap(view);
         firstBlock.getBlock().setType(Material.AIR);
-        player.getInventory().setItem(0, mapItem);
+        SpraysUtil.spawnSprays(player, frame, true);
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 player.getInventory().remove(mapItem);
             }
-        }.runTaskAsynchronously(Cosmetics.getInstance());
+        }.runTask(Cosmetics.getInstance());
         XSound.ENTITY_SILVERFISH_HURT.play(player, 10f, 10f);
     }
 
