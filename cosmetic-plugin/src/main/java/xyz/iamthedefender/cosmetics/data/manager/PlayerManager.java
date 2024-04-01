@@ -29,20 +29,14 @@ public class PlayerManager {
     }
 
     public PlayerData getPlayerData(UUID uuid) {
-        if (!playerDataHashMap.containsKey(uuid)) {
-            PlayerData playerData = new PlayerData(uuid);
-            playerData.load();
-            playerDataHashMap.put(uuid, playerData);
-        }
-        return playerDataHashMap.get(uuid);
+        PlayerData playerData = playerDataHashMap.computeIfAbsent(uuid, PlayerData::new);
+        playerData.load();
+        return playerData;
     }
 
     public PlayerOwnedData getPlayerOwnedData(UUID uuid) {
-        if (!playerOwnedDataHashMap.containsKey(uuid)){
-            PlayerOwnedData playerOwnedData = new PlayerOwnedData(uuid);
-            playerOwnedData.load();
-            playerOwnedDataHashMap.put(uuid, playerOwnedData);
-        }
-        return playerOwnedDataHashMap.get(uuid);
+        PlayerOwnedData playerOwnedData = playerOwnedDataHashMap.computeIfAbsent(uuid, PlayerOwnedData::new);
+        playerOwnedData.load();
+        return playerOwnedData;
     }
 }

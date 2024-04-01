@@ -14,10 +14,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinListener implements Listener {
 
-    public PlayerJoinListener() {
-        Cosmetics plugin = Cosmetics.getPlugin(Cosmetics.class);
-    }
-
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         CosmeticsAPI api = Cosmetics.getInstance().getApi();

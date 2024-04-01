@@ -204,16 +204,13 @@ public class SprayPreview {
         };
         Cosmetics.getInstance().getProtocolManager().addPacketListener(adapter);
         frame.setFacingDirection(getCardinalDirection(playerLocation), true);
-        firstBlock.getBlock().setType(Material.AIR);
         SpraysUtil.spawnSprays(player, frame, true);
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                player.getInventory().remove(mapItem);
-            }
-        }.runTask(Cosmetics.getInstance());
         XSound.ENTITY_SILVERFISH_HURT.play(player, 10f, 10f);
+        HCore.syncScheduler().every(10L).run((r) -> {
+            if(frame.isDead() || !frame.isValid()){
+                firstBlock.getBlock().setType(Material.AIR);
+            }
+        });
     }
 
     public static BlockFace getCardinalDirection(Location location) {

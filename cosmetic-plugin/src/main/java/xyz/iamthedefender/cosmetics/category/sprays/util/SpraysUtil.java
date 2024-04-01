@@ -58,9 +58,13 @@ public class SpraysUtil
                 }
                 SpraysUtil.cooldown.remove(player.getName());
             }
-            IArenaHandler arenaHandler = Cosmetics.getInstance().getHandler().getArenaUtil().getArenaByPlayer(player);
-            if(arenaHandler == null) return;
-            SpraysUtil.cooldown.put(player.getName(), System.currentTimeMillis() + 3000L);
+            DebugUtil.addMessage("Playing " + spray + " Spray for " + player.getDisplayName() + " is preview: " + isPreview);
+           if(!isPreview){
+               IArenaHandler arenaHandler = Cosmetics.getInstance().getHandler().getArenaUtil().getArenaByPlayer(player);
+               if(arenaHandler == null) return;
+               SpraysUtil.cooldown.put(player.getName(), System.currentTimeMillis() + 3000L);
+           }
+           DebugUtil.addMessage("Check 1");
 
             view.removeRenderer(view.getRenderers().get(0));
             final CustomRenderer renderer = new CustomRenderer();
