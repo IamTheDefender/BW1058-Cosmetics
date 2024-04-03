@@ -11,17 +11,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
+@Getter
 public class PlayerData {
 
-    @Getter
     private final UUID uuid;
-    @Getter @Setter
+    @Setter
     private String woodSkin, bedDestroy, victoryDance, shopkeeperSkin, glyph, spray, projectileTrail, killMessage, finalKillEffect, islandTopper, deathCry;
-    private final Connection connection;
 
     public PlayerData(UUID uuid) {
         this.uuid = uuid;
-        connection = Cosmetics.getInstance().getRemoteDatabase().getConnection();
         load();
     }
 
@@ -29,6 +27,7 @@ public class PlayerData {
 
     public void load() {
         try {
+            Connection connection = Cosmetics.getInstance().getRemoteDatabase().getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM cosmetics_player_data WHERE uuid = ?");
             statement.setString(1, uuid.toString());
             ResultSet result = statement.executeQuery();
@@ -46,6 +45,7 @@ public class PlayerData {
                 deathCry = result.getString("death_cry");
             }
             statement.close();
+            connection.close();
         } catch (SQLException e) {
             Bukkit.getLogger().severe("Failed to load player-data: " + e.getMessage());
         }
@@ -56,6 +56,7 @@ public class PlayerData {
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         try {
+            Connection connection = Cosmetics.getInstance().getRemoteDatabase().getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, uuid.toString());
             statement.setString(2, bedDestroy);
@@ -71,6 +72,7 @@ public class PlayerData {
             statement.setString(12, deathCry);
             statement.executeUpdate();
             statement.close();
+            connection.close();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -78,6 +80,7 @@ public class PlayerData {
 
     public void save() {
         try {
+            Connection connection = Cosmetics.getInstance().getRemoteDatabase().getConnection();
             PreparedStatement statement = connection.prepareStatement(
                     "UPDATE cosmetics_player_data SET bed_destroy = ?, wood_skin = ?, victory_dance = ?, shopkeeper_skin = ?, glyph = ?, spray = ?, projectile_trail = ?, kill_message = ?, final_kill_effect = ?, island_topper = ?, death_cry = ? WHERE uuid = ?");
             statement.setString(1, bedDestroy);
@@ -94,6 +97,7 @@ public class PlayerData {
             statement.setString(12, uuid.toString());
             statement.executeUpdate();
             statement.close();
+            connection.close();
         } catch (SQLException e) {
             Bukkit.getLogger().severe("Failed to save player-data: " + e.getMessage());
         }

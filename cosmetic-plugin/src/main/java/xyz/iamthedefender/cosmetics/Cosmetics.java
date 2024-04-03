@@ -127,7 +127,16 @@ public class Cosmetics extends JavaPlugin {
         ConfigUtils.addExtrasToLang();
 
         this.menuData = new ConfigManager(this, "MainMenu", getHandler().getAddonPath());
+        StartupUtils.loadLists();
+        getLogger().info("Cosmetics list successfully loaded.");
+
+        getLogger().info("Saving data to configs...");
+        MainMenuUtils.saveLores();
+        StartupUtils.updateConfigs();
+        getLogger().info("Creating folders...");
+        StartupUtils.createFolders();
         ConfigUtils.addSlotsList();
+
         getLogger().info("Configuration file successfully loaded.");
         getLogger().info("Loading " + (api.isMySQL() ? "MySQL" : "SQLite") + " database...");
         if (api.isMySQL()){
@@ -141,15 +150,7 @@ public class Cosmetics extends JavaPlugin {
             remoteDatabase = new SQLite(this);
         }
         handler.register();
-        // Load all the list
-        StartupUtils.loadLists();
-        getLogger().info("Cosmetics list successfully loaded.");
-
-        getLogger().info("Saving data to configs...");
-        MainMenuUtils.saveLores();
-        StartupUtils.updateConfigs();
-        getLogger().info("Creating folders...");
-        StartupUtils.createFolders();
+        
         getLogger().info("Registering event listeners...");
         StartupUtils.registerEvents();
         getLogger().info("Registering command to HCore...");

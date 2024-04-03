@@ -390,7 +390,9 @@ public class StartupUtils
         Library fastutil = new Library.Builder().groupId("it{}unimi{}dsi").artifactId("fastutil").version("8.5.8").build();
         libraryManager.addMavenCentral();
         libraryManager.addJitPack();
-        libraryManager.loadLibrary(mysql);
+        if(VersionSupportUtil.isHigherThan("1.8")){
+            libraryManager.loadLibrary(mysql);
+        }
         checkAndLoad(hCore, libraryManager);
         libraryManager.loadLibrary(hikariCP);
         libraryManager.loadLibrary(fastutil);

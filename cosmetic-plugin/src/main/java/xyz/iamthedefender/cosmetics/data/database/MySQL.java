@@ -38,6 +38,7 @@ public class MySQL implements IDatabase {
         if (!needConnecting) {
             try (Connection connection = dataSource.getConnection()) {
                 connection.createStatement();
+                connection.close();
             } catch (Exception e) {
                 needConnecting = true;
             }
@@ -52,7 +53,12 @@ public class MySQL implements IDatabase {
             int maxpoolsize = plugin.getConfig().getInt("mysql.maxpoolsize", 50);
 
             HikariConfig config = new HikariConfig();
-            config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+            try{
+                config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+            }catch (Exception e){
+                config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
+            }
+
             config.setJdbcUrl("jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true" + "&enabledTLSProtocols=TLSv1.2" + "&useSSL=" + ssl + "&allowPublicKeyRetrieval=true");
             config.setPoolName("BW1058Cosmetics-MySQLPool");
             config.setMaximumPoolSize(maxpoolsize);
@@ -69,7 +75,7 @@ public class MySQL implements IDatabase {
             config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
             dataSource = new HikariDataSource(config);
             try {
-                dataSource.getConnection();
+                dataSource.getConnection().close();
             } catch (SQLException e) {
                 Bukkit.getLogger().severe("There was an issue while getting connection for the database! error: " + e.getMessage());
             }
@@ -81,7 +87,8 @@ public class MySQL implements IDatabase {
     public void createTable(){
         if (dataSource != null){
             try {
-                Statement statement = getConnection().createStatement();
+                Connection connection = getConnection();
+                Statement statement = connection.createStatement();
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS cosmetics_player_data (" +
                         "uuid VARCHAR(36) PRIMARY KEY," +
                         "bed_destroy VARCHAR(36)," +
@@ -110,6 +117,7 @@ public class MySQL implements IDatabase {
                         "victory_dance INT," +
                         "wood_skin INT" +
                         ")");
+                connection.close();
             } catch (SQLException e) {
                 Bukkit.getLogger().severe("Failed to create player-data table: " + e.getMessage());
             }
