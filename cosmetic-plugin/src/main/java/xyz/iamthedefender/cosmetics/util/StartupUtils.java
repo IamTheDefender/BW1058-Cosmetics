@@ -391,9 +391,8 @@ public class StartupUtils
         Library slf4j = new Library.Builder().groupId("org{}slf4j").artifactId("slf4j-api").version("2.0.7").build();
         libraryManager.addMavenCentral();
         libraryManager.addJitPack();
-        if(VersionSupportUtil.isHigherThan("1.8")){
-            libraryManager.loadLibrary(mysql);
-        }
+        libraryManager.loadLibrary(mysql);
+
         checkAndLoad(hCore, libraryManager);
         libraryManager.loadLibrary(hikariCP);
         libraryManager.loadLibrary(fastutil);

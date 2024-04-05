@@ -53,12 +53,7 @@ public class MySQL implements IDatabase {
             int maxpoolsize = plugin.getConfig().getInt("mysql.maxpoolsize", 50);
 
             HikariConfig config = new HikariConfig();
-            try{
-                config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-            }catch (Exception e){
-                config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
-            }
-
+            config.setDriverClassName("com.mysql.cj.jdbc.Driver");
             config.setJdbcUrl("jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true" + "&enabledTLSProtocols=TLSv1.2" + "&useSSL=" + ssl + "&allowPublicKeyRetrieval=true");
             config.setPoolName("BW1058Cosmetics-MySQLPool");
             config.setMaximumPoolSize(maxpoolsize);
