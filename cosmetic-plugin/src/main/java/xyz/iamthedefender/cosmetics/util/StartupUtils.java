@@ -388,6 +388,10 @@ public class StartupUtils
         Library hCore = new Library.Builder().groupId("com{}github{}hakan-krgn{}hCore").artifactId("hCore-bukkit").version("0.7.3.3").build();
         Library hikariCP = new Library.Builder().groupId("com{}zaxxer").artifactId("HikariCP").version("5.0.1").build();
         Library fastutil = new Library.Builder().groupId("it{}unimi{}dsi").artifactId("fastutil").version("8.5.8").build();
+        Library log4jApi = new Library.Builder().groupId("org.apache.logging.log4j").artifactId("log4j-api").version("2.7").build();
+        Library log4jCore = new Library.Builder().groupId("org.apache.logging.log4j").artifactId("log4j-core").version("2.7").build();
+        Library log4jSlf4jImpl = new Library.Builder().groupId("org.apache.logging.log4j").artifactId("log4j-slf4j-impl").version("2.7").build();
+
         libraryManager.addMavenCentral();
         libraryManager.addJitPack();
         if(VersionSupportUtil.isHigherThan("1.8")){
@@ -396,7 +400,9 @@ public class StartupUtils
         checkAndLoad(hCore, libraryManager);
         libraryManager.loadLibrary(hikariCP);
         libraryManager.loadLibrary(fastutil);
-
+        libraryManager.loadLibrary(log4jApi);
+        libraryManager.loadLibrary(log4jCore);
+        libraryManager.loadLibrary(log4jSlf4jImpl);
     }
 
 
