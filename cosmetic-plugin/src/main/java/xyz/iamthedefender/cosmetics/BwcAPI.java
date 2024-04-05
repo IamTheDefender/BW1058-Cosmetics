@@ -12,6 +12,7 @@ import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
 import xyz.iamthedefender.cosmetics.data.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import xyz.iamthedefender.cosmetics.util.DebugUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
 
 import java.util.List;
@@ -158,6 +159,7 @@ public class BwcAPI implements CosmeticsAPI {
                 playerData.setFinalKillEffect(value);
                 break;
             case Glyphs:
+                DebugUtil.addMessage("Glyph: " + value);
                 playerData.setGlyph(value);
                 break;
             case IslandTopper:

@@ -19,6 +19,7 @@ import xyz.iamthedefender.cosmetics.category.islandtoppers.preview.IslandTopperP
 import xyz.iamthedefender.cosmetics.category.killmessage.preview.KillMessagePreview;
 import xyz.iamthedefender.cosmetics.category.shopkeeperskins.preview.ShopKeeperPreview;
 import xyz.iamthedefender.cosmetics.category.sprays.preview.SprayPreview;
+import xyz.iamthedefender.cosmetics.util.DebugUtil;
 import xyz.iamthedefender.cosmetics.util.StringUtils;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.util.VaultUtils;
@@ -121,6 +122,7 @@ public class CategoryMenu extends InventoryGui {
                     if (e.getClick() == ClickType.RIGHT){
                         previewClick(player, cosmeticsType, id, price);
                     }else if (e.getClick() == ClickType.LEFT){
+                        DebugUtil.addMessage("Left Clicked");
                         onClick(player, cosmeticsType, price, id, false);
                     }
                 });
@@ -302,6 +304,7 @@ public class CategoryMenu extends InventoryGui {
             // Select
             if (p.hasPermission(permissionFormat + "." + id)) {
                 if (isOnlyForCheck) return 0;
+                DebugUtil.addMessage("Selected " + id + " for " + type);
                 api.setSelectedCosmetic(p, type, id);
                 XSound.ENTITY_VILLAGER_YES.play(p);
                 new CategoryMenu(cosmeticsType, title, page).open(p);
