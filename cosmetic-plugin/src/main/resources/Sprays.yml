@@ -1,0 +1,129 @@
+# Note, the url should end with an .png or .jpg #
+# You can use "File" field, if you want to use file and not url
+sprays:
+  server-logo:
+    item: "BARRIER:0"
+    # upload your server logo to imgur and get the .png url and paste below!
+    url: ""
+    rarity: NONE
+    
+  diamond:
+    item: "DIAMOND:0"
+    file: "diamond.png"
+    price: 5000
+    rarity: COMMON
+    
+  creeper:
+    file: "creeper.png"
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTY1NDdiYTIyNzhmOGUyNWNlOTdjODJlM2RhYTllOGZlNjg2MWVlNjBjNjdmMWY2ZmM3MGE2NDE1NjIxZjFjMSJ9fX0="
+    price: 5000
+    rarity: COMMON
+
+  thanks:
+    file: "thanks.png"
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTJlOTgxNjVkZWVmNGVkNjIxOTUzOTIxYzFlZjgxN2RjNjM4YWY3MWMxOTM0YTQyODdiNjlkN2EzMWY2YjgifX19"
+    price: 5000
+    rarity: COMMON
+
+  invisibility-potion:
+    file: "invisibility-potion.png"
+    item: "GLASS_BOTTLE:0"
+    price: 5000
+    rarity: COMMON
+
+  disco-pumpkin:
+    file: "disco-pumpkin.png"
+    item: "PUMPKIN:0"
+    price: 5000
+    rarity: COMMON
+
+  reveillion:
+    file: "reveillion.png"
+    item: "COOKED_CHICKEN:0"
+    price: 5000
+    rarity: COMMON
+
+  christmas-tree:
+    file: "christmas-tree.png"
+    item: "SAPLING:0"
+    price: 15000
+    rarity: RARE
+
+  easter-eggs:
+    file: "easter-eggs.png"
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjgzNTAzYmU0NmNlMmU1Yzk4OTAwN2JjODMxODQzNDM0NTJkZDZkYWM1ZWQxNDVmMjQyNjc1YzNmMTdiOGYwYyJ9fX0="
+    price: 15000
+    rarity: RARE
+
+  careful-santa:
+    file: "careful-santa.png"
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWIxYjZhNmMwNTQzMTg3NTc5YmU4N2E5ODRjZWE5OGU4ODhmOWU2MDdjZTA4Y2I5NjU2NjJhZWFlNzMyNGE2OSJ9fX0="
+    price: 15000
+    rarity: RARE
+
+  bunny-GG:
+    file: "bunny-GG.png"
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTIxNjJkY2VmZmFjOTU3NDI5OGY5N2MyN2E3YWMyMzg2N2NjNTczYTlhMmYxNzg5ZDNkYjc2ZWE0ZDhlZDE1OSJ9fX0="
+    price: 15000
+    rarity: RARE
+
+  fireworks:
+    file: "fireworks.png"
+    item: "FIREWORK:0"
+    price: 15000
+    rarity: RARE
+
+  year-of-the-dog:
+    file: "year-of-the-dog.png"
+    item: "BONE:0"
+    price: 15000
+    rarity: RARE
+
+  year-of-the-pig:
+    file: "year-of-the-pig.png"
+    item: "CARROT_STICK:0"
+    price: 15000
+    rarity: RARE
+
+  lantern:
+    file: "lantern.png"
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmYzNDhmMWEyYTAwZWU1MmFlOGU1NDcxYThlMWUwNmJmNDkzYjAxZDg1ZDJiMTFhZTUzZWY0MGYyZDE1YWE3MyJ9fX0="
+    price: 15000
+    rarity: RARE
+
+  year-of-the-rat:
+    file: "year-of-the-rat.png"
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzVlMTgwY2YyZDBjODk4MWVkZmE2Yzg0YzE1NzA4Y2E0ZWE0NjU1NTYxZTdhYjU3NGUxMDllMmVhZDQ1ZmU1NiJ9fX0"
+    price: 15000
+    rarity: RARE
+
+  year-of-the-ox:
+    file: "year-of-the-ox.png"
+    item: "RAW_BEEF:0"
+    price: 15000
+    rarity: RARE
+
+  lion-Dancer:
+    file: "lion-dancer.png"
+    item: "SADDLE:0"
+    price: 15000
+    rarity: RARE
+
+  year-of-the-tiger:
+    file: "year-of-the-tiger.png"
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzVlMTgwY2YyZDBjODk4MWVkZmE2Yzg0YzE1NzA4Y2E0ZWE0NjU1NTYxZTdhYjU3NGUxMDllMmVhZDQ1ZmU1NiJ9fX0="
+    price: 15000
+    rarity: RARE
+
+  sorry:
+    file: "sorry.png"
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmVhMDc5YzkzMTQxYzhjNmJhZGU2MGIxOTg3ZDQyNDczOWI0NjM2MWRiZjUxM2MwYTQ5MDNkYmE0ZTY3In19fQ=="
+    price: 15000
+    rarity: RARE
+
+  enderman:
+    file: "enderman.png"
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzgzMjM2ZDc0ODA3ZjI0YTYzNGM5MjU5YjBjNjFhZmU1OTNjOWE4ZThiNTJmMWNmMTU3MDEwYjE5NTRjYzhmMiJ9fX0="
+    price: 15000
+    rarity: RARE
+    

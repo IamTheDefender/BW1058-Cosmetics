@@ -6,7 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="BW1058-Cosmetics" />
+        <module name="cosmetic-api" />
+        <module name="cosmetic-plugin" />
+        <module name="versionsupport_1_8_R3" />
+        <module name="versionsupport_1_20" />
       </profile>
     </annotationProcessing>
   </component>

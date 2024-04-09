@@ -1,0 +1,161 @@
+death-cry:
+  none:
+    price: 0
+    item: "BARRIER:0"
+    sound: "ENTITY_VILLAGER_YES"
+    pitch: 0
+    volume: 0
+    rarity: "NONE"
+
+  bazinga:
+    sound: "ENTITY_BLAZE_DEATH"
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2I4N2QyMjUyY2FjMWFhMTVkZjMyNTk5OGI4ZWM4MmVmOTEwOWI2YzU2NzYxMGFmYWMwZWNkYTUxM2Y2MSJ9fX0="
+    volume: 1
+    pitch: 1
+    price: 5000
+    rarity: "COMMON"
+
+  enderman:
+    sound: "ENTITY_ENDERMAN_DEATH"
+    item: "EYE_OF_ENDER:0"
+    volume: 1
+    pitch: 1
+    price: 5000
+    rarity: "COMMON"
+
+  pig:
+    sound: "ENTITY_PIG_DEATH"
+    item: "RAW_BEEF:0"
+    volume: 1
+    pitch: 1
+    price: 5000
+    rarity: "COMMON"
+
+  bat:
+    sound: "ENTITY_BAT_DEATH"
+    item: "MONSTER_EGG:65"
+    volume: 1
+    pitch: 1
+    price: 5000
+    rarity: "COMMON"
+
+  skeleton:
+    sound: "ENTITY_SKELETON_DEATH"
+    item: "MONSTER_EGG:51"
+    volume: 1
+    pitch: 1
+    price: 5000
+    rarity: "COMMON"
+
+  wolf:
+    sound: "ENTITY_WOLF_HOWL"
+    item: "MONSTER_EGG:95"
+    volume: 1
+    pitch: 1
+    price: 5000
+    rarity: "COMMON"
+
+  burp:
+    sound: "ENTITY_PLAYER_BURP"
+    item: "COOKED_BEEF:0"
+    volume: 1
+    pitch: 1
+    price: 10000
+    rarity: "COMMON"
+
+  firework:
+    sound: "ENTITY_FIREWORK_ROCKET_LAUNCH"
+    item: "FIREWORK:0"
+    volume: 1
+    pitch: 1
+    price: 10000
+    rarity: "RARE"
+
+  splash:
+    sound: "ENTITY_GENERIC_SPLASH"
+    item: "WATER_BUCKET:0"
+    volume: 1
+    pitch: 1
+    price: 10000
+    rarity: "RARE"
+
+  sad-puppy:
+    sound: "ENTITY_WOLF_DEATH"
+    item: "BONE:0"
+    volume: 1
+    pitch: 1
+    price: 10000
+    rarity: "RARE"
+
+  sad-moo:
+    sound: "ENTITY_COW_AMBIENT"
+    item: "MUTTON:0"
+    volume: 1
+    pitch: 1
+    price: 10000
+    rarity: "RARE"
+
+  plop:
+    sound: "ENTITY_CHICKEN_EGG"
+    item: "EGG:0"
+    volume: 1
+    pitch: 1
+    price: 10000
+    rarity: "RARE"
+
+  ding:
+    sound: "ENTITY_ARROW_HIT_PLAYER"
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmI1MDQ5MzVhYzRhNWQ5MzRhNzgyOGMxN2QzYWYyZDdiOTczMDY5NWU1YTVmYWMxODlhNzRhZDFlNzY5NDBhYyJ9fX0="
+    volume: 1
+    pitch: 1
+    price: 10000
+    rarity: "RARE"
+
+  fireball:
+    sound: "ENTITY_GHAST_SHOOT"
+    item: "FIREBALL:0"
+    volume: 1
+    pitch: 1
+    price: 15000
+    rarity: "RARE"
+
+  explode:
+    sound: "ENTITY_GENERIC_EXPLODE"
+    item: "TNT:0"
+    Slot: 29
+    volume: 1
+    pitch: 1
+    price: 15000
+    rarity: "RARE"
+
+  zombie:
+    sound: "ENTITY_ENDERMAN_SCREAM"
+    item: "MONSTER_EGG:54"
+    volume: 0.5
+    pitch: 0.10
+    price: 15000
+    rarity: "RARE"
+
+  breath:
+    sound: "ENTITY_BLAZE_AMBIENT"
+    item: "BOWL:0"
+    volume: 0.5
+    pitch: 0.10
+    price: 15000
+    rarity: "RARE"
+
+  click:
+    sound: "UI_BUTTON_CLICK"
+    item: "WOOD_BUTTON:0"
+    volume: 1
+    pitch: 1
+    price: 15000
+    rarity: "RARE"
+
+  creepy:
+    sound: "AMBIENT_CAVE"
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGQ0N2RiNzIxOTI3NDE0OTVlMTU3ZjRhYmZjMmFlMTIwMmQyOTI1MGVhMDA0N2E1MmZjODIwNDA4OWUxOGUxMCJ9fX0="
+    volume: 2
+    pitch: 2
+    price: 15000
+    rarity: "RARE"

@@ -1,0 +1,186 @@
+kill-message:
+  default:
+    item: "BARRIER:0"
+    price: 0
+    rarity: "NONE"
+
+  fire:
+    price: 5000
+    item: "BLAZE_POWDER:0"
+    PvP-Kill:
+      - '{victim} &7was struck down by {killer}.'
+      - '{victim} &7was turned to dust by {killer}.'
+      - '{victim} &7was melted by {killer}.'
+      - '{victim} &7was turned to ash by {killer}.'
+      - '{victim} &7was fried by {killer}.'
+    rarity: "COMMON"
+      
+      
+  western:
+    price: 5000
+    item: "BOW:0"
+    PvP-Kill:
+      - '{victim} &7was filled full of lead by {killer}.'
+      - '{victim} &7met their end by {killer}.'
+      - '{victim} &7lost a drinking contest with {killer}.'
+    Explosion-Kill:    
+      - '{victim} &7was killed with dynamite by {killer}.'
+    rarity: "COMMON"
+      
+      
+  honourable:
+    price: 5000
+    item: "DIAMOND:0"
+    PvP-Kill:
+      - '{victim} &7died in close combat to {killer}.'
+    Void-Kill:  
+      - '{victim} &7fought to the edge with {killer}.'
+      - '{victim} &7fell to the great marksmanship of {killer}.'
+      - '{victim} &7stumbled off a ledge with help by {killer}.'
+    rarity: "COMMON"
+      
+      
+  love:
+    price: 5000
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI5ZmI5ZjU5M2I2YWU1MzNkZmE4Y2U3OTYxNWZjYzM1ODk0YTQyY2JiNDFkZTU5OGQ2OTQ3NjczNTJmZSJ9fX0="
+    PvP-Kill:
+      - '{victim} &7was given the cold shoulder by {killer}.'
+      - '{victim} &7was out of the league of {killer}.'
+    Explosion-Kill:  
+      - '{victim} &7was hit off by a love bomb from {killer}.'
+    Shoot-Kill:  
+      - "{victim} &7was struck with Cupid's arrow by {killer}."
+    rarity: "COMMON"
+      
+      
+  bbq:
+    price: 5000
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTg2ZjE5YmYyM2QyNDhlNjYyYzljOGI3ZmExNWVmYjhhMWYxZDViZGFjZDNiODYyNWE5YjU5ZTkzYWM4YSJ9fX0="
+    PvP-Kill:
+      - '{victim} &7was glazed in BBQ sauce by {killer}.'
+      - '{victim} &7was not spicy enough for {killer}.'
+    Void-Kill:  
+      - '{victim} &7slipped in BBQ sauce off the edge spilled by {killer}.'
+      - "{victim} &7was thrown chilli powder at by {killer}."
+    rarity: "COMMON"
+  
+  woof-woof:
+    price: 5000
+    item: "BONE:0"
+    PvP-Kill:
+      - "{victim} &7was bitten by {killer}."
+      - "{victim} &7was distracted by a puppy place by {killer}."
+      - "{victim} &7played too rough with {killer}."
+      - "{victim} &7was ripped apart by {killer}."
+    Void-Kill:
+      - "{victim} &7howled into the void for {killer}."
+      - "{victim} &7was bitten by {killer}."
+    rarity: "COMMON"
+      
+  santas-workshop:
+    price: 5000
+    item: "SNOW_BALL:0"
+    PvP-Kill:
+      - "{victim} &7was wrapped into a gift by {killer}."
+      - "{victim} &7was put on the naughty list by {killer}."
+      - "{victim} &7was turned to gingerbread by {killer}."
+    Void-Kill:
+      - "{victim} &7was pushed down a slope by {killer}."
+    rarity: "COMMON"
+    
+  primal:
+    price: 5000
+    item: "STONE_AXE:0"
+    PvP-Kill:
+      - "{victim} &7was hunted down by {killer}."
+      - "{victim} &7stumbled on a trap set by {killer}."
+      - "{victim} &7was mauled by {killer}."
+    Void-Kill:
+      - "{victim} &7was thrown into volcano by {killer}."
+    rarity: "COMMON"
+  
+
+      
+  squeak:
+    price: 5000
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGI2ZDI0ODQ5ZmY4ODZiMWQ0ZjI0ZjVhMTg2NWNlMzhmNmE0NzFmMzAwYzU3MTcxYWFhMDRhYWQ0YWM5YWNiZiJ9fX0="
+    PvP-Kill:
+      - "{victim} &7was chewed up by {killer}."
+      - "{victim} &7stepped in a mouse trap placed by {killer}."
+      - "{victim} &7was distracted by a rat dragging pizza from {killer}."
+    Void-Kill:
+      - "{victim} &7was scared into the void by {killer}."
+    rarity: "COMMON"
+      
+  pirate:
+    price: 15000
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWFhMmY1OTQ5NzgwN2FkMDVjYWYwYmZmMjQ4YTAzYmNhZTU0YmJhMmY2YWVhMzY5ZGNhYmMwZjUwOGE4OWIzIn19fQ=="
+    PvP-Kill:
+      - "{victim} &7be sent to Davy Jone's locker by {killer}."
+      - "{victim} &7be cannonballed to death by {killer}."
+      - "{victim} &7be killed with magic by {killer}."
+      - "{victim} &7be killed with metal by {killer}."
+    Explosion-Kill:
+      - "{victim} be shot with cannon by {killer}"
+    rarity: "RARE"
+      
+  spooked:
+    price: 15000
+    item: "JACK_O_LANTERN:0"
+    PvP-Kill:
+      - "{victim} &7was spooked by {killer}."
+      - "{victim} &7was remotely spooked by {killer}."
+      - "{victim} &7was totally spooked by {killer}."
+    Void-Kill:
+      - "{victim} &7was spooked off the map by {killer}."
+    rarity: "RARE"
+      
+      
+  memed:
+    price: 15000
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjIyYjMzMTliNTk5MzQ4MTcyMzAzNThjZjMzZDAzOGM5ODNjOWI2NzdhZDE1YjBhM2Y1ZjFmZTNiNWMxNTdiIn19fQ=="
+    PvP-Kill:
+      - "{victim} &7got rekt by by {killer}."
+      - "{victim} &7took the L to {killer}."
+      - "{victim} &7got smacked by {killer}."
+      - "{victim} &7got roasted by {killer}."
+      - "{victim} &7got bamboozled by {killer}."
+    Void-Kill:
+      - "{victim} &7was smacked and fell into the void by {killer}."
+    rarity: "RARE"
+
+  buzz:
+    price: 15000
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjU5MDAxYTg1MWJiMWI5ZTljMDVkZTVkNWM2OGIxZWEwZGM4YmQ4NmJhYmYxODhlMGFkZWQ4ZjkxMmMwN2QwZCJ9fX0="
+    PvP-Kill:
+      - "{victim} &7was buzzed to death by {killer}."
+      - "{victim} &7was startled by {killer}."
+      - "{victim} &7was bee'd by {killer}."
+    Void-Kill:
+      - "{victim} &7was stung off the edge by {killer}."
+      - "{victim} &7was buzzz'd into the void by {killer}."
+    rarity: "RARE"
+      
+  dramatic:
+    price: 15000
+    item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzY5ZWM3MjJkOWNiNmVkOWJhZTkzYzI2NmJkMDk4ZjBhMzA2YzVlOGMwMzg0OWMyN2NkY2YxOGM2MGQ2Y2IzZSJ9fX0="
+    PvP-Kill:
+      - "{victim} &7was tragically backstabbed by {killer}."
+      - "{victim} &7heart was pierced by {killer}."
+      - "{victim} &7was delivered into nothingness by {killer}."
+      - "{victim} &7was dismembered by {killer}."
+      - "{victim} &7was dreadfully corrupted by {killer}."
+    Void-Kill:
+      - "{victim} &7was heatlessly let go by {killer}."
+    rarity: "RARE"
+
+  oink:
+    price: 15000
+    item: "COOKED_BEEF:0"
+    PvP-Kill:
+      - "{victim} &7was oinked by {killer}."
+      - "{victim} &7got attacked by a carrot from {killer}."
+      - "{victim} &7was distracted by a piglet from {killer}."
+    Void-Kill:
+      - "{victim} &7slipped into void for {killer}."
+    rarity: "RARE"

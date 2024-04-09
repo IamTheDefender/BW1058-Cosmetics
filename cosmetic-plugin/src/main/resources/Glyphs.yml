@@ -1,0 +1,55 @@
+# Use item for mc items and item for custom head with a base64 value #
+# The image you add for glyph should be 50x50 or else it will create lag and won't line up #
+glyph:
+   none:
+     item: "BARRIER:0"
+     price: 0
+     rarity: "NONE"
+
+   iron:
+     item: "IRON_INGOT:0"
+     price: 5000
+     file: "iron.png"
+     rarity: "COMMON"
+
+   gold:
+     item: "GOLD_INGOT:0"
+     price: 5000
+     file: "gold.png"
+     rarity: "COMMON"
+
+   thumbsup:
+     item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTk5YWFmMjQ1NmE2MTIyZGU4ZjZiNjI2ODNmMmJjMmVlZDlhYmI4MWZkNWJlYTFiNGMyM2E1ODE1NmI2NjkifX19"
+     price: 5000
+     file: "thumbsup.png"
+     rarity: "COMMON"
+
+   thumbsdown:
+     item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzkxMmQ0NWIxYzc4Y2MyMjQ1MjcyM2VlNjZiYTJkMTU3NzdjYzI4ODU2OGQ2YzFiNjJhNTQ1YjI5YzcxODcifX19"
+     price: 5000
+     file: "thumbsdown.png"
+     rarity: "COMMON"
+
+   sword:
+     item: "WOOD_SWORD:0"
+     price: 5000
+     file: "sword.png"
+     rarity: "COMMON"
+
+   storm:
+     item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzNkNjlhNjBkOTcwYWQwYjhhYTE1ODk3OTE0ZjVhYWMyNjVlOTllNmY1MDE2YTdkOGFhN2JlOWFjMDNiNjE0OCJ9fX0="
+     price: 5000
+     file: "storm.png"
+     rarity: "COMMON"
+
+   burn:
+     item: "LAVA_BUCKET:0"
+     price: 5000
+     file: "Burn.png"
+     rarity: "COMMON"
+
+   bronze-shield:
+     item: "player_head:0:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTU0OTQ3ZGU3ZjUyNTk4MjU1ZDZhZmVlOWQ3N2JlZmFkOWI0ZjI0YzBjNDY2M2QyOGJjZGY4YTY0NTdmMzQifX19"
+     price: 5000
+     file: "bronzeshield.png"
+     rarity: "COMMON"
