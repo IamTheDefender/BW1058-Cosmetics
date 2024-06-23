@@ -82,8 +82,11 @@ public class DragonRiderDance extends VictoryDance {
                     return;
                 }
 
-                Creature creature = (Creature) dragon;
-                creature.setTarget(stand);
+                try{
+                    Creature creature = (Creature) dragon;
+                    creature.setTarget(stand);
+                }catch (Exception ignored){}
+
                 Location original = winner.getEyeLocation();
                 Vector direction = winner.getEyeLocation().clone().getDirection().normalize().multiply(20);
                 Location newLocation = original.add(direction);
