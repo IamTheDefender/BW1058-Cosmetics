@@ -137,6 +137,11 @@ public class Cosmetics extends JavaPlugin {
         StartupUtils.createFolders();
         ConfigUtils.addSlotsList();
 
+        getLogger().info("Loading data from resources in jar...");
+        DefaultsUtils defaultsUtils = new DefaultsUtils();
+        defaultsUtils.saveAllDefaults();
+        StartupUtils.unzipSpray();
+
         getLogger().info("Configuration file successfully loaded.");
         getLogger().info("Loading " + (api.isMySQL() ? "MySQL" : "SQLite") + " database...");
         if (api.isMySQL()){
@@ -155,10 +160,7 @@ public class Cosmetics extends JavaPlugin {
         StartupUtils.registerEvents();
         getLogger().info("Registering command to HCore...");
         HCore.registerCommands(new MainCommand(this));
-        getLogger().info("Loading data from resources in jar...");
-        DefaultsUtils defaultsUtils = new DefaultsUtils();
-        defaultsUtils.saveAllDefaults();
-        StartupUtils.unzipSpray();
+
         getLogger().info("Loading cosmetics...");
         StartupUtils.loadCosmetics();
         StartupUtils.convertSpraysURLs();

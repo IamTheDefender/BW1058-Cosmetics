@@ -31,7 +31,7 @@ public class WoodSkinHandler1058 implements Listener {
         if (Utility.isWoodOrLogBlock(stack.getType())) {
             String selected = Cosmetics.getInstance().getApi().getSelectedCosmetic(p, CosmeticsType.WoodSkins);
             Optional<XMaterial> optional = XMaterial.matchXMaterial(selected.replace("-", "_").toUpperCase());
-            if (!optional.isPresent()) return;
+            if (optional.isEmpty()) return;
             XMaterial m = optional.get();
             stack.setType(m.parseMaterial());
             stack.setDurability(m.getData());
@@ -60,7 +60,7 @@ public class WoodSkinHandler1058 implements Listener {
 
                 if (Utility.isWoodOrLogBlock(i.getType()) && selected != null) {
                     Optional<XMaterial> optional = XMaterial.matchXMaterial(selected.replace("-", "_").toUpperCase());
-                    if (!optional.isPresent()) return;
+                    if (optional.isEmpty()) return;
                     XMaterial m = optional.get();
                     i.setType(m.parseMaterial());
                     i.setDurability(m.getData());

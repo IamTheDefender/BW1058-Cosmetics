@@ -5,7 +5,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.Glyph;
-import xyz.iamthedefender.cosmetics.category.glyphs.util.glyphUtil;
+import xyz.iamthedefender.cosmetics.category.glyphs.util.GlyphUtil;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
@@ -70,7 +70,7 @@ public class GlyphItems {
                     String fileLocation = config.getString(path + "file");
                     File file = new File(Cosmetics.getInstance().getHandler().getAddonPath() + "/Glyphs/" + fileLocation);
                     HCore.asyncScheduler().every(100, TimeUnit.MILLISECONDS).limit(10).run(()-> {
-                        glyphUtil.sendGlyphs(file, location);
+                        GlyphUtil.sendGlyphs(file, location);
                             });
                 }
             };

@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Level;
 
-public class glyphUtil
+public class GlyphUtil
 {
     
     public static void sendGlyphs(File file, Location loc) {
@@ -58,6 +58,7 @@ public class glyphUtil
 
     public static void sendRedstoneParticle(Player player, Location location, Color color){
         PacketContainer packet = new PacketContainer(PacketType.Play.Server.WORLD_PARTICLES);
+
         packet.getParticles().write(0, EnumWrappers.Particle.REDSTONE);
         packet.getFloat().write(0, (float) location.getX());
         packet.getFloat().write(1, (float) location.getY());

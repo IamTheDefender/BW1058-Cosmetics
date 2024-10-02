@@ -83,6 +83,7 @@ public class DragonRiderDance extends VictoryDance {
                 }
 
                 try{
+
                     Creature creature = (Creature) dragon;
                     creature.setTarget(stand);
                 }catch (Exception ignored){}

@@ -420,7 +420,7 @@ public class StartupUtils
         Location location = new Location(world, x, y, z, yaw, pitch);
         location.setX(location.getBlockX() + 0.5);
         location.setZ(location.getBlockZ() + 0.5);
-
+        location.getChunk().load(true);
         return location;
     }
 
@@ -435,7 +435,7 @@ public class StartupUtils
         Location location = new Location(world, x, y, z, yaw, pitch);
         location.setX(location.getBlockX() + 0.5);
         location.setZ(location.getBlockZ() + 0.5);
-
+        location.getChunk().load(true);
         return location;
     }
 

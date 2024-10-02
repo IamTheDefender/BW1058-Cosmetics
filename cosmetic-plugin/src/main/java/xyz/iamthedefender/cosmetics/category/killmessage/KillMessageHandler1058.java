@@ -29,6 +29,9 @@ public class KillMessageHandler1058 implements Listener
             e.setPlaySound(false);
         }
 
+        if(e.getArena().getTeam(e.getKiller()) == null ||
+        e.getArena().getTeam(e.getVictim()) == null) return;
+
         ChatColor color2 = e.getArena().getTeam(e.getKiller()).getColor().chat();
         ChatColor color3 = e.getArena().getTeam(e.getVictim()).getColor().chat();
 

@@ -91,6 +91,7 @@ public class RektEffect extends FinalKillEffect {
                 public void run() {
                     Cosmetics.getInstance().getEntityPlayerHashMap().remove(stand.getEntityId());
                     ProtocolLibrary.getProtocolManager().sendServerPacket(victim, packet);
+                    stand.remove();
                 }
             }.runTaskLater(Cosmetics.getInstance(), 80L);
         }

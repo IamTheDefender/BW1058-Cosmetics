@@ -14,7 +14,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.Glyph;
 import xyz.iamthedefender.cosmetics.category.glyphs.util.ImageParticles;
-import xyz.iamthedefender.cosmetics.category.glyphs.util.glyphUtil;
+import xyz.iamthedefender.cosmetics.category.glyphs.util.GlyphUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import org.bukkit.Bukkit;
@@ -173,7 +173,7 @@ public class GlyphPreview {
 
         HCore.asyncScheduler().every(100, TimeUnit.MILLISECONDS).limit(50).run(()-> {
             for (Location spot : particles.keySet()) {
-                HCore.syncScheduler().run(() -> glyphUtil.sendRedstoneParticle(player, spot, particles.get(spot)));
+                HCore.syncScheduler().run(() -> GlyphUtil.sendRedstoneParticle(player, spot, particles.get(spot)));
             }
         });
     }

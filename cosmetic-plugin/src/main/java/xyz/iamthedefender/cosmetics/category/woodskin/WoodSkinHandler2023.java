@@ -29,7 +29,7 @@ public class WoodSkinHandler2023 implements Listener {
         if (Utility.isWoodOrLogBlock(stack.getType())) {
             String selected = Cosmetics.getInstance().getApi().getSelectedCosmetic(p, CosmeticsType.WoodSkins);
 
-            XMaterial m = XMaterial.matchXMaterial(selected.replace("-", "_").toUpperCase()).get();
+            XMaterial m = XMaterial.matchXMaterial(selected.replace("-", "_").toUpperCase()).orElse(XMaterial.OAK_PLANKS);
             stack.setType(m.parseMaterial());
             stack.setDurability(m.getData());
         }
@@ -56,7 +56,7 @@ public class WoodSkinHandler2023 implements Listener {
                 if (i.getType() == XMaterial.AIR.parseMaterial()) continue;
 
                 if (Utility.isWoodOrLogBlock(i.getType()) && selected != null) {
-                    XMaterial m = XMaterial.matchXMaterial(selected.replace("-", "_").toUpperCase()).get();
+                    XMaterial m = XMaterial.matchXMaterial(selected.replace("-", "_").toUpperCase()).orElse(XMaterial.OAK_PLANKS);
                     i.setType(m.parseMaterial());
                     i.setDurability(m.getData());
                 }
