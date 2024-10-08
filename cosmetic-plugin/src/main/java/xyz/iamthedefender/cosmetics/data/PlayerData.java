@@ -2,8 +2,8 @@ package xyz.iamthedefender.cosmetics.data;
 
 import lombok.Getter;
 import lombok.Setter;
-import xyz.iamthedefender.cosmetics.Cosmetics;
 import org.bukkit.Bukkit;
+import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
 
 import java.sql.Connection;

@@ -4,14 +4,14 @@ import com.cryptomorin.xseries.XSound;
 import com.hakan.core.HCore;
 import com.hakan.core.ui.inventory.InventoryGui;
 import com.hakan.core.utils.ColorUtil;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.KillMessage;
+import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.category.killmessage.util.KillMessageUtils;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
-import xyz.iamthedefender.cosmetics.api.util.Utility;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

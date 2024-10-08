@@ -4,10 +4,13 @@ import com.hakan.core.HCore;
 import com.tomkeuper.bedwars.api.BedWars;
 import com.tomkeuper.bedwars.api.language.Language;
 import com.tomkeuper.bedwars.api.server.ServerType;
+import org.bukkit.Location;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.handler.*;
 import xyz.iamthedefender.cosmetics.category.bedbreakeffects.BedDestroyHandler2023;
 import xyz.iamthedefender.cosmetics.category.deathcries.DeathCryHandler2023;
-import xyz.iamthedefender.cosmetics.api.handler.*;
 import xyz.iamthedefender.cosmetics.category.finalkilleffects.FinalKillEffectHandler2023;
 import xyz.iamthedefender.cosmetics.category.glyphs.GlyphHandler2023;
 import xyz.iamthedefender.cosmetics.category.islandtoppers.IslandTopperHandler2023;
@@ -17,9 +20,6 @@ import xyz.iamthedefender.cosmetics.category.shopkeeperskins.ShopKeeperHandler20
 import xyz.iamthedefender.cosmetics.category.sprays.SpraysHandler2023;
 import xyz.iamthedefender.cosmetics.category.victorydance.VictoryDanceHandler2023;
 import xyz.iamthedefender.cosmetics.category.woodskin.WoodSkinHandler2023;
-import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.List;

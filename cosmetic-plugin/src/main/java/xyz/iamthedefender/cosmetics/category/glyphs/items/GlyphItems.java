@@ -1,17 +1,17 @@
 package xyz.iamthedefender.cosmetics.category.glyphs.items;
 
 import com.hakan.core.HCore;
-import xyz.iamthedefender.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.category.Glyph;
-import xyz.iamthedefender.cosmetics.category.glyphs.util.GlyphUtil;
-import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
+import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
+import xyz.iamthedefender.cosmetics.api.cosmetics.category.Glyph;
+import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
+import xyz.iamthedefender.cosmetics.category.glyphs.util.GlyphUtil;
 
 import java.io.File;
 import java.util.List;

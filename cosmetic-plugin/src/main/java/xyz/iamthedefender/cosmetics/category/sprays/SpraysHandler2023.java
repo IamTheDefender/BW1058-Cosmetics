@@ -2,16 +2,16 @@ package xyz.iamthedefender.cosmetics.category.sprays;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.hakan.core.utils.ColorUtil;
-import xyz.iamthedefender.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.category.Spray;
-import xyz.iamthedefender.cosmetics.util.StartupUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
+import xyz.iamthedefender.cosmetics.api.cosmetics.category.Spray;
+import xyz.iamthedefender.cosmetics.util.StartupUtils;
 
 public class SpraysHandler2023 implements Listener {
 

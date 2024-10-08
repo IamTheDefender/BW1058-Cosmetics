@@ -5,8 +5,6 @@ package xyz.iamthedefender.cosmetics.category.islandtoppers.util;
 import com.sk89q.worldedit.*;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.schematic.SchematicFormat;
-import xyz.iamthedefender.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.handler.IArenaHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -15,6 +13,8 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.material.Directional;
+import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.handler.IArenaHandler;
 
 import java.io.File;
 import java.io.IOException;

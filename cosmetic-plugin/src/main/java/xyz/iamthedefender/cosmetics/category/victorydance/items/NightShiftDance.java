@@ -2,13 +2,11 @@ package xyz.iamthedefender.cosmetics.category.victorydance.items;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.hakan.core.HCore;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
-import xyz.iamthedefender.cosmetics.category.shopkeeperskins.ShopKeeperHandler1058;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 

@@ -5,14 +5,14 @@ import com.cryptomorin.xseries.XSound;
 import com.hakan.core.HCore;
 import com.hakan.core.particle.Particle;
 import com.hakan.core.particle.type.ParticleType;
-import xyz.iamthedefender.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
+import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
 
 import java.util.Arrays;
 import java.util.List;

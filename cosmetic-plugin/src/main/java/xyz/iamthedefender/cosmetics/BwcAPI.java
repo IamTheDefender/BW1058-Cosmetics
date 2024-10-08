@@ -1,6 +1,8 @@
 package xyz.iamthedefender.cosmetics;
 
 import com.hakan.core.HCore;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
@@ -10,8 +12,6 @@ import xyz.iamthedefender.cosmetics.api.database.IDatabase;
 import xyz.iamthedefender.cosmetics.api.handler.IHandler;
 import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
 import xyz.iamthedefender.cosmetics.data.PlayerData;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
 

@@ -1,12 +1,12 @@
 package xyz.iamthedefender.cosmetics.category.deathcries.preview;
 
 import com.cryptomorin.xseries.XSound;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.DeathCry;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 public class DeathCryPreview {
 

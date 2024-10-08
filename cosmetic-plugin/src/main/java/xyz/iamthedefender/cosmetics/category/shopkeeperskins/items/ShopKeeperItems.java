@@ -1,5 +1,9 @@
 package xyz.iamthedefender.cosmetics.category.shopkeeperskins.items;
 
+import org.bukkit.Location;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
@@ -8,10 +12,6 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.category.ShopKeeperSkin;
 import xyz.iamthedefender.cosmetics.category.shopkeeperskins.utils.ShopKeeperSkinsUtils;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
 import xyz.iamthedefender.cosmetics.util.StringUtils;
-import org.bukkit.Location;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,5 @@
 package xyz.iamthedefender.cosmetics.category.shopkeeperskins.utils;
 
-import xyz.iamthedefender.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
-import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
-import xyz.iamthedefender.cosmetics.api.util.Utility;
-import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.MemoryNPCDataStore;
 import net.citizensnpcs.api.npc.NPC;
@@ -18,6 +13,11 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
+import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
+import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
+import xyz.iamthedefender.cosmetics.api.util.Utility;
+import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,9 +1,9 @@
 package xyz.iamthedefender.cosmetics.listener;
 
-import xyz.iamthedefender.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.event.CosmeticPurchaseEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.event.CosmeticPurchaseEvent;
 
 public class CosmeticPurchaseListener implements Listener {
 

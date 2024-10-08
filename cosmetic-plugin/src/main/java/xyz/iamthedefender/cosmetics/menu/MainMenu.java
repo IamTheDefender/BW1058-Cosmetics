@@ -2,16 +2,16 @@ package xyz.iamthedefender.cosmetics.menu;
 
 import com.hakan.core.HCore;
 import com.hakan.core.ui.inventory.InventoryGui;
-import xyz.iamthedefender.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
-import xyz.iamthedefender.cosmetics.util.MainMenuUtils;
-import xyz.iamthedefender.cosmetics.api.util.Utility;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
+import xyz.iamthedefender.cosmetics.api.util.Utility;
+import xyz.iamthedefender.cosmetics.util.MainMenuUtils;
 
 import java.util.List;
 

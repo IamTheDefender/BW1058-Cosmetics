@@ -4,9 +4,10 @@ import com.andrei1058.bedwars.api.BedWars;
 import com.andrei1058.bedwars.api.language.Language;
 import com.andrei1058.bedwars.api.server.ServerType;
 import com.hakan.core.HCore;
+import org.bukkit.Location;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import xyz.iamthedefender.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.handler.HandlerType;
-import xyz.iamthedefender.cosmetics.api.handler.IArenaUtil;
 import xyz.iamthedefender.cosmetics.api.handler.*;
 import xyz.iamthedefender.cosmetics.category.bedbreakeffects.BedDestroyHandler1058;
 import xyz.iamthedefender.cosmetics.category.deathcries.DeathCryHandler1058;
@@ -19,9 +20,6 @@ import xyz.iamthedefender.cosmetics.category.shopkeeperskins.ShopKeeperHandler10
 import xyz.iamthedefender.cosmetics.category.sprays.SpraysHandler1058;
 import xyz.iamthedefender.cosmetics.category.victorydance.VictoryDanceHandler1058;
 import xyz.iamthedefender.cosmetics.category.woodskin.WoodSkinHandler1058;
-import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.List;

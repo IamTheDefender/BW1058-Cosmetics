@@ -1,5 +1,9 @@
 package xyz.iamthedefender.cosmetics.category.glyphs;
 
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
@@ -8,10 +12,6 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.category.Glyph;
 import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 
 public class GlyphHandler2023 implements Listener {
 

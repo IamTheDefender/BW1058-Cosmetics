@@ -2,12 +2,12 @@ package xyz.iamthedefender.cosmetics.category.bedbreakeffects.items;
 
 
 import com.cryptomorin.xseries.XMaterial;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
-import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
+import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
+import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
 
 import java.util.Arrays;
 import java.util.List;

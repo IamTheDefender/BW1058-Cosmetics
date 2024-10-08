@@ -1,13 +1,13 @@
 package xyz.iamthedefender.cosmetics.support.placeholders;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.data.PlayerOwnedData;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
-import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 public class Placeholders extends PlaceholderExpansion {
     private final Cosmetics plugin;

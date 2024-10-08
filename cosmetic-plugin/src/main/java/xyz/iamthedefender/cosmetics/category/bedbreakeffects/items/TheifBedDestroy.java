@@ -3,15 +3,15 @@ package xyz.iamthedefender.cosmetics.category.bedbreakeffects.items;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.hakan.core.HCore;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
-import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
 import org.bukkit.Location;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
+import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
+import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
+import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
 
 import java.util.Arrays;
 import java.util.List;

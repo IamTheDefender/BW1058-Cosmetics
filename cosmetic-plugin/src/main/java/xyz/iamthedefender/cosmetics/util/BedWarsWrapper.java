@@ -1,9 +1,9 @@
 package xyz.iamthedefender.cosmetics.util;
 
 import com.andrei1058.bedwars.api.arena.team.ITeam;
-import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
 
 import java.util.List;
 

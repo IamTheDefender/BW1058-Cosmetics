@@ -1,13 +1,13 @@
 package xyz.iamthedefender.cosmetics.category.killmessage;
 
+import org.bukkit.ChatColor;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.category.killmessage.util.KillMessageUtils;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
-import org.bukkit.ChatColor;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 
 public class KillMessageHandler2023 implements Listener {
     @EventHandler

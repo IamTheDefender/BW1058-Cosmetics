@@ -2,23 +2,12 @@
 
 package xyz.iamthedefender.cosmetics.category.sprays.util;
 
-import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 import com.hakan.core.HCore;
 import com.hakan.core.particle.Particle;
 import com.hakan.core.particle.type.ParticleType;
 import com.hakan.core.utils.ColorUtil;
-import org.bukkit.util.Vector;
-import xyz.iamthedefender.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
-import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
-import xyz.iamthedefender.cosmetics.api.handler.IArenaHandler;
-import xyz.iamthedefender.cosmetics.category.shopkeeperskins.ShopKeeperHandler1058;
-import xyz.iamthedefender.cosmetics.util.DebugUtil;
-import xyz.iamthedefender.cosmetics.api.util.Utility;
-import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Effect;
 import org.bukkit.Rotation;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -26,6 +15,14 @@ import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.map.MapView;
+import org.bukkit.util.Vector;
+import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
+import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
+import xyz.iamthedefender.cosmetics.api.handler.IArenaHandler;
+import xyz.iamthedefender.cosmetics.api.util.Utility;
+import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
+import xyz.iamthedefender.cosmetics.util.DebugUtil;
 import xyz.iamthedefender.cosmetics.util.FileUtil;
 
 import java.io.File;

@@ -1,7 +1,6 @@
 package xyz.iamthedefender.cosmetics.util;
 
 import org.bukkit.Bukkit;
-import xyz.iamthedefender.cosmetics.Cosmetics;
 
 public class VersionSupportUtil {
 

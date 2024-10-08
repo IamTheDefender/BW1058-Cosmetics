@@ -1,15 +1,15 @@
 package xyz.iamthedefender.cosmetics.category.sprays.items;
 
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.ItemFrame;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.Spray;
 import xyz.iamthedefender.cosmetics.category.sprays.util.SpraysUtil;
 import xyz.iamthedefender.cosmetics.util.StringUtils;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.ItemFrame;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 

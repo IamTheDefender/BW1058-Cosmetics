@@ -1,26 +1,20 @@
 package xyz.iamthedefender.cosmetics.category.victorydance.items;
 
-import com.cryptomorin.xseries.XEntity;
 import com.cryptomorin.xseries.XMaterial;
-import com.tomkeuper.bedwars.BedWars;
-import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.npc.MemoryNPCDataStore;
-import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.util.NMS;
-import xyz.iamthedefender.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
-import xyz.iamthedefender.cosmetics.api.handler.IArenaHandler;
-import xyz.iamthedefender.cosmetics.category.shopkeeperskins.ShopKeeperHandler1058;
-import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
+import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
+import xyz.iamthedefender.cosmetics.api.handler.IArenaHandler;
+import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 
 import java.util.List;
 
@@ -71,11 +65,20 @@ public class DragonRiderDance extends VictoryDance {
         stand.setVisible(false);
         stand.setGravity(false);
         stand.setMetadata("FAKE_TARGET", new FixedMetadataValue(Cosmetics.getInstance(), ""));
+        World startingWorld = winner.getWorld();
         // create a task to move the dragon towards the fake target
         new BukkitRunnable() {
             public void run() {
                 IArenaHandler arena = Cosmetics.getInstance().getHandler().getArenaUtil().getArenaByPlayer(winner);
+
                 if(arena == null){
+                    cancel();
+                    stand.remove();
+                    dragon.remove();
+                    return;
+                }
+
+                if(!winner.getWorld().getUID().equals(startingWorld.getUID())){
                     cancel();
                     stand.remove();
                     dragon.remove();

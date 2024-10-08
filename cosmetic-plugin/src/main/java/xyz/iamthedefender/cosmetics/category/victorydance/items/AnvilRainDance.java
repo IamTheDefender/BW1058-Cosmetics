@@ -2,15 +2,15 @@ package xyz.iamthedefender.cosmetics.category.victorydance.items;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.hakan.core.HCore;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
-import xyz.iamthedefender.cosmetics.category.shopkeeperskins.ShopKeeperHandler1058;
-import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
+import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
+import xyz.iamthedefender.cosmetics.category.shopkeeperskins.ShopKeeperHandler1058;
+import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 
 import java.util.List;
 

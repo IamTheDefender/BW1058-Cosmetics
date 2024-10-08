@@ -1,5 +1,10 @@
 package xyz.iamthedefender.cosmetics.category.bedbreakeffects;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
@@ -9,11 +14,6 @@ import xyz.iamthedefender.cosmetics.api.event.BedBreakEffectExecuteEvent;
 import xyz.iamthedefender.cosmetics.util.BedWarsWrapper;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 
 public class BedDestroyHandler2023 implements Listener {
 

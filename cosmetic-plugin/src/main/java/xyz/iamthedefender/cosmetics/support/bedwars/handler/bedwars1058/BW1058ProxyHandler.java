@@ -2,9 +2,9 @@ package xyz.iamthedefender.cosmetics.support.bedwars.handler.bedwars1058;
 
 import com.andrei1058.bedwars.proxy.BedWarsProxy;
 import com.andrei1058.bedwars.proxy.api.BedWars;
+import org.bukkit.entity.Player;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.handler.*;
-import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.List;

@@ -1,14 +1,14 @@
 package xyz.iamthedefender.cosmetics.category.deathcries.items;
 
 import com.cryptomorin.xseries.XSound;
-import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.category.DeathCry;
-import xyz.iamthedefender.cosmetics.util.StringUtils;
-import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
+import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
+import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
+import xyz.iamthedefender.cosmetics.api.cosmetics.category.DeathCry;
+import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
+import xyz.iamthedefender.cosmetics.util.StringUtils;
 
 import java.util.List;
 

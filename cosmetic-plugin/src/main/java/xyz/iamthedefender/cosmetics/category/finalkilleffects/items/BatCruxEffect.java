@@ -5,15 +5,14 @@ import com.hakan.core.HCore;
 import com.hakan.core.particle.Particle;
 import com.hakan.core.particle.type.ParticleType;
 import com.hakan.core.utils.ColorUtil;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
-import xyz.iamthedefender.cosmetics.api.util.Utility;
 import org.bukkit.Location;
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
+import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
 import xyz.iamthedefender.cosmetics.util.EntityUtil;
 
 import java.util.ArrayList;

@@ -2,12 +2,11 @@ package xyz.iamthedefender.cosmetics.data;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.*;
-import xyz.iamthedefender.cosmetics.api.database.IDatabase;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
-import org.bukkit.Bukkit;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -4,14 +4,14 @@ package xyz.iamthedefender.cosmetics.listener;
 
 import com.hakan.core.HCore;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.*;
 import xyz.iamthedefender.cosmetics.data.PlayerData;
 import xyz.iamthedefender.cosmetics.data.PlayerOwnedData;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinListener implements Listener {
 

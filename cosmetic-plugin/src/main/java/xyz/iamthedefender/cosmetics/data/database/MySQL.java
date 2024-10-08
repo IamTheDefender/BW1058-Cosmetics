@@ -3,10 +3,10 @@ package xyz.iamthedefender.cosmetics.data.database;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.Getter;
-import xyz.iamthedefender.cosmetics.api.database.DatabaseType;
-import xyz.iamthedefender.cosmetics.api.database.IDatabase;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import xyz.iamthedefender.cosmetics.api.database.DatabaseType;
+import xyz.iamthedefender.cosmetics.api.database.IDatabase;
 
 import java.sql.Connection;
 import java.sql.SQLException;

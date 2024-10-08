@@ -1,8 +1,8 @@
 package xyz.iamthedefender.cosmetics.support.bedwars.handler.bedwars2023;
 
 import com.tomkeuper.bedwars.BedWars;
-import xyz.iamthedefender.cosmetics.Cosmetics;
 import org.bukkit.Bukkit;
+import xyz.iamthedefender.cosmetics.Cosmetics;
 
 public class BedWars2023 {
     private final Cosmetics plugin;

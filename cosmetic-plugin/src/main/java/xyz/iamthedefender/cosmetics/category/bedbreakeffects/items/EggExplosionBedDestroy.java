@@ -4,16 +4,16 @@ import com.cryptomorin.xseries.XMaterial;
 import com.hakan.core.HCore;
 import com.hakan.core.particle.Particle;
 import com.hakan.core.particle.type.ParticleType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
-import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
-import xyz.iamthedefender.cosmetics.util.MathUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
+import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
+import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
+import xyz.iamthedefender.cosmetics.util.MathUtil;
 
 import java.util.List;
 

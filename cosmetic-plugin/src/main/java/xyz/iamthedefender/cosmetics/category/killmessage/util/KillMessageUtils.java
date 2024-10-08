@@ -2,15 +2,15 @@ package xyz.iamthedefender.cosmetics.category.killmessage.util;
 
 import com.hakan.core.utils.ColorUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.KillMessage;
-import xyz.iamthedefender.cosmetics.util.StartupUtils;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
+import xyz.iamthedefender.cosmetics.util.StartupUtils;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;

@@ -3,6 +3,10 @@
 package xyz.iamthedefender.cosmetics.category.victorydance;
 
 import com.andrei1058.bedwars.api.events.gameplay.GameEndEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
@@ -11,10 +15,6 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
 import xyz.iamthedefender.cosmetics.api.event.VictoryDancesExecuteEvent;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 
 import java.util.UUID;
 
