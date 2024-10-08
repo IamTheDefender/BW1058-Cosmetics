@@ -21,6 +21,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -174,7 +175,12 @@ public class IslandTopperPreview {
 
                             if (baseBlock.isAir()) continue;
 
-                            Optional<XMaterial> xMaterial = XMaterial.matchXMaterial(baseBlock.getId(), (byte) baseBlock.getData());
+                            Optional<XMaterial> xMaterial;
+                            try{
+                                xMaterial = XMaterial.matchXMaterial(Material.getMaterial(baseBlock.getId()).name());
+                            }catch (Exception e){
+                                xMaterial = Optional.of(XMaterial.matchXMaterial(new MaterialData(baseBlock.getId(), (byte) baseBlock.getData()).getItemType()));
+                            }
 
                             if (xMaterial.isPresent()) {
                                 Vector targetVec = new Vector(x, y, z).add(newOrigin);
@@ -238,8 +244,12 @@ public class IslandTopperPreview {
 
                             if (baseBlock.isAir()) continue;
 
-                            Optional<XMaterial> xMaterial = XMaterial.matchXMaterial(baseBlock.getId(), (byte) baseBlock.getData());
-
+                            Optional<XMaterial> xMaterial;
+                            try{
+                                xMaterial = XMaterial.matchXMaterial(Material.getMaterial(baseBlock.getId()).name());
+                            }catch (Exception e){
+                                xMaterial = Optional.of(XMaterial.matchXMaterial(new MaterialData(baseBlock.getId(), (byte) baseBlock.getData()).getItemType()));
+                            }
                             if (xMaterial.isPresent()) {
                                 Vector targetVec = new Vector(x, y, z).add(newOrigin);
                                 Location targetLoc = new Location(location.getWorld(),
