@@ -109,6 +109,26 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <delete failonerror="false">
+                                    <fileset dir="${project.parent.basedir}/jars" includes="*.jar"/>
+                                </delete>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
@@ -122,11 +142,11 @@
                 <version>3.4.1</version>
                 <configuration>
                     <finalName>BedWars-Cosmetics-v${project.parent.version}</finalName>
+                    <outputDirectory>${project.parent.basedir}/jars</outputDirectory>
                     <createDependencyReducedPom>false</createDependencyReducedPom>
                     <relocations>
                         <relocation>
                             <pattern>com.cryptomorin.xseries</pattern>
-                            <!-- Be sure to change the package below -->
                             <shadedPattern>xyz.iamthedefender.cosmetics.support.xseries</shadedPattern>
                         </relocation>
                     </relocations>

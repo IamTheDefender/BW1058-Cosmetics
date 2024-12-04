@@ -37,25 +37,28 @@ public class VersionSupport_1_8_R3 implements IVersionSupport {
 
     @Override
     public void displayRedstoneParticle(Player player, Location location, Color color) {
-        EnumWrappers.Particle particle = EnumWrappers.Particle.REDSTONE;
-
         PacketContainer packet = new PacketContainer(PacketType.Play.Server.WORLD_PARTICLES);
 
-        packet.getDoubles().write(0, location.getX());
-        packet.getDoubles().write(1, location.getY());
-        packet.getDoubles().write(2, location.getZ());
+        packet.getFloat().write(0, (float) location.getX());
+        packet.getFloat().write(1, (float) location.getY());
+        packet.getFloat().write(2, (float) location.getZ());
 
-        packet.getFloat().write(0, 0f);
-        packet.getFloat().write(1, 0f);
-        packet.getFloat().write(2, 0f);
+        packet.getFloat().write(3, 0f);
+        packet.getFloat().write(4, 0f);
+        packet.getFloat().write(5, 0f);
 
-        packet.getFloat().write(3, 1.0f);
+        packet.getFloat().write(6, 1.0f);
 
         packet.getIntegers().write(0, 1);
 
-        packet.getNewParticles().write(0, WrappedParticle.fromHandle(particle));
+        packet.getParticles().write(0, EnumWrappers.Particle.REDSTONE);
 
-        ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
+        if(player != null){
+            ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
+            return;
+        }
+
+        ProtocolLibrary.getProtocolManager().broadcastServerPacket(packet);
     }
 
 
