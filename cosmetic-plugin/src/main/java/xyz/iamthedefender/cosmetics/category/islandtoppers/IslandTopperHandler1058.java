@@ -15,6 +15,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.IslandTopper;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
 
 public class IslandTopperHandler1058 implements Listener {
@@ -24,7 +25,7 @@ public class IslandTopperHandler1058 implements Listener {
         boolean isIslandToppersEnabled = Cosmetics.getInstance().getConfig().getBoolean("island-toppers.enabled");
         if (!isIslandToppersEnabled) return;
 
-        HCore.syncScheduler().after(20).run((runnable) -> {
+        Run.delayed(() -> {
             for (ITeam teams : e.getArena().getTeams()) {
                 Player player = null;
                 for (Player p : teams.getMembers()) {
@@ -49,6 +50,6 @@ public class IslandTopperHandler1058 implements Listener {
                     }
                 }
             }
-        });
+        }, 20L);
     }
 }

@@ -14,12 +14,10 @@ import static java.util.Objects.requireNonNull;
 public class CosmeticsLibraryManager extends LibraryManager {
 
     private final URLClassLoaderHelper classLoader;
-    private final Cosmetics plugin;
 
     public CosmeticsLibraryManager(Cosmetics plugin) {
         super(new JDKLogAdapter(requireNonNull(plugin, "plugin").getLogger()), new File(plugin.getHandler().getAddonPath()).toPath(), "lib");
         classLoader = new URLClassLoaderHelper((URLClassLoader) plugin.getClass().getClassLoader(), this);
-        this.plugin = plugin;
     }
 
     @Override

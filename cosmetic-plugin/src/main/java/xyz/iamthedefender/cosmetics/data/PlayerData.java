@@ -1,7 +1,9 @@
 package xyz.iamthedefender.cosmetics.data;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.bukkit.Bukkit;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
@@ -13,6 +15,8 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 @Getter
+@ToString
+@EqualsAndHashCode
 public class PlayerData {
 
     private final UUID uuid;
@@ -23,7 +27,6 @@ public class PlayerData {
         this.uuid = uuid;
         load();
     }
-
 
 
     public void load() {

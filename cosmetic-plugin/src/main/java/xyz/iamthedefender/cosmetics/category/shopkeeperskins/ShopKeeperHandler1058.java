@@ -21,6 +21,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.ShopKeeperSkin;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
 import xyz.iamthedefender.cosmetics.util.MathUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
@@ -105,27 +106,21 @@ public class ShopKeeperHandler1058 implements Listener
 
         if (e.getPlayer().hasMetadata("NPC2")){
             e.setCancelled(true);
-            HCore.syncScheduler().after(2).run((() -> {
+
+            Run.delayed(() -> {
                 CitizensAPI.getNPCRegistry().getNPC(e.getPlayer()).despawn();
-            }));
+            }, 2L);
         }
     }
 
     @EventHandler
     public void onGameEnd1058(GameEndEvent e) {
-
         boolean isShopkeepersEnabled = Cosmetics.getInstance().getConfig().getBoolean("shopkeeper-skins.enabled");
         if (!isShopkeepersEnabled) return;
 
         String name = e.getArena().getWorldName();
 
-        new BukkitRunnable(){
-            @Override
-            public void run() {
-
-                ShopKeeperHandler1058.arenas.remove(name);
-            }
-        }.runTaskLater(Cosmetics.getInstance(), 300L);
+        Run.delayed(() -> ShopKeeperHandler1058.arenas.remove(name), 300L);
     }
 
     @EventHandler

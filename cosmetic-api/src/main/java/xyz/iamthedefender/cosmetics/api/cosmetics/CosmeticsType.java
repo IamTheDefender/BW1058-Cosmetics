@@ -1,13 +1,14 @@
 package xyz.iamthedefender.cosmetics.api.cosmetics;
 
 
+import lombok.Getter;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 
 import java.util.List;
 
-
+@Getter
 public enum CosmeticsType {
     FinalKillEffects("Final Kill Effect", ConfigUtils.getFinalKillEffects(), Utility.getApi().getFinalKillList(), "finalkill-effect", "finalkilleffect"),
     ProjectileTrails("Projectile Trail", ConfigUtils.getProjectileTrails(), Utility.getApi().getProjectileTrailList(), "projectile-trails", "projectiletrail"),
@@ -34,24 +35,8 @@ public enum CosmeticsType {
         this.permissionFormat = permissionFormat;
     }
 
-
-    public String getFormatedName() {
-        return formatedName;
-    }
-
     public ConfigManager getConfig() {
         return configManager;
     }
 
-    public List<?> getItemsList(){
-        return itemsList;
-    }
-
-    public String getSectionKey() {
-        return sectionKey;
-    }
-
-    public String getPermissionFormat() {
-        return permissionFormat;
-    }
 }

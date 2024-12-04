@@ -13,6 +13,7 @@ import org.bukkit.util.Vector;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
 import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.util.MathUtil;
 
 import java.util.List;
@@ -71,10 +72,9 @@ public class EggExplosionBedDestroy extends BedDestroy {
                 HCore.playParticle(egg.getLocation(), new Particle(ParticleType.SPELL_INSTANT, 1, center.toVector()));
             }
 
-            // Schedule a task to run after 5 seconds to spawn a chicken and despawn the egg
-            HCore.syncScheduler().run(() -> {
-                egg.getWorld().spawnEntity(egg.getLocation(), EntityType.CHICKEN); // Spawn a chicken entity
-                egg.remove(); // Remove the egg entity
+            Run.sync(() -> {
+                egg.getWorld().spawnEntity(egg.getLocation(), EntityType.CHICKEN);
+                egg.remove();
             });
         }
     }

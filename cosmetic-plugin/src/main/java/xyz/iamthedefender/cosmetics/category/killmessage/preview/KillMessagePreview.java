@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.KillMessage;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.category.killmessage.util.KillMessageUtils;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
@@ -44,9 +45,7 @@ public class KillMessagePreview {
                 player.sendMessage(ColorUtil.colored(s));
             }
         }
-        HCore.syncScheduler().after(5, TimeUnit.SECONDS).run(() -> {
-           gui.open(player);
-        });
 
+        Run.delayed(() -> gui.open(player), 5 * 20L);
     }
 }

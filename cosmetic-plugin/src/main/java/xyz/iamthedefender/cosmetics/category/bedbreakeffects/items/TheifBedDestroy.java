@@ -12,6 +12,7 @@ import org.bukkit.material.MaterialData;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
 import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 
 import java.util.Arrays;
 import java.util.List;
@@ -61,7 +62,7 @@ public class TheifBedDestroy extends BedDestroy {
         Enderman enderman = (Enderman) player.getWorld().spawnEntity(bedLocation, EntityType.ENDERMAN);
         assert XMaterial.RED_BED.parseMaterial() != null;
         enderman.setCarriedMaterial(new MaterialData(XMaterial.RED_BED.parseMaterial()));
-        HCore.syncScheduler().after(70L).run(enderman::remove);
+        Run.delayed(enderman::remove, 70L);
     }
 
 }

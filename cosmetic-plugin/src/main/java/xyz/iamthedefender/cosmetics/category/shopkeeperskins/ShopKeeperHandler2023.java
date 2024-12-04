@@ -20,6 +20,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.ShopKeeperSkin;
 import xyz.iamthedefender.cosmetics.api.handler.HandlerType;
 import xyz.iamthedefender.cosmetics.api.handler.IHandler;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
 import xyz.iamthedefender.cosmetics.util.MathUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
@@ -108,9 +109,8 @@ public class ShopKeeperHandler2023 implements Listener {
 
         if (e.getPlayer().hasMetadata("NPC2")){
             e.setCancelled(true);
-            HCore.syncScheduler().after(2).run((() -> {
-                CitizensAPI.getNPCRegistry().getNPC(e.getPlayer()).despawn();
-            }));
+
+            Run.delayed(() -> CitizensAPI.getNPCRegistry().getNPC(e.getPlayer()).despawn(), 2L);
         }
     }
 
@@ -122,12 +122,6 @@ public class ShopKeeperHandler2023 implements Listener {
 
         String name = e.getArena().getWorldName();
 
-        new BukkitRunnable(){
-            @Override
-            public void run() {
-
-                ShopKeeperHandler1058.arenas.remove(name);
-            }
-        }.runTaskLater(Cosmetics.getInstance(), 300L);
+        Run.delayed(() -> ShopKeeperHandler1058.arenas.remove(name), 300L);
     }
 }

@@ -10,6 +10,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.*;
 import xyz.iamthedefender.cosmetics.api.database.IDatabase;
 import xyz.iamthedefender.cosmetics.api.handler.IHandler;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
 import xyz.iamthedefender.cosmetics.data.PlayerData;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
@@ -184,8 +185,8 @@ public class BwcAPI implements CosmeticsAPI {
                 playerData.setWoodSkin(value);
                 break;
         }
-        // Ran ASYNC
-        HCore.asyncScheduler().run(playerData::save);
+        
+        Run.async(playerData::save);
     }
 
     /**

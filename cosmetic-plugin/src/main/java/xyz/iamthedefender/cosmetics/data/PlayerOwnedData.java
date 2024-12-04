@@ -1,7 +1,9 @@
 package xyz.iamthedefender.cosmetics.data;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.bukkit.Bukkit;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
@@ -15,6 +17,8 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 @Getter
+@ToString
+@EqualsAndHashCode
 public class PlayerOwnedData{
     private final UUID uuid;
     @Setter

@@ -46,6 +46,8 @@ public class WoodSkinHandler1058 implements Listener {
         IArena arena = BedWars.getAPI().getArenaUtil().getArenaByPlayer(p);
         String selected = Cosmetics.getInstance().getApi().getSelectedCosmetic(p, CosmeticsType.WoodSkins);
 
+        if(selected == null) return;
+
         if (arena == null) return;
 
         boolean isWoodSkinInventory =
@@ -53,19 +55,20 @@ public class WoodSkinHandler1058 implements Listener {
                         || e.getView().getTitle().equals(Utility.getMSGLang(p, "shop-items-messages.blocks-category.inventory-name"))
                         || e.getView().getTitle().equals(Utility.getMSGLang(p, "shop-items-messages.quick-buy-add-inventory-name"));
 
-        if (isWoodSkinInventory) {
-            for (ItemStack i : inv.getContents()) {
-                if (i == null) continue;
-                if (i.getType() == XMaterial.AIR.parseMaterial()) continue;
+        if(!isWoodSkinInventory) return;
 
-                if (Utility.isWoodOrLogBlock(i.getType()) && selected != null) {
-                    Optional<XMaterial> optional = XMaterial.matchXMaterial(selected.replace("-", "_").toUpperCase());
-                    if (optional.isEmpty()) return;
-                    XMaterial m = optional.get();
-                    i.setType(m.parseMaterial());
-                    i.setDurability(m.getData());
-                }
-            }
+        Optional<XMaterial> optionalXMaterial = XMaterial.matchXMaterial(selected.replace("-", "_").toUpperCase());
+        if (optionalXMaterial.isEmpty()) return;
+
+        XMaterial material = optionalXMaterial.get();
+
+        for (ItemStack itemStack : inv.getContents()) {
+            if (itemStack == null) continue;
+            if (itemStack.getType() == XMaterial.AIR.parseMaterial()) continue;
+            if (!Utility.isWoodOrLogBlock(itemStack.getType())) continue;
+
+            itemStack.setType(material.parseMaterial());
+            itemStack.setDurability(material.getData());
         }
     }
 }

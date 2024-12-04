@@ -12,6 +12,7 @@ mysql:
   password: "none"
   useSSL: false
   maxpoolsize: 50
+  maxlifetime: 1024
 cosmetic-preview:
   cosmetic-location:
     world:

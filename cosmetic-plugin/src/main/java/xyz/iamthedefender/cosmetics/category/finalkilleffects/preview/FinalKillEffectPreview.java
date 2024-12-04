@@ -11,6 +11,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 import net.citizensnpcs.api.CitizensAPI;
@@ -114,7 +115,7 @@ public class FinalKillEffectPreview {
         resetPacket.getIntegers().write(0, player.getEntityId());
         Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, cameraPacket);
 
-        HCore.syncScheduler().after(5, TimeUnit.SECONDS).run(() -> {
+        Run.delayed(() -> {
             if (!as.isDead()) as.remove();
 
             Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, resetPacket);
@@ -131,7 +132,7 @@ public class FinalKillEffectPreview {
             }
 
             gui.open(player);
-        });
+        }, 5 * 20L);
     }
 
     public void sendKillEffect(Player player, Location location) {

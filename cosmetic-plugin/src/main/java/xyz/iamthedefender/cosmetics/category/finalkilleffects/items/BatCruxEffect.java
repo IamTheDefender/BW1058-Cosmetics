@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.util.EntityUtil;
 
 import java.util.ArrayList;
@@ -80,7 +81,7 @@ public class BatCruxEffect extends FinalKillEffect {
             }
         }
 
-        HCore.syncScheduler().every(5L).run(() -> {
+        Run.delayed(() -> {
             if (!bats.isEmpty()) {
                 for (Bat bat : bats) {
                     Location batLocation = bat.getLocation().clone();
@@ -88,15 +89,13 @@ public class BatCruxEffect extends FinalKillEffect {
                     HCore.playParticle(victim, batLocation, particle);
                 }
             }
-        });
+        }, 5L);
 
-        long delay = 80L;
-
-       HCore.syncScheduler().every(delay).run(() -> {
-           for (Bat bat : bats) {
-               bat.remove();
-           }
-           bats.clear();
-       });
+        Run.delayed(() -> {
+            for (Bat bat : bats) {
+                bat.remove();
+            }
+            bats.clear();
+        }, 80L);
     }
 }

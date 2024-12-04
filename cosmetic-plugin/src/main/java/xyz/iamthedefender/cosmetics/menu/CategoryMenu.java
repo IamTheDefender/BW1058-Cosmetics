@@ -48,24 +48,6 @@ public class CategoryMenu extends InventoryGui {
     List<Integer> slots;
     int page;
 
-    public CategoryMenu(CosmeticsType type, String title) {
-        super(type.getFormatedName(), title, 6, InventoryType.CHEST);
-        this.config = type.getConfig();
-        this.cosmeticsType = type;
-        this.title = title;
-        String list = config.getString("slots");
-        list = list.replace("[", "").replace("]", "");
-        List<Integer> integerList = new ArrayList<>();
-        for (String s : list.split("\\s*,\\s*")) {
-            integerList.add(Integer.parseInt(s));
-        }
-        slots = integerList;
-        if (slots.isEmpty()){
-            slots = Arrays.asList(10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34);
-        }
-        this.page = 0;
-    }
-
     public CategoryMenu(CosmeticsType type, String title, int page) {
         super(type.getFormatedName(), title, 6, InventoryType.CHEST);
         this.config = type.getConfig();
@@ -82,6 +64,10 @@ public class CategoryMenu extends InventoryGui {
             slots = Arrays.asList(10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34);
         }
        this.page = page;
+    }
+
+    public CategoryMenu(CosmeticsType type, String title) {
+        this(type, title, 0);
     }
 
     @Override

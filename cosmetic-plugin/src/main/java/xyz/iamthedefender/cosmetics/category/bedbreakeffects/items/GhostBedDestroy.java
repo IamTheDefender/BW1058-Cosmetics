@@ -14,6 +14,7 @@ import org.bukkit.util.Vector;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
 import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 
 import java.util.ArrayList;
@@ -65,7 +66,8 @@ public class GhostBedDestroy extends BedDestroy {
     @Override
     public void execute(Player player, Location bedLocation, ITeamHandler victimTeam) {
         List<Entity> standsAndBats = new ArrayList<>();
-        HCore.syncScheduler().every(10L).limit(5).run(() -> {
+
+        Run.every(() -> {
             Location loc = UsefulUtilsVD.getRandomLocation(bedLocation, 2);
             Bat bat = (Bat) player.getWorld().spawnEntity(loc, EntityType.BAT);
             bat.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 19999980, 1));
@@ -75,8 +77,9 @@ public class GhostBedDestroy extends BedDestroy {
             bat.setPassenger(stand);
             stand.setHelmet(UsefulUtilsVD.gethead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTZlOTM0NjdhM2EwNzkyMjdmNGE3ZDNlYmE3NjE3NTM2ZGE0OTFiYzJmYzZkNzNlZTM5NjhkM2NmMWE2YTUifX19"));
             standsAndBats.addAll(Arrays.asList(stand, bat));
-        });
-        HCore.syncScheduler().after(8, TimeUnit.SECONDS).run(() -> {
+        }, 10L, 5);
+
+        Run.delayed(() -> {
             for(Entity entity : standsAndBats){
                 if (entity instanceof Bat) {
                     Location location = entity.getLocation();
@@ -86,6 +89,6 @@ public class GhostBedDestroy extends BedDestroy {
                     entity.remove();
                 }
             }
-        });
+        }, 8 * 20L);
     }
 }

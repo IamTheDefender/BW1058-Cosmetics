@@ -1,8 +1,16 @@
 package xyz.iamthedefender.cosmetics.versionsupport;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.EnumWrappers;
+import com.comphenix.protocol.wrappers.WrappedParticle;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -69,5 +77,28 @@ public class VersionSupport_1_20 implements IVersionSupport {
         // We simply remove the "beginning" and "ending" part of the JSON, so we're left with only the URL. You could use a proper
         // JSON parser for this, but that's not worth it. The String will always start exactly with this stuff anyway
         return new URL(decoded.substring("{\"textures\":{\"SKIN\":{\"url\":\"".length(), decoded.length() - "\"}}}".length()));
+    }
+
+    @Override
+    public void displayRedstoneParticle(Player player, Location location, Color color) {
+        EnumWrappers.Particle particle = EnumWrappers.Particle.REDSTONE;
+
+        PacketContainer packet = new PacketContainer(PacketType.Play.Server.WORLD_PARTICLES);
+
+        packet.getDoubles().write(0, location.getX());
+        packet.getDoubles().write(1, location.getY());
+        packet.getDoubles().write(2, location.getZ());
+
+        packet.getFloat().write(0, 0f);
+        packet.getFloat().write(1, 0f);
+        packet.getFloat().write(2, 0f);
+
+        packet.getFloat().write(3, 1.0f);
+
+        packet.getIntegers().write(0, 1);
+
+        packet.getNewParticles().write(0, WrappedParticle.fromHandle(particle));
+
+        ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
     }
 }

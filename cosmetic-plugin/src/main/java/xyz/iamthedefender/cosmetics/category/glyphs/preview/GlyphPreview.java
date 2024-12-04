@@ -24,6 +24,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.Glyph;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.category.glyphs.util.GlyphUtil;
 import xyz.iamthedefender.cosmetics.category.glyphs.util.ImageParticles;
@@ -112,9 +113,8 @@ public class GlyphPreview {
         Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, cameraPacket);
 
 
-        HCore.syncScheduler().after(5, TimeUnit.SECONDS).run(() -> {
+        Run.delayed(() -> {
             if (!as.isDead()) as.remove();
-
 
             Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, resetPacket);
             player.removePotionEffect(PotionEffectType.INVISIBILITY);
@@ -130,7 +130,7 @@ public class GlyphPreview {
             }
 
             gui.open(player);
-        });
+        }, 5 * 20L);
     }
 
     private void sendGlyphParticles(Player player, Location location, String selected) {
@@ -171,10 +171,10 @@ public class GlyphPreview {
 
         Map<Location, Color> particles = imageParticles.getParticles(location, location.getPitch(), 180.0f);
 
-        HCore.asyncScheduler().every(100, TimeUnit.MILLISECONDS).limit(50).run(()-> {
+        Run.delayedAsync(() -> {
             for (Location spot : particles.keySet()) {
-                HCore.syncScheduler().run(() -> GlyphUtil.sendRedstoneParticle(player, spot, particles.get(spot)));
+                Run.sync(() -> GlyphUtil.sendRedstoneParticle(player, spot, particles.get(spot)));
             }
-        });
+        }, 2L);
     }
 }

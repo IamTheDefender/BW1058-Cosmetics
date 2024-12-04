@@ -21,6 +21,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.ShopKeeperSkin;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.category.shopkeeperskins.utils.ShopKeeperSkinsUtils;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
 
@@ -102,7 +103,7 @@ public class ShopKeeperPreview {
 
         ShopKeeperSkinsUtils.spawnShopKeeperNPCForPreview(player, finalCosmeticLocation, selected);
 
-        HCore.syncScheduler().after(5, TimeUnit.SECONDS).run(() -> {
+        Run.delayed(() -> {
             if (!as.isDead()) as.remove();
             Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, resetPacket);
             player.removePotionEffect(PotionEffectType.INVISIBILITY);
@@ -119,6 +120,6 @@ public class ShopKeeperPreview {
             }
 
             gui.open(player);
-        });
+        }, 5 * 20L);
     }
 }

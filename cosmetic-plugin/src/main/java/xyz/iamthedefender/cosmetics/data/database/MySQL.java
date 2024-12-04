@@ -51,6 +51,7 @@ public class MySQL implements IDatabase {
             boolean ssl = plugin.getConfig().getBoolean("mysql.useSSL");
             int port = plugin.getConfig().getInt("mysql.port", 3306);
             int maxpoolsize = plugin.getConfig().getInt("mysql.maxpoolsize", 50);
+            int maxLifetime = plugin.getConfig().getInt("mysql.maxlifetime", Integer.MAX_VALUE);
 
             HikariConfig config = new HikariConfig();
             config.setDriverClassName("com.mysql.cj.jdbc.Driver");

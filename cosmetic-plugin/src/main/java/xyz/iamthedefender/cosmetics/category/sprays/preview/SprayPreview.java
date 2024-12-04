@@ -26,6 +26,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.Spray;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.category.sprays.util.SpraysUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
 
@@ -114,12 +115,9 @@ public class SprayPreview {
         Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, cameraPacket);
 
 
-        HCore.syncScheduler().after(5, TimeUnit.SECONDS).run(() -> {
+        Run.delayed(() -> {
             if (!as.isDead()) as.remove();
 
-            //PacketContainer itemFrameDestroyPacket = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.ENTITY_DESTROY);
-            //itemFrameDestroyPacket.getIntegerArrays().write(0, new int[]{currentID});
-            //Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, itemFrameDestroyPacket);
             frame.setItem(new ItemStack(Material.AIR));
             frame.remove();
             Cosmetics.getInstance().getProtocolManager().removePacketListener(adapter);
@@ -137,7 +135,8 @@ public class SprayPreview {
             }
 
             gui.open(player);
-        });
+        }, 5 * 20L);
+
     }
 
     public org.bukkit.inventory.ItemStack createMapItem() {
@@ -198,11 +197,13 @@ public class SprayPreview {
         frame.setFacingDirection(getCardinalDirection(playerLocation), true);
         SpraysUtil.spawnSprays(player, frame, true);
         XSound.ENTITY_SILVERFISH_HURT.play(player, 10f, 10f);
-        HCore.syncScheduler().every(10L).run((r) -> {
+
+        Run.every((r) -> {
             if(frame.isDead() || !frame.isValid()){
                 firstBlock.getBlock().setType(Material.AIR);
+                r.cancel();
             }
-        });
+        }, 10L);
     }
 
     public static BlockFace getCardinalDirection(Location location) {

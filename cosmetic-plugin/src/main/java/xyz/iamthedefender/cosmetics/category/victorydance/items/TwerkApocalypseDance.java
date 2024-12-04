@@ -18,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 import xyz.iamthedefender.cosmetics.util.MathUtil;
@@ -79,7 +80,8 @@ public class TwerkApocalypseDance extends VictoryDance {
         List<NPC> npcs = new ArrayList<>();
 
         Skin finalSkin = skin;
-        HCore.syncScheduler().every(1).limit(15).run(() -> {
+
+        Run.every(() -> {
             List<Block> freeBlocks = UsefulUtilsVD.getFreeBlocks(winner.getLocation());
             Location loc = freeBlocks.get(MathUtil.getRandom(0, freeBlocks.size() -1)).getLocation();
             loc.setYaw((float) MathUtil.getRandom(0.0D, 360.0D));
@@ -94,21 +96,20 @@ public class TwerkApocalypseDance extends VictoryDance {
                 npc.spawn(loc.add(0,1,0));
                 npcs.add(npc);
 
-                HCore.syncScheduler().every(1, TimeUnit.SECONDS).run(() -> {
-                    if (npc.isSpawned()) {
-                        Player npcP  = (Player) npc.getEntity();
-                        npcP.setSneaking(!npcP.isSneaking());
-                        NMS.setSneaking(npcP, npcP.isSneaking());
+                Run.every((r) -> {
+                    if(!npc.isSpawned()) {
+                        r.cancel();
+                        return;
                     }
-                });
-            }
-        });
 
-        Bukkit.getScheduler().runTaskLater(HCore.getInstance(), () -> {
-            for (NPC npc : npcs) {
-                npc.destroy();
+                    Player npcP = (Player) npc.getEntity();
+                    npcP.setSneaking(!npcP.isSneaking());
+                    NMS.setSneaking(npcP, npcP.isSneaking());
+                }, 20L);
             }
-        }, 20L * 9 + 10L);
+        }, 1L, 15);
+
+        Run.delayed(() -> npcs.forEach(NPC::destroy), 20L * 9 + 10L);
 
     }
 }

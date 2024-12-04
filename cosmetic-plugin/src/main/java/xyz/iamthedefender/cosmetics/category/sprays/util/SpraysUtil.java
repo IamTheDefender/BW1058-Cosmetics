@@ -20,6 +20,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.handler.IArenaHandler;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
@@ -41,7 +42,7 @@ public class SpraysUtil
      * @param itemFrame The item frame in which to display the spray.
      */
     public static void spawnSprays(Player player, ItemFrame itemFrame, boolean isPreview) {
-        HCore.syncScheduler().run(() -> {
+        Run.sync(() -> {
             MapView view = Bukkit.createMap(player.getWorld());
             String spray = Cosmetics.getInstance().getApi().getSelectedCosmetic(player, CosmeticsType.Sprays);
             ConfigManager config = ConfigUtils.getSprays();
@@ -56,12 +57,12 @@ public class SpraysUtil
                 SpraysUtil.cooldown.remove(player.getName());
             }
             DebugUtil.addMessage("Playing " + spray + " Spray for " + player.getDisplayName() + " is preview: " + isPreview);
-           if(!isPreview){
-               IArenaHandler arenaHandler = Cosmetics.getInstance().getHandler().getArenaUtil().getArenaByPlayer(player);
-               if(arenaHandler == null) return;
-               SpraysUtil.cooldown.put(player.getName(), System.currentTimeMillis() + 3000L);
-           }
-           DebugUtil.addMessage("Check 1");
+            if (!isPreview) {
+                IArenaHandler arenaHandler = Cosmetics.getInstance().getHandler().getArenaUtil().getArenaByPlayer(player);
+                if (arenaHandler == null) return;
+                SpraysUtil.cooldown.put(player.getName(), System.currentTimeMillis() + 3000L);
+            }
+            DebugUtil.addMessage("Check 1");
 
             view.removeRenderer(view.getRenderers().get(0));
             final CustomRenderer renderer = new CustomRenderer();

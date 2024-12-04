@@ -10,6 +10,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.Glyph;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.category.glyphs.util.GlyphUtil;
 
@@ -69,9 +70,9 @@ public class GlyphItems {
                 public void execute(Player player, Location location) {
                     String fileLocation = config.getString(path + "file");
                     File file = new File(Cosmetics.getInstance().getHandler().getAddonPath() + "/Glyphs/" + fileLocation);
-                    HCore.asyncScheduler().every(100, TimeUnit.MILLISECONDS).limit(10).run(()-> {
-                        GlyphUtil.sendGlyphs(file, location);
-                            });
+                    System.out.println("Glyphs Path: " + file.getAbsolutePath());
+
+                    Run.everyAsync(()-> GlyphUtil.sendGlyphs(file, location), 2, 10);
                 }
             };
             glyphs.register();

@@ -14,6 +14,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
 import xyz.iamthedefender.cosmetics.api.handler.IArenaHandler;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -65,17 +66,20 @@ public class YeeHawDance extends VictoryDance {
         horse.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 190000000, 3));
         horse.setTamed(true);
         horse.setOwner(winner);
-        HCore.syncScheduler().every(20L, TimeUnit.SECONDS).run((r) -> {
+
+        Run.every((r) -> {
             IArenaHandler arena = Cosmetics.getInstance().getHandler().getArenaUtil().getArenaByPlayer(winner);
             if(arena == null){
                 horse.remove();
                 r.cancel();
+                return;
             }
+
             if(horse.getPassenger() == null){
                 horse.remove();
                 r.cancel();
             }
-        });
+        }, 20 * 20L);
 
         // Horse Hit Event
         HCore.registerEvent(EntityDamageEvent.class).filter(event -> !horse.isDead()).consume((event) -> {

@@ -31,6 +31,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.IslandTopper;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.category.islandtoppers.util.BlockData;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
@@ -113,7 +114,7 @@ public class IslandTopperPreview {
 
         sendIslandTopper(player, finalCosmeticLocation, selected);
 
-        HCore.syncScheduler().after(5, TimeUnit.SECONDS).run(() -> {
+        Run.delayed(() -> {
             if (!as.isDead()) as.remove();
 
             Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, resetPacket);
@@ -131,7 +132,7 @@ public class IslandTopperPreview {
             }
 
             gui.open(player);
-        });
+        }, 5 * 20L);
     }
 
     private void sendIslandTopper(Player player, Location location, String selected) {

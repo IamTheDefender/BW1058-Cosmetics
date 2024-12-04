@@ -35,7 +35,7 @@ import xyz.iamthedefender.cosmetics.category.woodskin.items.*;
 import xyz.iamthedefender.cosmetics.category.woodskin.items.log.*;
 import xyz.iamthedefender.cosmetics.listener.CosmeticPurchaseListener;
 import xyz.iamthedefender.cosmetics.listener.PlayerJoinListener;
-import xyz.iamthedefender.cosmetics.support.placeholders.Placeholders;
+import xyz.iamthedefender.cosmetics.support.placeholders.CosmeticsPlaceholders;
 import xyz.iamthedefender.cosmetics.util.lib.CosmeticsLibraryManager;
 import xyz.iamthedefender.cosmetics.versionsupport.VersionSupport_1_20;
 import xyz.iamthedefender.cosmetics.versionsupport.VersionSupport_1_8_R3;
@@ -275,7 +275,7 @@ public class StartupUtils
 
         if (isPluginEnabled("PlaceholderAPI")){
             log.info("Found PlaceholderAPI, loading placeholders!");
-            new Placeholders(Cosmetics.getInstance()).register();
+            new CosmeticsPlaceholders().register();
             Cosmetics.setPlaceholderAPI(true);
         }
         return true;

@@ -19,6 +19,7 @@ import xyz.iamthedefender.cosmetics.api.database.DatabaseType;
 import xyz.iamthedefender.cosmetics.api.database.IDatabase;
 import xyz.iamthedefender.cosmetics.api.handler.HandlerType;
 import xyz.iamthedefender.cosmetics.api.handler.IHandler;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.api.util.config.DefaultsUtils;
 import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
@@ -170,19 +171,19 @@ public class Cosmetics extends JavaPlugin {
 
         metrics = new Metrics(this, 21340);
 
-        HCore.asyncScheduler().every(5L).run(() -> {
+        Run.everyAsync(() -> {
             try (Connection connection = remoteDatabase.getConnection()){
                 connection.createStatement();
             }catch (Exception e){
                 remoteDatabase.connect();
             }
-        });
+        }, 5L);
 
-        HCore.asyncScheduler().every(5 * 20L).run(() -> {
+        Run.everyAsync(() -> {
             for (Player onlinePlayer : getServer().getOnlinePlayers()) {
                 getPlayerManager().getPlayerOwnedData(onlinePlayer.getUniqueId()).updateOwned();
             }
-        });
+        }, 5 * 20L);
 
     }
 

@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.*;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.data.PlayerData;
 import xyz.iamthedefender.cosmetics.data.PlayerOwnedData;
 
@@ -70,7 +71,7 @@ public class PlayerJoinListener implements Listener {
     }
 
     private void updatePlayerOwnedDataAsync(Player player) {
-        HCore.asyncScheduler().run(() -> {
+        Run.async(() -> {
             PlayerOwnedData playerOwnedData = Cosmetics.getInstance().getPlayerManager().getPlayerOwnedData(player.getUniqueId());
             playerOwnedData.updateOwned();
         });

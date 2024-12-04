@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.category.shopkeeperskins.ShopKeeperHandler1058;
 import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 
@@ -52,15 +53,16 @@ public class AnvilRainDance extends VictoryDance {
 
     @Override
     public void execute(Player winner) {
-        HCore.syncScheduler().every(1L).run((runnable) -> {
-            if (ShopKeeperHandler1058.arenas.containsKey(winner.getWorld().getName())) {
-                final Location loc = UsefulUtilsVD.getRandomLocation(winner.getLocation(), 20);
-                final FallingBlock anvil = winner.getWorld().spawnFallingBlock(loc, Material.ANVIL, (byte)0);
-                anvil.setHurtEntities(false);
-                anvil.setDropItem(false);
-            } else {
-                runnable.cancel();
+        Run.every((r) -> {
+            if(!ShopKeeperHandler1058.arenas.containsKey(winner.getWorld().getName())) {
+                r.cancel();
+                return;
             }
-        });
+
+            Location loc = UsefulUtilsVD.getRandomLocation(winner.getLocation(), 20);
+            FallingBlock anvil = winner.getWorld().spawnFallingBlock(loc, Material.ANVIL, (byte)0);
+            anvil.setHurtEntities(false);
+            anvil.setDropItem(false);
+        }, 1L);
     }
 }
