@@ -43,13 +43,13 @@ public class VersionSupport_1_8_R3 implements IVersionSupport {
         packet.getFloat().write(1, (float) location.getY());
         packet.getFloat().write(2, (float) location.getZ());
 
-        packet.getFloat().write(3, 0f);
-        packet.getFloat().write(4, 0f);
-        packet.getFloat().write(5, 0f);
-
         packet.getFloat().write(6, 1.0f);
 
-        packet.getIntegers().write(0, 1);
+        packet.getIntegers().write(0, 0);
+
+        packet.getFloat().write(3, color.getRed() / 255f);
+        packet.getFloat().write(4, color.getGreen() / 255f);
+        packet.getFloat().write(5, color.getBlue() / 255f);
 
         packet.getParticles().write(0, EnumWrappers.Particle.REDSTONE);
 

@@ -99,6 +99,15 @@ public class VersionSupport_1_20 implements IVersionSupport {
 
         packet.getNewParticles().write(0, WrappedParticle.fromHandle(particle));
 
-        ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
+        packet.getFloat().write(4, color.getRed() / 255f);
+        packet.getFloat().write(5, color.getGreen() / 255f);
+        packet.getFloat().write(6, color.getBlue() / 255f);
+
+        if(player != null) {
+            ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
+            return;
+        }
+
+        ProtocolLibrary.getProtocolManager().broadcastServerPacket(packet);
     }
 }

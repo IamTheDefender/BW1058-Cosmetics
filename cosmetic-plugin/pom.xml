@@ -120,7 +120,7 @@
                         <configuration>
                             <tasks>
                                 <delete failonerror="false">
-                                    <fileset dir="${project.parent.basedir}/jars" includes="*.jar"/>
+                                    <fileset dir="${project.parent.basedir}/build" includes="*.jar"/>
                                 </delete>
                             </tasks>
                         </configuration>
@@ -142,7 +142,7 @@
                 <version>3.4.1</version>
                 <configuration>
                     <finalName>BedWars-Cosmetics-v${project.parent.version}</finalName>
-                    <outputDirectory>${project.parent.basedir}/jars</outputDirectory>
+                    <outputDirectory>${project.parent.basedir}/build</outputDirectory>
                     <createDependencyReducedPom>false</createDependencyReducedPom>
                     <relocations>
                         <relocation>
