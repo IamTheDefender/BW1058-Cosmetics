@@ -2,12 +2,14 @@
 
 package xyz.iamthedefender.cosmetics.category.sprays.util;
 
+import com.comphenix.protocol.wrappers.EnumWrappers;
+import com.comphenix.protocol.wrappers.WrappedParticle;
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.HCore;
-import com.hakan.core.particle.Particle;
 import com.hakan.core.particle.type.ParticleType;
 import com.hakan.core.utils.ColorUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
+import org.bukkit.Particle;
 import org.bukkit.Rotation;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -20,6 +22,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.handler.IArenaHandler;
+import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
@@ -106,8 +109,20 @@ public class SpraysUtil
             player.getInventory().setItem(0, map);
         }
 
-        Particle particle = new Particle(ParticleType.ASH, 10, new Vector());
-        HCore.playParticle(player, itemFrame.getLocation(), particle);
+        ParticleWrapper particleWrapper;
+
+        try {
+            particleWrapper = new ParticleWrapper(WrappedParticle.create(Particle.FALLING_DUST, null));
+        }catch (Exception exception){
+            particleWrapper = new ParticleWrapper(EnumWrappers.Particle.FALLING_DUST);
+        }
+
+        Cosmetics.getInstance().getVersionSupport().displayParticle(
+                player,
+                itemFrame.getLocation(),
+                particleWrapper,
+                10
+        );
 
         for (final Entity entity : itemFrame.getNearbyEntities(1.0, 1.0, 1.0)) {
             if (entity.getType() == EntityType.ARMOR_STAND && entity.hasMetadata("HOLO_ITEM_FRAME")) {

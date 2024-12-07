@@ -23,11 +23,13 @@ public class GlyphUtil
     
     public static void sendGlyphs(File file, Location loc) {
         BufferedImage image = null;
+
         try {
             image = ImageIO.read(file);
         } catch (final IOException e) {
             Cosmetics.getInstance().getLogger().log(Level.SEVERE, "Unable to read glyph file! please check your config!");
         }
+
         ImageParticles particles = new ImageParticles(image, 1);
         particles.setAnchor(50, 10);
         particles.setDisplayRatio(0.1);
@@ -40,26 +42,5 @@ public class GlyphUtil
 
     public static void sendRedstoneParticle(Player player, Location location, Color color){
         Cosmetics.getInstance().getVersionSupport().displayRedstoneParticle(player, location, color);
-       /* Old Particle send code
-        boolean oneEight = false;
-
-        try {
-            Class.forName("org.bukkit.Particle");
-        } catch (ClassNotFoundException ex) {
-            oneEight = true;
-        }
-
-        if(oneEight){
-
-            return;
-        }
-
-        XParticle particle = XParticle.DUST;
-
-        ParticleDisplay.of(particle).withColor(new java.awt.Color(color.getRed(), color.getGreen(), color.getBlue()))
-                .withExtra(1.0f)
-                .onlyVisibleTo(player)
-                .spawn(location);
-        */
     }
 }

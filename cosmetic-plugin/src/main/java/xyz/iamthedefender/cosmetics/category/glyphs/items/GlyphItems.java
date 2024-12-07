@@ -70,7 +70,6 @@ public class GlyphItems {
                 public void execute(Player player, Location location) {
                     String fileLocation = config.getString(path + "file");
                     File file = new File(Cosmetics.getInstance().getHandler().getAddonPath() + "/Glyphs/" + fileLocation);
-                    System.out.println("Glyphs Path: " + file.getAbsolutePath());
 
                     Run.everyAsync(()-> GlyphUtil.sendGlyphs(file, location), 2, 10);
                 }
