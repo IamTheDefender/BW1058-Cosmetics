@@ -1,19 +1,23 @@
 package xyz.iamthedefender.cosmetics.category.bedbreakeffects.items;
 
+import com.comphenix.protocol.wrappers.EnumWrappers;
+import com.comphenix.protocol.wrappers.WrappedParticle;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 import com.hakan.core.HCore;
-import com.hakan.core.particle.Particle;
 import com.hakan.core.particle.type.ParticleType;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
+import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
 import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
+import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 
@@ -83,7 +87,22 @@ public class GhostBedDestroy extends BedDestroy {
             for(Entity entity : standsAndBats){
                 if (entity instanceof Bat) {
                     Location location = entity.getLocation();
-                    HCore.playParticle(location, new Particle(ParticleType.EXPLOSION_LARGE, 0.0f, new Vector(0.0f, 0.0f, 0.0f)));
+                    ParticleWrapper particleWrapper;
+
+                    try{
+                        particleWrapper = new ParticleWrapper(WrappedParticle.create(Particle.EXPLOSION_LARGE, null));
+                    }catch (Exception exception){
+                        particleWrapper = new ParticleWrapper(EnumWrappers.Particle.EXPLOSION_LARGE);
+                    }
+
+                    Cosmetics.getInstance().getVersionSupport().displayParticle(
+                            player,
+                            location,
+                            particleWrapper,
+                            1,
+                            0.0f
+                    );
+
                     XSound.ENTITY_GENERIC_EXPLODE.play(location);
                     entity.getPassenger().remove();
                     entity.remove();

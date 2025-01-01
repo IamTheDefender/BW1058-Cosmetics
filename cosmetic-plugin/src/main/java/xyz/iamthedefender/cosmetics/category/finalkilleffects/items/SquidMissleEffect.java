@@ -1,5 +1,7 @@
 package xyz.iamthedefender.cosmetics.category.finalkilleffects.items;
 
+import com.comphenix.protocol.wrappers.EnumWrappers;
+import com.comphenix.protocol.wrappers.WrappedParticle;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 import com.hakan.core.HCore;
@@ -17,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
 
 import java.util.Arrays;
 import java.util.List;
@@ -79,8 +82,15 @@ public class SquidMissleEffect extends FinalKillEffect {
                     stand.teleport(stand.getLocation().add(0.0, 0.5, 0.0));
                     stand.setPassenger(squid);
 
-                    Particle particle = new Particle(ParticleType.FLAME, 1, 0.01f, new Vector(0.0f, 0.0f, 0.0f));
-                    HCore.playParticle(victim, stand.getLocation(), particle);
+                    ParticleWrapper particleWrapper;
+                    try{
+                        particleWrapper = new ParticleWrapper(WrappedParticle.create(org.bukkit.Particle.FLAME, null));
+                    }catch (Exception exception){
+                        particleWrapper = new ParticleWrapper(EnumWrappers.Particle.FLAME);
+                    }
+
+                    Cosmetics.getInstance().getVersionSupport()
+                            .displayParticle(player, stand.getLocation(), particleWrapper, 1, 0.0f);
 
                     victim.playSound(victim.getLocation(), XSound.ENTITY_CHICKEN_EGG.parseSound(), 1.0f, 1.0f);
                     if (this.i1 == 25) {

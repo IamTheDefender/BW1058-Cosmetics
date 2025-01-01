@@ -1,14 +1,16 @@
 package xyz.iamthedefender.cosmetics.category.bedbreakeffects.items;
 
 
+import com.comphenix.protocol.wrappers.EnumWrappers;
+import com.comphenix.protocol.wrappers.WrappedParticle;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
 import com.hakan.core.HCore;
-import com.hakan.core.particle.Particle;
 import com.hakan.core.particle.type.ParticleType;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -18,6 +20,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
 import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
+import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
 
 import java.util.Arrays;
 import java.util.List;
@@ -79,8 +82,18 @@ public class PigMissileBedDestroy extends BedDestroy {
                 stand.eject();
                 stand.teleport(stand.getLocation().add(0.0, 0.5, 0.0));
                 stand.setPassenger(pig);
-                Particle flame = new Particle(ParticleType.FLAME, 1, 0.0f, new Vector(0.0f, 0.0f, 0.0f));
-                HCore.playParticle(player, stand.getLocation(), flame);
+
+                ParticleWrapper particleWrapper;
+
+                try{
+                    particleWrapper = new ParticleWrapper(WrappedParticle.create(Particle.FLAME, null));
+                }catch (Exception exception){
+                    particleWrapper = new ParticleWrapper(EnumWrappers.Particle.FLAME);
+                }
+
+                Cosmetics.getInstance().getVersionSupport()
+                        .displayParticle(player, stand.getLocation(), particleWrapper, 1, 0.0f);
+
                 XSound.ENTITY_CHICKEN_EGG.play(stand.getLocation(), 1.0f, 1.0f);
                 if (this.i1 == 13) {
                     final Firework fw = stand.getWorld().spawn(stand.getLocation(), Firework.class);
@@ -88,6 +101,7 @@ public class PigMissileBedDestroy extends BedDestroy {
                     fm.addEffect(FireworkEffect.builder().flicker(true).trail(false).with(FireworkEffect.Type.BALL).withColor(Color.BLACK).withFade(Color.BLACK).build());
                     fw.setFireworkMeta(fm);
                 }
+
                 if (this.i1 == 25) {
                     stand.remove();
                     pig.remove();

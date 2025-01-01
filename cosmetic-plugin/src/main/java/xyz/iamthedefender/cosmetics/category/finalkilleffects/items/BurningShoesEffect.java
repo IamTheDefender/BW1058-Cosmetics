@@ -1,5 +1,7 @@
 package xyz.iamthedefender.cosmetics.category.finalkilleffects.items;
 
+import com.comphenix.protocol.wrappers.EnumWrappers;
+import com.comphenix.protocol.wrappers.WrappedParticle;
 import com.cryptomorin.xseries.XMaterial;
 import com.hakan.core.HCore;
 import com.hakan.core.particle.Particle;
@@ -12,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
 
 import java.util.List;
 
@@ -63,11 +66,23 @@ public class BurningShoesEffect extends FinalKillEffect {
                     double y = 0.23D * this.t;
                     double z = 0.11D * (12.5D - this.t) * Math.sin(this.t + phi);
                     location.add(x, y, z);
-                    if (onlyVictim) {
-                        HCore.playParticle(victim, location, new Particle(ParticleType.FLAME, 100, 0.01, new Vector(0.0f, 0.0f, 0.0f)));
-                    } else {
-                        HCore.playParticle(location, new Particle(ParticleType.FLAME, 100, 0.01, new Vector(0.0f, 0.0f, 0.0f)));
+
+                    ParticleWrapper particleWrapper;
+                    try{
+                        particleWrapper = new ParticleWrapper(WrappedParticle.create(org.bukkit.Particle.FLAME, null));
+                    }catch (Exception exception){
+                        particleWrapper = new ParticleWrapper(EnumWrappers.Particle.FLAME);
                     }
+
+                    if (onlyVictim) {
+                        Cosmetics.getInstance().getVersionSupport()
+                                .displayParticle(victim, location, particleWrapper, 1, 0.0f);
+                    } else {
+                        Cosmetics.getInstance().getVersionSupport()
+                                .displayParticle(null, location, particleWrapper, 1, 0.0f);
+                    }
+
+
                     location.subtract(x, y, z);
                     if (this.t >= 12.5D) {
                         location.add(x, y, z);
