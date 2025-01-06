@@ -3,7 +3,13 @@ package xyz.iamthedefender.cosmetics.api.particle;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.comphenix.protocol.wrappers.WrappedParticle;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import xyz.iamthedefender.cosmetics.api.util.Utility;
+import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
+
+import java.util.Objects;
+import java.util.Optional;
 
 
 @Getter
@@ -29,4 +35,27 @@ public class ParticleWrapper {
         this(null, newWrapperParticle);
     }
 
+    public IVersionSupport support() {
+        return Utility.getApi().getVersionSupport();
+    }
+
+    public static Optional<ParticleWrapper> getParticle(@NotNull String name) {
+        Objects.requireNonNull(name, "The particle name cannot be null!");
+
+        name = name.toUpperCase();
+
+        ParticleWrapper particleWrapper;
+
+        try {
+            particleWrapper = new ParticleWrapper(WrappedParticle.create(org.bukkit.Particle.valueOf(name), null));
+        } catch (Exception exception) {
+            try {
+                particleWrapper = new ParticleWrapper(EnumWrappers.Particle.valueOf(name));
+            }catch (Exception exception1) {
+                particleWrapper = null;
+            }
+        }
+
+        return Optional.ofNullable(particleWrapper);
+    }
 }
