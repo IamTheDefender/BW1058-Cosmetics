@@ -2,7 +2,6 @@ package xyz.iamthedefender.cosmetics.category.victorydance.items;
 
 import com.andrei1058.bedwars.api.events.player.PlayerLeaveArenaEvent;
 import com.cryptomorin.xseries.XMaterial;
-import com.hakan.core.HCore;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -10,6 +9,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class GuardiansDance extends VictoryDance {
+public class GuardiansDance extends VictoryDance implements Listener {
 
-    private HashMap<Player, GuardianTriangle> guardians = new HashMap<>();
+    private final HashMap<Player, GuardianTriangle> guardians = new HashMap<>();
 
     @Override
     public ItemStack getItem() {

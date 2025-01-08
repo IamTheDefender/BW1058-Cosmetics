@@ -1,7 +1,6 @@
 package xyz.iamthedefender.cosmetics.category.victorydance.items;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.hakan.core.HCore;
 import com.hakan.core.utils.ColorUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
