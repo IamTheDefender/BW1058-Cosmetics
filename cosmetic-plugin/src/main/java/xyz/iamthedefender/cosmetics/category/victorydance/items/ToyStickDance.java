@@ -7,17 +7,26 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
+import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
 import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
-public class ToyStickDance extends VictoryDance {
+public class ToyStickDance extends VictoryDance implements Listener {
+    private final Map<Player, Long> cooldown = new HashMap<>();
+
     @Override
     public ItemStack getItem() {
         return XMaterial.STICK.parseItem();
@@ -63,19 +72,29 @@ public class ToyStickDance extends VictoryDance {
         lore.add(ColorUtil.colored("&7to fly!"));
         i.setItemMeta(im);
         winner.getInventory().addItem(i);
-        final long[] cooldown = {0};
-        HCore.registerEvent(PlayerInteractEvent.class).filter(e -> i.equals(e.getItem())).consume((event) -> {
-            if (cooldown[0] != 0 && cooldown[0] > System.currentTimeMillis()){
+    }
+
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        if (event.getItem() == null || !event.getItem().equals(getItem())) return;
+        if (cooldown.containsKey(event.getPlayer())) {
+            long difference = System.currentTimeMillis() - cooldown.get(event.getPlayer());
+            if (difference < TimeUnit.SECONDS.toMillis(1)) {
                 return;
-            }else if (cooldown[0] == 0 || cooldown[0] < System.currentTimeMillis()){
-                cooldown[0] = System.currentTimeMillis() + 1000;
             }
-            event.getPlayer().setVelocity(event.getPlayer().getLocation().getDirection().multiply(-6).setY(6));
-            for (Location loc : UsefulUtilsVD.generateSphere(event.getPlayer().getLocation(), 6, false)) {
-                final Block block = loc.getBlock();
-                UsefulUtilsVD.bounceBlock(block);
-                block.breakNaturally();
+        }
+        event.getPlayer().setVelocity(event.getPlayer().getLocation().getDirection().multiply(-6).setY(6));
+        for (Location loc : UsefulUtilsVD.generateSphere(event.getPlayer().getLocation(), 6, false)) {
+            final Block block = loc.getBlock();
+            UsefulUtilsVD.bounceBlock(block);
+            block.breakNaturally();
+        }
+        cooldown.put(event.getPlayer(), System.currentTimeMillis());
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                cooldown.remove(event.getPlayer());
             }
-        });
+        }.runTaskLater(Cosmetics.getInstance(), 20);
     }
 }

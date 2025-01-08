@@ -9,15 +9,20 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.ItemStack;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class GuardiansDance extends VictoryDance {
+
+    private HashMap<Player, GuardianTriangle> guardians = new HashMap<>();
+
     @Override
     public ItemStack getItem() {
         return XMaterial.PRISMARINE_BRICKS.parseItem();
@@ -56,9 +61,16 @@ public class GuardiansDance extends VictoryDance {
     @Override
     public void execute(Player winner) {
         GuardianTriangle guardianTriangle = new GuardianTriangle(winner);
-        HCore.registerEvent(PlayerLeaveArenaEvent.class).limit(1).consume((event) -> {
-           guardianTriangle.stop();
-        });
+        guardians.put(winner, guardianTriangle);
+    }
+
+
+    // TODO create a wrapper for this event
+    @EventHandler
+    public void onPlayerLeaveArena(PlayerLeaveArenaEvent event) {
+        if(!guardians.containsKey(event.getPlayer())) return;
+
+        guardians.get(event.getPlayer()).stop();
     }
 }
 
