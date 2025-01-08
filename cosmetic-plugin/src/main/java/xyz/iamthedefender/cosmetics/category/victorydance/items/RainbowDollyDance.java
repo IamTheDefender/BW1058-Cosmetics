@@ -67,7 +67,7 @@ public class RainbowDollyDance extends VictoryDance {
                     return;
                 }
                 if (Objects.equals(sheep.getCustomName(), "Dolly")) {
-                    final ArrayList<String> color = new ArrayList<String>();
+                    final ArrayList<String> color = new ArrayList<>();
                     color.add("RED");
                     color.add("BLUE");
                     color.add("BROWN");
