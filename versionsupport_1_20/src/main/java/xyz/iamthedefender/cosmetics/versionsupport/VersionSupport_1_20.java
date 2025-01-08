@@ -3,8 +3,6 @@ package xyz.iamthedefender.cosmetics.versionsupport;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.EnumWrappers;
-import com.comphenix.protocol.wrappers.WrappedParticle;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -82,9 +80,7 @@ public class VersionSupport_1_20 implements IVersionSupport {
     }
 
     @Override
-    public void displayRedstoneParticle(Player player, Location location, Color color) {
-        EnumWrappers.Particle particle = EnumWrappers.Particle.REDSTONE;
-
+    public void displayParticle(Player player, Location location, ParticleWrapper particleWrapper, Color color) {
         PacketContainer packet = new PacketContainer(PacketType.Play.Server.WORLD_PARTICLES);
 
         packet.getDoubles().write(0, location.getX());
@@ -99,7 +95,7 @@ public class VersionSupport_1_20 implements IVersionSupport {
 
         packet.getIntegers().write(0, 1);
 
-        packet.getNewParticles().write(0, WrappedParticle.fromHandle(particle));
+        packet.getNewParticles().write(0, particleWrapper.getNewWrapperParticle());
 
         packet.getFloat().write(4, color.getRed() / 255f);
         packet.getFloat().write(5, color.getGreen() / 255f);

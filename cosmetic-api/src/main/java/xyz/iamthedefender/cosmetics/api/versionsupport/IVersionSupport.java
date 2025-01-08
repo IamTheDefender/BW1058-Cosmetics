@@ -1,9 +1,7 @@
 package xyz.iamthedefender.cosmetics.api.versionsupport;
 
-import com.comphenix.protocol.wrappers.EnumWrappers;
 import org.bukkit.Color;
 import org.bukkit.Location;
-import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.map.MapRenderer;
@@ -19,7 +17,11 @@ public interface IVersionSupport {
     @NotNull
     ItemStack applyRenderer(MapRenderer mapRenderer, MapView mapView);
 
-    void displayRedstoneParticle(Player player, Location location, Color color);
+    default void displayRedstoneParticle(Player player, Location location, Color color) {
+        displayParticle(player, location, ParticleWrapper.getParticle("REDSTONE").orElse(ParticleWrapper.getParticle("DUST").orElseThrow()), color);
+    }
+
+    void displayParticle(Player player, Location location, ParticleWrapper particleWrapper, Color color);
 
     void displayParticle(Player player, Location location, ParticleWrapper particle);
 

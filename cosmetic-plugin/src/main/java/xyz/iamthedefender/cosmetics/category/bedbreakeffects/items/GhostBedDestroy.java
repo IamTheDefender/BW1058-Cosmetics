@@ -4,15 +4,12 @@ import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.comphenix.protocol.wrappers.WrappedParticle;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.HCore;
-import com.hakan.core.particle.type.ParticleType;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
@@ -24,7 +21,6 @@ import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Bed destroy effect.

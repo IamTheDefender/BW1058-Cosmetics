@@ -1,6 +1,5 @@
 package xyz.iamthedefender.cosmetics.category.shopkeeperskins;
 
-import com.hakan.core.HCore;
 import com.tomkeuper.bedwars.api.arena.GameState;
 import com.tomkeuper.bedwars.api.arena.team.ITeam;
 import com.tomkeuper.bedwars.api.events.gameplay.GameStateChangeEvent;

@@ -39,7 +39,6 @@ import xyz.iamthedefender.cosmetics.util.StartupUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 import static xyz.iamthedefender.cosmetics.util.StartupUtils.getCosmeticLocation;
 import static xyz.iamthedefender.cosmetics.util.StartupUtils.getPlayerLocation;

@@ -6,13 +6,13 @@ package xyz.iamthedefender.cosmetics.util;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
-import com.hakan.core.HCore;
 import net.byteflux.libby.Library;
 import net.byteflux.libby.LibraryManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
@@ -72,11 +72,16 @@ public class StartupUtils
 
     /**
      Register events and handler
-      @author defender
+      @author IamTheDefender
      */
     public static void registerEvents() {
-        HCore.registerListeners(new CosmeticPurchaseListener());
-        HCore.registerListeners(new PlayerJoinListener());
+        registerListeners(new CosmeticPurchaseListener(), new PlayerJoinListener());
+    }
+
+    public static void registerListeners(Listener... listeners) {
+        for (Listener listener : listeners) {
+            Bukkit.getPluginManager().registerEvents(listener, Cosmetics.getInstance());
+        }
     }
 
     public static void convertSpraysURLs(){

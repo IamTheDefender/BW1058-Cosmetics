@@ -1,5 +1,9 @@
 package xyz.iamthedefender.cosmetics.category.finalkilleffects;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
@@ -9,10 +13,6 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
 import xyz.iamthedefender.cosmetics.api.event.FinalKillEffectsExecuteEvent;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 
 public class FinalKillEffectHandler2023 implements Listener {
 

@@ -1,6 +1,5 @@
 package xyz.iamthedefender.cosmetics.support.bedwars.handler.bedwars2023;
 
-import com.hakan.core.HCore;
 import com.tomkeuper.bedwars.api.BedWars;
 import com.tomkeuper.bedwars.api.language.Language;
 import com.tomkeuper.bedwars.api.server.ServerType;
@@ -20,6 +19,7 @@ import xyz.iamthedefender.cosmetics.category.shopkeeperskins.ShopKeeperHandler20
 import xyz.iamthedefender.cosmetics.category.sprays.SpraysHandler2023;
 import xyz.iamthedefender.cosmetics.category.victorydance.VictoryDanceHandler2023;
 import xyz.iamthedefender.cosmetics.category.woodskin.WoodSkinHandler2023;
+import xyz.iamthedefender.cosmetics.util.StartupUtils;
 
 import java.io.File;
 import java.util.List;
@@ -27,23 +27,26 @@ import java.util.UUID;
 
 public class BW2023Handler implements IHandler {
 
-    private BedWars api = com.tomkeuper.bedwars.BedWars.getAPI();
+    private final BedWars api = com.tomkeuper.bedwars.BedWars.getAPI();
+
     @Override
     public void register() {
-        BedWars2023 bedWars2023 = new BedWars2023(Cosmetics.getInstance());
+        Cosmetics plugin = Cosmetics.getInstance();
+
+        BedWars2023 bedWars2023 = new BedWars2023(plugin);
         bedWars2023.start();
 
-        HCore.registerListeners(new ProjectileHandler(Cosmetics.getInstance()));
-        HCore.registerListeners(new WoodSkinHandler2023());
-        HCore.registerListeners(new VictoryDanceHandler2023());
-        HCore.registerListeners(new ShopKeeperHandler2023());
-        HCore.registerListeners(new KillMessageHandler2023());
-        HCore.registerListeners(new IslandTopperHandler2023());
-        HCore.registerListeners(new GlyphHandler2023());
-        HCore.registerListeners(new FinalKillEffectHandler2023());
-        HCore.registerListeners(new BedDestroyHandler2023());
-        HCore.registerListeners(new SpraysHandler2023());
-        HCore.registerListeners(new DeathCryHandler2023());
+        StartupUtils.registerListeners(new ProjectileHandler(plugin));
+        StartupUtils.registerListeners(new WoodSkinHandler2023());
+        StartupUtils.registerListeners(new VictoryDanceHandler2023());
+        StartupUtils.registerListeners(new ShopKeeperHandler2023());
+        StartupUtils.registerListeners(new KillMessageHandler2023());
+        StartupUtils.registerListeners(new IslandTopperHandler2023());
+        StartupUtils.registerListeners(new GlyphHandler2023());
+        StartupUtils.registerListeners(new FinalKillEffectHandler2023());
+        StartupUtils.registerListeners(new BedDestroyHandler2023());
+        StartupUtils.registerListeners(new SpraysHandler2023());
+        StartupUtils.registerListeners(new DeathCryHandler2023());
     }
 
     @Override

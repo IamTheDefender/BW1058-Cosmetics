@@ -1,6 +1,5 @@
 package xyz.iamthedefender.cosmetics.category.glyphs.items;
 
-import com.hakan.core.HCore;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -16,7 +15,6 @@ import xyz.iamthedefender.cosmetics.category.glyphs.util.GlyphUtil;
 
 import java.io.File;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class GlyphItems {
 

@@ -1,13 +1,13 @@
 package xyz.iamthedefender.cosmetics.category.projectiletrails.items;
 
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.ProjectileTrail;
 import xyz.iamthedefender.cosmetics.util.StringUtils;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 

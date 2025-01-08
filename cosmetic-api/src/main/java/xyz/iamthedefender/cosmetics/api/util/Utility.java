@@ -3,22 +3,21 @@
 package xyz.iamthedefender.cosmetics.api.util;
 
 
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.events.PacketContainer;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.hakan.core.utils.ColorUtil;
 import lombok.Getter;
-import org.bukkit.*;
-import org.bukkit.plugin.java.JavaPlugin;
-import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 
 import java.io.*;
 import java.net.URL;

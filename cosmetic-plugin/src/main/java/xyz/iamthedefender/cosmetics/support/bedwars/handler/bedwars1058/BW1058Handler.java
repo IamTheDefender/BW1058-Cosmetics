@@ -3,7 +3,6 @@ package xyz.iamthedefender.cosmetics.support.bedwars.handler.bedwars1058;
 import com.andrei1058.bedwars.api.BedWars;
 import com.andrei1058.bedwars.api.language.Language;
 import com.andrei1058.bedwars.api.server.ServerType;
-import com.hakan.core.HCore;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -20,6 +19,7 @@ import xyz.iamthedefender.cosmetics.category.shopkeeperskins.ShopKeeperHandler10
 import xyz.iamthedefender.cosmetics.category.sprays.SpraysHandler1058;
 import xyz.iamthedefender.cosmetics.category.victorydance.VictoryDanceHandler1058;
 import xyz.iamthedefender.cosmetics.category.woodskin.WoodSkinHandler1058;
+import xyz.iamthedefender.cosmetics.util.StartupUtils;
 
 import java.io.File;
 import java.util.List;
@@ -31,17 +31,17 @@ public class BW1058Handler implements IHandler {
 
     @Override
     public void register() {
-        HCore.registerListeners(new ShopKeeperHandler1058());
-        HCore.registerListeners(new GlyphHandler1058());
-        HCore.registerListeners(new KillMessageHandler1058());
-        HCore.registerListeners(new VictoryDanceHandler1058());
-        HCore.registerListeners(new FinalKillEffectHandler1058());
-        HCore.registerListeners(new BedDestroyHandler1058());
-        HCore.registerListeners(new WoodSkinHandler1058());
-        HCore.registerListeners(new IslandTopperHandler1058());
-        HCore.registerListeners(new ProjectileHandler(Cosmetics.getInstance()));
-        HCore.registerListeners(new DeathCryHandler1058());
-        HCore.registerListeners(new SpraysHandler1058());
+        StartupUtils.registerListeners(new ShopKeeperHandler1058());
+        StartupUtils.registerListeners(new GlyphHandler1058());
+        StartupUtils.registerListeners(new KillMessageHandler1058());
+        StartupUtils.registerListeners(new VictoryDanceHandler1058());
+        StartupUtils.registerListeners(new FinalKillEffectHandler1058());
+        StartupUtils.registerListeners(new BedDestroyHandler1058());
+        StartupUtils.registerListeners(new WoodSkinHandler1058());
+        StartupUtils.registerListeners(new IslandTopperHandler1058());
+        StartupUtils.registerListeners(new ProjectileHandler(Cosmetics.getInstance()));
+        StartupUtils.registerListeners(new DeathCryHandler1058());
+        StartupUtils.registerListeners(new SpraysHandler1058());
     }
 
     @Override

@@ -5,7 +5,6 @@ package xyz.iamthedefender.cosmetics.category.islandtoppers;
 import com.andrei1058.bedwars.api.arena.team.ITeam;
 import com.andrei1058.bedwars.api.configuration.ConfigManager;
 import com.andrei1058.bedwars.api.events.gameplay.GameStateChangeEvent;
-import com.hakan.core.HCore;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

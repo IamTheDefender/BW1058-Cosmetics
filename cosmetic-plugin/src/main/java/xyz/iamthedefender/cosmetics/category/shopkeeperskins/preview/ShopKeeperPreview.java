@@ -4,7 +4,6 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.HCore;
 import com.hakan.core.ui.inventory.InventoryGui;
 import com.hakan.core.utils.ColorUtil;
 import org.bukkit.Bukkit;
@@ -28,7 +27,6 @@ import xyz.iamthedefender.cosmetics.util.StartupUtils;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import static xyz.iamthedefender.cosmetics.util.StartupUtils.getCosmeticLocation;
 import static xyz.iamthedefender.cosmetics.util.StartupUtils.getPlayerLocation;

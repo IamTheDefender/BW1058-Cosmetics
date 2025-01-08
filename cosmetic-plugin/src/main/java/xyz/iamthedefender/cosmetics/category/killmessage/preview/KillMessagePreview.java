@@ -15,7 +15,6 @@ import xyz.iamthedefender.cosmetics.category.killmessage.util.KillMessageUtils;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class KillMessagePreview {
 

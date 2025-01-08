@@ -2,9 +2,6 @@
 
 package xyz.iamthedefender.cosmetics.category.glyphs.util;
 
-import com.cryptomorin.xseries.particles.ParticleDisplay;
-import com.cryptomorin.xseries.particles.XParticle;
-import com.hakan.core.HCore;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

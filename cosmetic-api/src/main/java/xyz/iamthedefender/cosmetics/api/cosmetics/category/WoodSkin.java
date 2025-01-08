@@ -1,14 +1,17 @@
 package xyz.iamthedefender.cosmetics.api.cosmetics.category;
 
 import com.cryptomorin.xseries.XMaterial;
-import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
-import xyz.iamthedefender.cosmetics.api.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
+import xyz.iamthedefender.cosmetics.api.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
+import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
+import xyz.iamthedefender.cosmetics.api.util.Utility;
+import xyz.iamthedefender.cosmetics.api.util.config.ConfigType;
+import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,9 +20,6 @@ import java.util.List;
 import static xyz.iamthedefender.cosmetics.api.util.Utility.saveIfNotExistsLang;
 import static xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils.get;
 import static xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils.saveIfNotFound;
-import xyz.iamthedefender.cosmetics.api.util.Utility;
-import xyz.iamthedefender.cosmetics.api.util.config.ConfigType;
-import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 
 public abstract class WoodSkin extends Cosmetics {
 

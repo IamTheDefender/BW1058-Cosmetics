@@ -1,9 +1,6 @@
 package xyz.iamthedefender.cosmetics.category.bedbreakeffects.items;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.hakan.core.HCore;
-import com.hakan.core.particle.Particle;
-import com.hakan.core.particle.type.ParticleType;
 import org.bukkit.Location;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.EntityType;
@@ -13,6 +10,7 @@ import org.bukkit.util.Vector;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
 import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
+import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.util.MathUtil;
 
@@ -68,8 +66,10 @@ public class EggExplosionBedDestroy extends BedDestroy {
 
             // Spawn particle effects at the egg's location
             for (int j = 0; j < 10; j++) {
-                HCore.playParticle(egg.getLocation(), new Particle(ParticleType.SPELL_WITCH, 1, center.toVector()));
-                HCore.playParticle(egg.getLocation(), new Particle(ParticleType.SPELL_INSTANT, 1, center.toVector()));
+                ParticleWrapper.getParticle("SPELL_WITCH").ifPresent(particle ->
+                        particle.support().displayParticle(null, egg.getLocation(), particle, 1, 0, center.toVector()));
+                ParticleWrapper.getParticle("SPELL_INSTANT").ifPresent(particle ->
+                        particle.support().displayParticle(null, egg.getLocation(), particle, 1, 0, center.toVector()));
             }
 
             Run.sync(() -> {

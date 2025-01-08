@@ -11,7 +11,6 @@ import org.bukkit.event.Listener;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.DeathCry;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;

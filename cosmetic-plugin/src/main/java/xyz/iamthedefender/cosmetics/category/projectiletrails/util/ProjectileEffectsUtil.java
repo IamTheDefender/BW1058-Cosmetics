@@ -1,19 +1,18 @@
 package xyz.iamthedefender.cosmetics.category.projectiletrails.util;
 
-import com.hakan.core.HCore;
-import com.hakan.core.particle.Particle;
-import com.hakan.core.particle.type.ParticleType;
+import org.bukkit.Color;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.ProjectileTrail;
-import xyz.iamthedefender.cosmetics.util.StartupUtils;
+import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
-import org.bukkit.Color;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
+import xyz.iamthedefender.cosmetics.util.StartupUtils;
+
+import java.util.Optional;
 
 public class ProjectileEffectsUtil {
 
@@ -36,13 +35,18 @@ public class ProjectileEffectsUtil {
 			}
 		}
 		if (projectileTrail != null && projectileTrail.getField(FieldsType.RARITY, p) != RarityType.NONE){
-			Particle particle;
-			if (color == null) {
-				particle = new Particle(ParticleType.valueOf(effect), 1, 0, new Vector(0, 0, 0));
-			} else {
-				particle = new Particle(ParticleType.valueOf(effect), 1, 0, new Vector(0, 0, 0), color);
+			Optional<ParticleWrapper> particleWrapper = ParticleWrapper.getParticle(effect);
+
+			if (particleWrapper.isEmpty()) {
+				Cosmetics.getInstance().getLogger().warning("Unknown particle effect: " + effect);
+				return;
 			}
-			HCore.playParticle(e.getLocation(), particle);
+
+			if (color == null) {
+				particleWrapper.get().support().displayParticle(null, e.getLocation(), particleWrapper.get());
+			} else {
+				particleWrapper.get().support().displayParticle(null, e.getLocation(), particleWrapper.get(), color);
+			}
 		}
 	}
 

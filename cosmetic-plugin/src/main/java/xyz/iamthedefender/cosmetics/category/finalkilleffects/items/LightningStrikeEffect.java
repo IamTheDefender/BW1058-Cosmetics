@@ -1,13 +1,12 @@
 package xyz.iamthedefender.cosmetics.category.finalkilleffects.items;
 
 import com.cryptomorin.xseries.XMaterial;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
-import xyz.iamthedefender.cosmetics.api.util.Utility;
 import org.bukkit.Location;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
+import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
 import xyz.iamthedefender.cosmetics.util.EntityUtil;
 
 import java.util.Arrays;

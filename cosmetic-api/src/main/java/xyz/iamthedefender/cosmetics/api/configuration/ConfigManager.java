@@ -1,12 +1,12 @@
 package xyz.iamthedefender.cosmetics.api.configuration;
 
 import com.cryptomorin.xseries.XMaterial;
-import xyz.iamthedefender.cosmetics.api.util.Utility;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import xyz.iamthedefender.cosmetics.api.util.Utility;
 
 import java.io.File;
 import java.io.IOException;

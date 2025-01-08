@@ -2,7 +2,6 @@ package xyz.iamthedefender.cosmetics.category.bedbreakeffects.items;
 
 
 import com.cryptomorin.xseries.XMaterial;
-import com.hakan.core.HCore;
 import org.bukkit.Location;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.EntityType;

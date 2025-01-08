@@ -1,7 +1,7 @@
 package xyz.iamthedefender.cosmetics.api.util.config;
 
-import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import org.bukkit.configuration.file.YamlConfiguration;
+import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 
 import java.io.InputStream;

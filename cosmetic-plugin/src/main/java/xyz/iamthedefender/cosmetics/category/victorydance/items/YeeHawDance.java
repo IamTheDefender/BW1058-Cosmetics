@@ -17,7 +17,6 @@ import xyz.iamthedefender.cosmetics.api.handler.IArenaHandler;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class YeeHawDance extends VictoryDance {
     @Override

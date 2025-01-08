@@ -1,12 +1,12 @@
 package xyz.iamthedefender.cosmetics.api;
 
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.*;
 import xyz.iamthedefender.cosmetics.api.database.IDatabase;
 import xyz.iamthedefender.cosmetics.api.handler.IHandler;
-import org.bukkit.entity.Player;
 import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
 
 import java.util.List;

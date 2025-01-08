@@ -1,7 +1,6 @@
 package xyz.iamthedefender.cosmetics.category.victorydance.items;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.hakan.core.HCore;
 import com.hakan.core.skin.Skin;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -9,7 +8,6 @@ import net.citizensnpcs.api.npc.NPCRegistry;
 import net.citizensnpcs.trait.LookClose;
 import net.citizensnpcs.trait.SkinTrait;
 import net.citizensnpcs.util.NMS;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -26,7 +24,6 @@ import xyz.iamthedefender.cosmetics.util.MathUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static org.bukkit.Bukkit.getLogger;
 

@@ -2,7 +2,6 @@ package xyz.iamthedefender.cosmetics.category.finalkilleffects.items;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.HCore;
 import com.hakan.core.particle.Particle;
 import com.hakan.core.particle.type.ParticleType;
 import org.bukkit.Location;
@@ -13,6 +12,7 @@ import org.bukkit.util.Vector;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
+import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
 
 import java.util.Arrays;
 import java.util.List;
@@ -71,11 +71,16 @@ public class TornadoEffect extends FinalKillEffect {
                         final double x = Math.cos(Math.toRadians((double) 360 / lines * l + y * 30.0 - this.angle)) * radius;
                         final double z = Math.sin(Math.toRadians((double) 360 / lines * l + y * 30.0 - this.angle)) * radius;
                         Particle particle = new Particle(ParticleType.CLOUD, 1, 0.01f, new Vector(0.0f, 0.0f, 0.0f));
+                        double finalY = y;
 
                         if (onlyVictim) {
-                            HCore.playParticle(victim, location.clone().add(x, y, z), particle);
+                            ParticleWrapper.getParticle("CLOUD").ifPresent(particleWrapper -> {
+                                particleWrapper.support().displayParticle(null, location.clone().add(x, finalY, z), particleWrapper);
+                            });
                         } else {
-                            HCore.playParticle(location.clone().add(x, y, z), particle);
+                            ParticleWrapper.getParticle("CLOUD").ifPresent(particleWrapper -> {
+                                particleWrapper.support().displayParticle(null, location.clone().add(x, finalY, z), particleWrapper);
+                            });
                         }
                     }
                 }

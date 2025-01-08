@@ -2,7 +2,6 @@
 
 package xyz.iamthedefender.cosmetics.listener;
 
-import com.hakan.core.HCore;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

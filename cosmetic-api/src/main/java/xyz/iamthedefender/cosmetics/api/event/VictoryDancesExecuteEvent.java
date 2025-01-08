@@ -1,11 +1,11 @@
 package xyz.iamthedefender.cosmetics.api.event;
 
 import lombok.Getter;
-import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 
 public class VictoryDancesExecuteEvent extends Event implements Cancellable {
