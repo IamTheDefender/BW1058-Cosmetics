@@ -4,12 +4,15 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.map.MapRenderer;
@@ -28,19 +31,22 @@ import java.util.Base64;
 import java.util.UUID;
 
 public class VersionSupport_1_20 implements IVersionSupport {
+
     @Override
     public ItemStack getSkull(String base64) {
-        try {
-            PlayerProfile profile = getProfile(getUrlFromBase64(base64).toString());
-            ItemStack head = new ItemStack(Material.PLAYER_HEAD);
-            SkullMeta meta = (SkullMeta) head.getItemMeta();
-            if(meta == null) return head;
-            meta.setOwnerProfile(profile);
-            head.setItemMeta(meta);
-            return head;
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+        ItemStack head = XMaterial.PLAYER_HEAD.parseItem();
+
+        if(head == null) throw new RuntimeException("Failed to get skull (v1.20)");
+
+        ItemMeta itemMeta = head.getItemMeta();
+
+        if(itemMeta == null) return head;
+
+        itemMeta = XSkull.of(itemMeta).profile(Profileable.detect(base64)).lenient().apply();
+
+        head.setItemMeta(itemMeta);
+
+        return head;
     }
 
     @Override

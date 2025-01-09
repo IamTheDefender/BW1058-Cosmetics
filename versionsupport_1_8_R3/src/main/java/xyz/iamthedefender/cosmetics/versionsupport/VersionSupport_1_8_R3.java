@@ -3,12 +3,16 @@ package xyz.iamthedefender.cosmetics.versionsupport;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
+import com.cryptomorin.xseries.XItemStack;
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import com.hakan.core.HCore;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
 import org.bukkit.util.Vector;
@@ -17,9 +21,22 @@ import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
 import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
 
 public class VersionSupport_1_8_R3 implements IVersionSupport {
+
     @Override
-    public org.bukkit.inventory.ItemStack getSkull(String base64) {
-        return HCore.skullBuilder(base64).build();
+    public ItemStack getSkull(String base64) {
+        ItemStack head = XMaterial.PLAYER_HEAD.parseItem();
+
+        if(head == null) throw new RuntimeException("Failed to get skull (v1.8.8)");
+
+        ItemMeta itemMeta = head.getItemMeta();
+
+        if(itemMeta == null) return head;
+
+        itemMeta =XSkull.of(itemMeta).profile(Profileable.detect(base64)).lenient().apply();
+
+        head.setItemMeta(itemMeta);
+
+        return head;
     }
 
     @Override

@@ -1,8 +1,11 @@
 package xyz.iamthedefender.cosmetics.menu;
 
+import com.cryptomorin.xseries.XItemStack;
 import com.hakan.core.HCore;
 import com.hakan.core.ui.inventory.InventoryGui;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.MemoryConfiguration;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -36,8 +39,14 @@ public class MainMenu extends InventoryGui {
                 List<String> lores = MainMenuUtils.formatLore(lore, player);
                 boolean disabled = config.getBoolean(loc + "." + name + ".disabled");
 
+                // Translate for XItemStack
+                ConfigurationSection configurationSection = new MemoryConfiguration();
+                configurationSection.set("lore", lore);
+                configurationSection.set("name", itemName);
+
                 if (itemStack != null && !disabled) {
-                    super.setItem(slot, HCore.itemBuilder(itemStack).lores(true, lores).name(true, itemName).build(), (e) -> {
+
+                    super.setItem(slot, XItemStack.edit(itemStack, configurationSection, s -> s, null), (e) -> {
                         MainMenuUtils.openMenus((Player) e.getWhoClicked(), name);
                     });
                 }

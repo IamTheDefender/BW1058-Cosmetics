@@ -233,7 +233,7 @@ public class IslandTopperPreview {
                             }
                         }
                     }
-                }.runTaskTimerAsynchronously(HCore.getInstance(), 0L, 0L);
+                }.runTaskTimerAsynchronously(Cosmetics.getInstance(), 0L, 0L);
             } else {
                 LinkedHashMap<Location, BlockData> blockLocations = new LinkedHashMap<>();
 
@@ -301,7 +301,7 @@ public class IslandTopperPreview {
                             }
                         }
                     }
-                }.runTaskTimerAsynchronously(HCore.getInstance(), 0L, 0L);
+                }.runTaskTimerAsynchronously(Cosmetics.getInstance(), 0L, 0L);
             }
 
         } catch (DataException | IOException e) {
