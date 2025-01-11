@@ -9,6 +9,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.*;
 import xyz.iamthedefender.cosmetics.api.database.IDatabase;
 import xyz.iamthedefender.cosmetics.api.handler.IHandler;
+import xyz.iamthedefender.cosmetics.api.menu.SystemGuiManager;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
 import xyz.iamthedefender.cosmetics.data.PlayerData;
@@ -30,6 +31,11 @@ public class BwcAPI implements CosmeticsAPI {
     @Override
     public IHandler getHandler() {
         return Cosmetics.getInstance().getHandler();
+    }
+
+    @Override
+    public SystemGuiManager getSystemGuiManager() {
+        return null;
     }
 
     @Override

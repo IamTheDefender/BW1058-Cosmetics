@@ -7,6 +7,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.*;
 import xyz.iamthedefender.cosmetics.api.database.IDatabase;
 import xyz.iamthedefender.cosmetics.api.handler.IHandler;
+import xyz.iamthedefender.cosmetics.api.menu.SystemGuiManager;
 import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public interface CosmeticsAPI {
     boolean isMySQL();
 
     IHandler getHandler();
+    SystemGuiManager getSystemGuiManager();
 
     JavaPlugin getPlugin();
 

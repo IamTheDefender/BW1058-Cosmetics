@@ -1,7 +1,6 @@
 package xyz.iamthedefender.cosmetics.menu;
 
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.HCore;
 import com.hakan.core.ui.inventory.InventoryGui;
 import com.hakan.core.ui.inventory.item.ClickableItem;
 import com.hakan.core.ui.inventory.pagination.Pagination;
@@ -35,10 +34,12 @@ import xyz.iamthedefender.cosmetics.category.killmessage.preview.KillMessagePrev
 import xyz.iamthedefender.cosmetics.category.shopkeeperskins.preview.ShopKeeperPreview;
 import xyz.iamthedefender.cosmetics.category.sprays.preview.SprayPreview;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
+import xyz.iamthedefender.cosmetics.api.util.ItemBuilder;
 import xyz.iamthedefender.cosmetics.util.StringUtils;
 import xyz.iamthedefender.cosmetics.util.VaultUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CategoryMenu extends InventoryGui {
 
@@ -104,7 +105,13 @@ public class CategoryMenu extends InventoryGui {
                 if (returnValue == -2 ){ // <- Selected
                     stack.addUnsafeEnchantment(Enchantment.LUCK, 1);
                 }
-                item = new ClickableItem(HCore.itemBuilder(stack).addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES).name(true, colorCode + formattedName).lores(true, lore1).build(), (e) -> {
+
+                item = new ClickableItem(new ItemBuilder(stack)
+                        .name(colorCode + formattedName)
+                        .lore(lore1)
+                        .itemFlag(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES)
+                        .build(), (e) -> {
+
                     if (e.getClick() == ClickType.RIGHT){
                         previewClick(player, cosmeticsType, id, price);
                     }else if (e.getClick() == ClickType.LEFT){
@@ -119,7 +126,7 @@ public class CategoryMenu extends InventoryGui {
             }
         }
         if (Cosmetics.getInstance().getConfig().getBoolean("BackItemInCosmeticsMenu")) {
-            setItem(49, HCore.itemBuilder(Material.ARROW).name(true, "&aBack").build(), (e) -> new MainMenu((Player) e.getWhoClicked()).open((Player) e.getWhoClicked()));
+            setItem(49, new ItemBuilder().material(Material.ARROW).name("&aBack").build(), (e) -> new MainMenu((Player) e.getWhoClicked()).open((Player) e.getWhoClicked()));
         }
         createPages(items, rarityMap);
     }
@@ -133,13 +140,13 @@ public class CategoryMenu extends InventoryGui {
         // these items in the GUI
         try {
             if (!pages.getPage(page - 1).getItems().isEmpty()) {
-                setItem(45, HCore.itemBuilder(Material.ARROW).name(true, "&aPrevious Page").build(), (e) -> new CategoryMenu(cosmeticsType, title, page - 1).open((Player) e.getWhoClicked()));
+                setItem(45, new ItemBuilder().material(Material.ARROW).name("&aPrevious page").build(), (e) -> new CategoryMenu(cosmeticsType, title, page - 1).open((Player) e.getWhoClicked()));
             }
         }catch (IndexOutOfBoundsException ignored){}
 
         try {
             if (!pages.getPage(page + 1).getItems().isEmpty()) {
-                setItem(53, HCore.itemBuilder(Material.ARROW).name(true, "&aNext page").build(), (e) -> new CategoryMenu(cosmeticsType, title, page + 1).open((Player) e.getWhoClicked()));
+                setItem(53, new ItemBuilder().material(Material.ARROW).name("&aNext page").build(), (e) -> new CategoryMenu(cosmeticsType, title, page + 1).open((Player) e.getWhoClicked()));
             }
         }catch (IndexOutOfBoundsException ignored){}
 
@@ -166,91 +173,24 @@ public class CategoryMenu extends InventoryGui {
         return findFirstEmptySlot(inventory) == -1;
     }
 
-    public void addItemsAccordingToRarity(Map<ClickableItem, RarityType> rarityMap){
-        List<ClickableItem> noneItems = new ArrayList<>();
-        List<ClickableItem> randomItems = new ArrayList<>();
-        List<ClickableItem> commonItems = new ArrayList<>();
-        List<ClickableItem> rareItems = new ArrayList<>();
-        List<ClickableItem> epicItems = new ArrayList<>();
-        List<ClickableItem> legendaryItems = new ArrayList<>();
-
-        for (Map.Entry<ClickableItem, RarityType> entry : rarityMap.entrySet()) {
-            ClickableItem item = entry.getKey();
-            RarityType rarity = entry.getValue();
-            switch (rarity) {
-                case NONE:
-                    noneItems.add(item);
-                    break;
-                case RANDOM:
-                    randomItems.add(item);
-                    break;
-                case COMMON:
-                    commonItems.add(item);
-                    break;
-                case RARE:
-                    rareItems.add(item);
-                    break;
-                case EPIC:
-                    epicItems.add(item);
-                    break;
-                case LEGENDARY:
-                    legendaryItems.add(item);
-                    break;
-            }
-        }
-        noneItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
-        randomItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
-        commonItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
-        rareItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
-        epicItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
-        legendaryItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
-
-
-
-        for (ClickableItem clickableItem : noneItems) {
-            if (!isFull(toInventory())) {
-                super.setItem(findFirstEmptySlot(toInventory()), clickableItem);
-            }
-        }
-
-        for (ClickableItem clickableItem : randomItems) {
-            if (!isFull(toInventory())) {
-                super.setItem(findFirstEmptySlot(toInventory()), clickableItem);
-            }
-        }
-
-        for (ClickableItem clickableItem : commonItems) {
-            if (!isFull(toInventory())) {
-                super.setItem(findFirstEmptySlot(toInventory()), clickableItem);
-            }
-        }
-
-        for (ClickableItem clickableItem : rareItems) {
-            if (!isFull(toInventory())) {
-                super.setItem(findFirstEmptySlot(toInventory()), clickableItem);
-            }
-        }
-
-        for (ClickableItem clickableItem : epicItems) {
-            if (!isFull(toInventory())) {
-                super.setItem(findFirstEmptySlot(toInventory()), clickableItem);
-            }
-        }
-
-        for (ClickableItem clickableItem : legendaryItems) {
-            if (!isFull(toInventory())) {
-                super.setItem(findFirstEmptySlot(toInventory()), clickableItem);
-            }
-        }
+    public void addItemsAccordingToRarity(Map<ClickableItem, RarityType> rarityMap) {
+        rarityMap.entrySet().stream()
+                .sorted(Comparator.comparing(entry -> entry.getValue().ordinal()))
+                .sorted(Comparator.comparing(entry -> ChatColor.stripColor(entry.getKey().getItem().getItemMeta().getDisplayName())))
+                .collect(Collectors.groupingBy(Map.Entry::getValue, LinkedHashMap::new, Collectors.mapping(Map.Entry::getKey, Collectors.toList())))
+                .forEach((rarity, items) -> items.forEach(item -> {
+                    if (!isFull(toInventory())) {
+                        super.setItem(findFirstEmptySlot(toInventory()), item);
+                    }
+                }));
 
         String extrasPath = "Extras.fill-empty.";
-        if (config.getBoolean(extrasPath + "enabled")){
+        if (config.getBoolean(extrasPath + "enabled")) {
             ItemStack stack = ConfigManager.getItemStack(config.getYml(), extrasPath + "item");
-            while (toInventory().firstEmpty() != -1){
-                setItem(toInventory().firstEmpty(), HCore.itemBuilder(stack).name(true, "&r").build());
+            while (toInventory().firstEmpty() != -1) {
+                setItem(toInventory().firstEmpty(), new ItemBuilder(stack).name("&r").build());
             }
         }
-
     }
 
 

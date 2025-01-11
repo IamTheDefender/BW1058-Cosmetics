@@ -6,9 +6,11 @@ import com.hakan.core.ui.inventory.InventoryGui;
 import com.hakan.core.utils.ColorUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.KillMessage;
+import xyz.iamthedefender.cosmetics.api.menu.SystemGui;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.category.killmessage.util.KillMessageUtils;
@@ -30,8 +32,11 @@ public class KillMessagePreview {
                 if (killMessage.getField(FieldsType.RARITY, player) == RarityType.NONE) return;
             }
         }
-        InventoryGui gui = HCore.getInventoryByPlayer(player);
+
+        SystemGui systemGui = Cosmetics.getInstance().getSystemGuiManager().getByPlayer(player);
+
         player.closeInventory();
+
         XSound.ENTITY_ARROW_HIT_PLAYER.play(player, 1.0f, 1.0f);
         List<String> message = Utility.getListLang(player, "cosmetics." + "kill-message" + ".preview.message");
         for (String s : message) {
@@ -45,6 +50,6 @@ public class KillMessagePreview {
             }
         }
 
-        Run.delayed(() -> gui.open(player), 5 * 20L);
+        Run.delayed(() -> systemGui.open(player), 5 * 20L);
     }
 }

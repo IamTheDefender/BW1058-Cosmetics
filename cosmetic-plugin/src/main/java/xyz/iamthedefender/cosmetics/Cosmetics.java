@@ -19,6 +19,7 @@ import xyz.iamthedefender.cosmetics.api.database.DatabaseType;
 import xyz.iamthedefender.cosmetics.api.database.IDatabase;
 import xyz.iamthedefender.cosmetics.api.handler.HandlerType;
 import xyz.iamthedefender.cosmetics.api.handler.IHandler;
+import xyz.iamthedefender.cosmetics.api.menu.SystemGuiManager;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.api.util.config.DefaultsUtils;
@@ -43,36 +44,37 @@ import java.sql.SQLException;
 import java.util.HashMap;
 @Getter
 public class Cosmetics extends JavaPlugin {
-    @Getter
+
     public ConfigManager menuData;
+    private PlayerManager playerManager;
+    private Metrics metrics;
+
     public boolean dependenciesMissing = false;
-    @Getter
     static boolean placeholderAPI;
-    @Getter
-    private IDatabase remoteDatabase;
-    @Getter
-    private static Cosmetics instance;
-    @Getter
-    private ProtocolManager protocolManager;
-    @Getter
-    private HashMap<Integer, Player> entityPlayerHashMap;
 
     @Getter
-    private PlayerManager playerManager;
-    @Getter
+    private static Cosmetics instance;
+
+    private ProtocolManager protocolManager;
+
+    private HashMap<Integer, Player> entityPlayerHashMap;
+
     private CosmeticsAPI api;
-    @Getter
     private Economy economy;
-    @Getter
     private IHandler handler;
     private IVersionSupport versionSupport;
-    private Metrics metrics;
+    private IDatabase remoteDatabase;
+
+    private SystemGuiManager systemGuiManager;
+
 
     @Override
     public void onEnable() {
         instance = this;
         api = new BwcAPI();
         Bukkit.getServicesManager().register(CosmeticsAPI.class, api, this, ServicePriority.Highest);
+        systemGuiManager = new SystemGuiManager(this);
+
         if (!StartupUtils.checkDependencies()){
             getLogger().severe("Cosmetics addon will now disable, make sure you have all dependencies installed!");
             getServer().getPluginManager().disablePlugin(this);

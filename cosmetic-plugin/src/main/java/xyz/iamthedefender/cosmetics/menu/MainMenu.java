@@ -1,7 +1,6 @@
 package xyz.iamthedefender.cosmetics.menu;
 
 import com.cryptomorin.xseries.XItemStack;
-import com.hakan.core.HCore;
 import com.hakan.core.ui.inventory.InventoryGui;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
@@ -14,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
+import xyz.iamthedefender.cosmetics.api.util.ItemBuilder;
 import xyz.iamthedefender.cosmetics.util.MainMenuUtils;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class MainMenu extends InventoryGui {
 
                 // Translate for XItemStack
                 ConfigurationSection configurationSection = new MemoryConfiguration();
-                configurationSection.set("lore", lore);
+                configurationSection.set("lore", lores);
                 configurationSection.set("name", itemName);
 
                 if (itemStack != null && !disabled) {
@@ -59,7 +59,7 @@ public class MainMenu extends InventoryGui {
         if (config.getBoolean(extrasPath + "enabled")){
             ItemStack stack = ConfigManager.getItemStack(config, extrasPath + "item");
             while (toInventory().firstEmpty() != -1){
-                setItem(toInventory().firstEmpty(), HCore.itemBuilder(stack).name(true, "&r").build());
+                setItem(toInventory().firstEmpty(), new ItemBuilder(stack).name("&r").build());
             }
         }
     }
