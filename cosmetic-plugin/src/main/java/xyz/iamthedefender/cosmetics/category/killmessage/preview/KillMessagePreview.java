@@ -1,7 +1,7 @@
 package xyz.iamthedefender.cosmetics.category.killmessage.preview;
 
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.utils.ColorUtil;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import xyz.iamthedefender.cosmetics.Cosmetics;
@@ -44,7 +44,7 @@ public class KillMessagePreview {
                 KillMessageUtils.sendKillMessage(player, "Player", null, false, ChatColor.GREEN, ChatColor.GRAY, "Shoot", "Old Message" ,true, selected, player.getDisplayName());
                 KillMessageUtils.sendKillMessage(player, "Player", null, false, ChatColor.GREEN, ChatColor.GRAY, "Explosion", "Old Message" ,true, selected, player.getDisplayName());
             }else{
-                player.sendMessage(ColorUtil.colored(s));
+                player.sendMessage(ColorUtil.translate(s));
             }
         }
 

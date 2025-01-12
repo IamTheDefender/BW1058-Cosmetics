@@ -134,6 +134,9 @@
                 <configuration>
                     <source>11</source>
                     <target>11</target>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -148,6 +151,14 @@
                         <relocation>
                             <pattern>com.cryptomorin.xseries</pattern>
                             <shadedPattern>xyz.iamthedefender.cosmetics.support.xseries</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>co.aikar.commands</pattern>
+                            <shadedPattern>xyz.iamthedefender.cosmetics.support.aikar</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>co.aikar.locales</pattern>
+                            <shadedPattern>xyz.iamthedefender.cosmetics.support.aikar</shadedPattern>
                         </relocation>
                     </relocations>
                     <filters>

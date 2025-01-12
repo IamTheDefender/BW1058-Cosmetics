@@ -3,7 +3,6 @@ package xyz.iamthedefender.cosmetics.category.finalkilleffects.items;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.comphenix.protocol.wrappers.WrappedParticle;
 import com.cryptomorin.xseries.XMaterial;
-import com.hakan.core.utils.ColorUtil;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Bat;
@@ -14,6 +13,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
 import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.util.EntityUtil;
 
@@ -69,9 +69,9 @@ public class BatCruxEffect extends FinalKillEffect {
             
             int number = i + 1;
             if (onlyVictim) {
-                bat.setCustomName(ColorUtil.colored("&7Deperino's horcrux #" + number));
+                bat.setCustomName(ColorUtil.translate("&7Deperino's horcrux #" + number));
             } else {
-                bat.setCustomName(ColorUtil.colored("&7" + victim.getName() + "'s horcrux #" + number));
+                bat.setCustomName(ColorUtil.translate("&7" + victim.getName() + "'s horcrux #" + number));
             }
             bats.add(bat);
         }

@@ -12,5 +12,4 @@ You can join our [discord support server](discord.iamthedefender.xyz) if you hav
 
 ## 3rd Party libraries
 - [HikariCP](https://github.com/brettwooldridge/HikariCP)
-- [HCore](https://github.com/hakan-krgn/hCore)
 - [XSeries](https://github.com/CryptoMorin/XSeries)

@@ -4,7 +4,7 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import com.cryptomorin.xseries.XMaterial;
-import com.hakan.core.utils.ColorUtil;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -63,7 +63,7 @@ public class RektEffect extends FinalKillEffect {
             stand.setGravity(false);
             stand.setVisible(false);
             stand.setCustomNameVisible(true);
-            stand.setCustomName(ColorUtil.colored("&6" + killer.getDisplayName() + " &ehas #rekt &6" + victim.getDisplayName()
+            stand.setCustomName(ColorUtil.translate("&6" + killer.getDisplayName() + " &ehas #rekt &6" + victim.getDisplayName()
                     + "&ehere"));
 
             new BukkitRunnable() {
@@ -79,7 +79,7 @@ public class RektEffect extends FinalKillEffect {
             stand.setGravity(false);
             stand.setVisible(false);
             stand.setCustomNameVisible(true);
-            stand.setCustomName(ColorUtil.colored("&6" + killer.getDisplayName() + " &ehas #rekt &6Derperino " +
+            stand.setCustomName(ColorUtil.translate("&6" + killer.getDisplayName() + " &ehas #rekt &6Derperino " +
                     "&ehere"));
 
              PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_DESTROY);

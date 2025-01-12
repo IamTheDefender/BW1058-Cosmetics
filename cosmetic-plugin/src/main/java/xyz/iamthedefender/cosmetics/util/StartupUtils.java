@@ -7,7 +7,6 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import net.byteflux.libby.Library;
-import net.byteflux.libby.LibraryManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -390,7 +389,6 @@ public class StartupUtils
         Cosmetics.getInstance().getLogger().info("Loading libraries...");
         CosmeticsLibraryManager libraryManager = new CosmeticsLibraryManager(Cosmetics.getInstance());
         Library mysql = new Library.Builder().groupId("com{}mysql").artifactId("mysql-connector-j").version("8.2.0").build();
-        Library hCore = new Library.Builder().groupId("com{}github{}hakan-krgn{}hCore").artifactId("hCore-bukkit").version("0.7.3.3").build();
         Library hikariCP = new Library.Builder().groupId("com{}zaxxer").artifactId("HikariCP").version("5.1.0").build();
         Library fastutil = new Library.Builder().groupId("it{}unimi{}dsi").artifactId("fastutil").version("8.5.8").build();
         Library slf4j = new Library.Builder().groupId("org{}slf4j").artifactId("slf4j-api").version("2.0.7").build();
@@ -398,20 +396,9 @@ public class StartupUtils
         libraryManager.addJitPack();
         libraryManager.loadLibrary(mysql);
 
-        checkAndLoad(hCore, libraryManager);
         libraryManager.loadLibrary(hikariCP);
         libraryManager.loadLibrary(fastutil);
         libraryManager.loadLibrary(slf4j);
-    }
-
-
-    public static void checkAndLoad(Library library, LibraryManager libraryManager){
-       Package packageInfo = Package.getPackage(library.getGroupId().replace("{", "").replace("}", "."));
-       if(packageInfo != null){
-           Cosmetics.getInstance().getLogger().info("Found library: " + library.getGroupId() + ":" + library.getArtifactId() + ":" + library.getVersion() + ", not loading it..");
-           return;
-       }
-       libraryManager.loadLibrary(library);
     }
 
     public static Location getCosmeticLocation() {

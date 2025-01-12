@@ -5,7 +5,7 @@ package xyz.iamthedefender.cosmetics.category.sprays.util;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.comphenix.protocol.wrappers.WrappedParticle;
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.utils.ColorUtil;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.Rotation;
@@ -51,7 +51,7 @@ public class SpraysUtil
                 long cooldownEndTime = SpraysUtil.cooldown.get(player.getName());
                 if (cooldownEndTime > System.currentTimeMillis() && cooldownEndTime != 0) {
                     player.playSound(player.getLocation(), XSound.ENTITY_VILLAGER_NO.parseSound(), 1.0f, 1.0f);
-                    player.sendMessage(ColorUtil.colored(Utility.getMSGLang(player, "cosmetics.spray-msg")));
+                    player.sendMessage(ColorUtil.translate(Utility.getMSGLang(player, "cosmetics.spray-msg")));
                     return;
                 }
                 SpraysUtil.cooldown.remove(player.getName());
@@ -81,7 +81,7 @@ public class SpraysUtil
 
             File file = new File(Cosmetics.getInstance().getHandler().getAddonPath() + "/" + Cosmetics.getInstance().getConfig().getString("Spray-Dir") + "/" + sprayFile);
             if (!renderer.load(file)) {
-                player.sendMessage(ColorUtil.colored("&cLooks like there's an error rendering the Spray, contact the admin!"));
+                player.sendMessage(ColorUtil.translate("&cLooks like there's an error rendering the Spray, contact the admin!"));
                 Logger.getLogger("Minecraft").log(Level.SEVERE, "Could not load the File for the " + spray + ". Check if the File in Sprays.yml is valid: " + file.getPath());
             } else {
                 addRendererAndShowSpray(player, itemFrame, renderer, view, isPreview);

@@ -2,8 +2,6 @@ package xyz.iamthedefender.cosmetics.category.finalkilleffects.items;
 
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.particle.Particle;
-import com.hakan.core.particle.type.ParticleType;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -70,7 +68,6 @@ public class TornadoEffect extends FinalKillEffect {
                         final double radius = y * radius_increasement;
                         final double x = Math.cos(Math.toRadians((double) 360 / lines * l + y * 30.0 - this.angle)) * radius;
                         final double z = Math.sin(Math.toRadians((double) 360 / lines * l + y * 30.0 - this.angle)) * radius;
-                        Particle particle = new Particle(ParticleType.CLOUD, 1, 0.01f, new Vector(0.0f, 0.0f, 0.0f));
                         double finalY = y;
 
                         if (onlyVictim) {

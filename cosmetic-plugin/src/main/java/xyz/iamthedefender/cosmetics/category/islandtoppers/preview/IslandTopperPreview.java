@@ -5,8 +5,7 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.ui.inventory.InventoryGui;
-import com.hakan.core.utils.ColorUtil;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import com.sk89q.worldedit.CuboidClipboard;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.blocks.BaseBlock;
@@ -83,7 +82,7 @@ public class IslandTopperPreview {
             playerLocation = getPlayerLocation();
         }catch (Exception exception){
             exception.printStackTrace();
-            player.sendMessage(ColorUtil.colored("&cEither Preview location or Player location is not set! Contact the admin."));
+            player.sendMessage(ColorUtil.translate("&cEither Preview location or Player location is not set! Contact the admin."));
         }
 
         if (cosmeticLocation == null || playerLocation == null) return;

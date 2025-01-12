@@ -1,9 +1,9 @@
 
 package xyz.iamthedefender.cosmetics;
 
+import co.aikar.commands.PaperCommandManager;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import com.hakan.core.HCore;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -24,7 +24,7 @@ import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.api.util.config.DefaultsUtils;
 import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
-import xyz.iamthedefender.cosmetics.command.MainCommand;
+import xyz.iamthedefender.cosmetics.command.BedWarsCosmeticsCommand;
 import xyz.iamthedefender.cosmetics.data.PlayerData;
 import xyz.iamthedefender.cosmetics.data.PlayerOwnedData;
 import xyz.iamthedefender.cosmetics.data.database.MySQL;
@@ -82,16 +82,10 @@ public class Cosmetics extends JavaPlugin {
             dependenciesMissing = true;
             return;
         }
+
         handler = (api.isProxy() ? (StartupUtils.isBw2023 ? new BW2023ProxyHandler() : new BW1058ProxyHandler()) : (StartupUtils.isBw2023 ? new BW2023Handler() : new BW1058Handler()));
         StartupUtils.loadLibraries();
-        try{
-            HCore.initialize(this);
-        }catch (IllegalStateException ignored){
-            getLogger().severe("Cosmetics does not support your server version, please check dev builds or contact the developer for more info!");
-            setEnabled(false);
-            dependenciesMissing = true;
-            return;
-        }
+
         versionSupport = StartupUtils.getVersionSupport();
         if(versionSupport == null){
             getLogger().severe("Could not find a version support for " + VersionSupportUtil.getVersion());
@@ -162,8 +156,10 @@ public class Cosmetics extends JavaPlugin {
         
         getLogger().info("Registering event listeners...");
         StartupUtils.registerEvents();
-        getLogger().info("Registering command to HCore...");
-        HCore.registerCommands(new MainCommand(this));
+
+        getLogger().info("Registering commands...");
+        PaperCommandManager commandManager = new PaperCommandManager(this);
+        commandManager.registerCommand(new BedWarsCosmeticsCommand());
 
         getLogger().info("Loading cosmetics...");
         StartupUtils.loadCosmetics();

@@ -6,8 +6,7 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.ui.inventory.InventoryGui;
-import com.hakan.core.utils.ColorUtil;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -83,7 +82,7 @@ public class SprayPreview {
             playerLocation = getPlayerLocation();
         }catch (Exception exception){
             exception.printStackTrace();
-            player.sendMessage(ColorUtil.colored("&cEither Preview location or Player location is not set! Contact the admin."));
+            player.sendMessage(ColorUtil.translate("&cEither Preview location or Player location is not set! Contact the admin."));
         }
 
         if (cosmeticLocation == null || playerLocation == null) return;
@@ -156,14 +155,14 @@ public class SprayPreview {
         String sprayURL = config.getString(CosmeticsType.Sprays.getSectionKey() + "." + selected + ".url");
         if (sprayFile == null) {
             if (!renderer.load(sprayURL)) {
-                player.sendMessage(ColorUtil.colored("&cLooks like there's an error rendering the Spray, contact the admin!"));
+                player.sendMessage(ColorUtil.translate("&cLooks like there's an error rendering the Spray, contact the admin!"));
                 Logger.getLogger("Minecraft").log(Level.SEVERE, "Could not load the URL for the " + selected + " Check if the URL in Sprays.yml is valid!");
                 return;
             }
         } else {
             File file = new File(Cosmetics.getInstance().getHandler().getAddonPath() + "/" + Cosmetics.getInstance().getConfig().getString("Spray-Dir") + "/" + sprayFile);
             if (!renderer.load(file)) {
-                player.sendMessage(ColorUtil.colored("&cLooks like there's an error rendering the Spray, contact the admin!"));
+                player.sendMessage(ColorUtil.translate("&cLooks like there's an error rendering the Spray, contact the admin!"));
                 Logger.getLogger("Minecraft").log(Level.SEVERE, "Could not load the File for the " + selected + " Check if the File in Sprays.yml is valid!");
                 Logger.getLogger("Minecraft").log(Level.SEVERE, "FilePath: " + file.getAbsolutePath());
                 return;

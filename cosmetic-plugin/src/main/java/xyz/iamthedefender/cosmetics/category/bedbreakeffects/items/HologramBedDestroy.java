@@ -2,7 +2,7 @@ package xyz.iamthedefender.cosmetics.category.bedbreakeffects.items;
 
 
 import com.cryptomorin.xseries.XMaterial;
-import com.hakan.core.utils.ColorUtil;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -61,7 +61,7 @@ public class HologramBedDestroy extends BedDestroy {
         ArmorStand stand = (ArmorStand) player.getWorld().spawnEntity(bedLocation.add(0,1,0), EntityType.ARMOR_STAND);
         stand.setVisible(false);
         stand.setGravity(false);
-        stand.setCustomName(ColorUtil.colored("&c" + victimTeam.getName() + "'s Bed was destroyed by " + player.getDisplayName()));
+        stand.setCustomName(ColorUtil.translate("&c" + victimTeam.getName() + "'s Bed was destroyed by " + player.getDisplayName()));
         stand.setCustomNameVisible(true);
     }
 }

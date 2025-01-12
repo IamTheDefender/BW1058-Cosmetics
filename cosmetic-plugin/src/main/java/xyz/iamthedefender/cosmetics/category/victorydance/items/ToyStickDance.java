@@ -1,7 +1,7 @@
 package xyz.iamthedefender.cosmetics.category.victorydance.items;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.hakan.core.utils.ColorUtil;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -65,10 +65,10 @@ public class ToyStickDance extends VictoryDance implements Listener {
     public void execute(Player winner) {
         ItemStack i = new ItemStack(Material.STICK);
         ItemMeta im = i.getItemMeta();
-        im.setDisplayName(ColorUtil.colored("&aToy Stick"));
+        im.setDisplayName(ColorUtil.translate("&aToy Stick"));
         ArrayList<String> lore = new ArrayList<String>();
-        lore.add(ColorUtil.colored("&7Right Click on a block"));
-        lore.add(ColorUtil.colored("&7to fly!"));
+        lore.add(ColorUtil.translate("&7Right Click on a block"));
+        lore.add(ColorUtil.translate("&7to fly!"));
         i.setItemMeta(im);
         winner.getInventory().addItem(i);
     }

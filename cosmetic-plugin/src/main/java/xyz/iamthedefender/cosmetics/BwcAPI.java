@@ -35,7 +35,7 @@ public class BwcAPI implements CosmeticsAPI {
 
     @Override
     public SystemGuiManager getSystemGuiManager() {
-        return null;
+        return Cosmetics.getInstance().getSystemGuiManager();
     }
 
     @Override

@@ -68,7 +68,7 @@ public class SystemGuiManager implements Listener {
         Player player = (Player) event.getPlayer();
         if(getByPlayer(player) != null){
             SystemGui systemGui = getByPlayer(player);
-            Bukkit.getScheduler().runTaskLater(plugin, r -> systemGui.onClose(player), 1L);
+            Bukkit.getScheduler().runTaskLater(plugin, () -> systemGui.onClose(player), 1L);
             guiStorage.remove(player);
 
             getLastOpenGuiStorage().put(player, systemGui);

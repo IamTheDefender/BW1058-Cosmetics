@@ -1,10 +1,10 @@
 package xyz.iamthedefender.cosmetics.category.victorydance.items;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.hakan.core.skin.Skin;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
+import net.citizensnpcs.npc.skin.Skin;
 import net.citizensnpcs.trait.LookClose;
 import net.citizensnpcs.trait.SkinTrait;
 import net.citizensnpcs.util.NMS;
@@ -65,18 +65,8 @@ public class TwerkApocalypseDance extends VictoryDance {
 
     @Override
     public void execute(Player winner) {
-        Skin skin = null;
-        getLogger().info("Trying to find the skin of " + winner.getName());
-        try{
-            List<String> values = Arrays.asList(Utility.getFromName(winner.getName()));
-            skin = new Skin(values.get(0), values.get(1));
-        }catch (Exception e){}
-
-
         NPCRegistry registry = CitizensAPI.getNPCRegistry();
         List<NPC> npcs = new ArrayList<>();
-
-        Skin finalSkin = skin;
 
         Run.every(() -> {
             List<Block> freeBlocks = UsefulUtilsVD.getFreeBlocks(winner.getLocation());
@@ -85,9 +75,8 @@ public class TwerkApocalypseDance extends VictoryDance {
 
             if (loc.getBlock().getType() == Material.AIR && loc.subtract(0,1,0).getBlock().getType() != Material.AIR) {
                 NPC npc = registry.createNPC(EntityType.PLAYER, winner.getDisplayName());
-                if(finalSkin != null){
-                    npc.getOrAddTrait(SkinTrait.class).setTexture(finalSkin.getTexture(), finalSkin.getSignature());
-                }
+
+                npc.getOrAddTrait(SkinTrait.class).setSkinName(winner.getName(), true);
 
                 npc.getOrAddTrait(LookClose.class).lookClose(false);
                 npc.spawn(loc.add(0,1,0));

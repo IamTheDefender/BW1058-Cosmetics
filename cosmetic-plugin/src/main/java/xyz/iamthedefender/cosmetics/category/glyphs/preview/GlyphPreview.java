@@ -4,8 +4,6 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.ui.inventory.InventoryGui;
-import com.hakan.core.utils.ColorUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -24,6 +22,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.Glyph;
 import xyz.iamthedefender.cosmetics.api.menu.SystemGui;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.category.glyphs.util.GlyphUtil;
@@ -83,7 +82,7 @@ public class GlyphPreview {
             playerLocation = getPlayerLocation();
         }catch (Exception exception){
             exception.printStackTrace();
-            player.sendMessage(ColorUtil.colored("&cEither Preview location or Player location is not set! Contact the admin."));
+            player.sendMessage(ColorUtil.translate("&cEither Preview location or Player location is not set! Contact the admin."));
         }
         if (cosmeticLocation == null || playerLocation == null) return;
 
@@ -138,7 +137,7 @@ public class GlyphPreview {
         String glyphFile = config.getString(CosmeticsType.Glyphs.getSectionKey() + "." + selected + ".file");
 
         if (glyphFile == null) {
-            player.sendMessage(ColorUtil.colored("&cLooks like the glyphFile is null? Contact a developer!"));
+            player.sendMessage(ColorUtil.translate("&cLooks like the glyphFile is null? Contact a developer!"));
             Logger.getLogger("Minecraft").log(Level.SEVERE, glyphFile + " is null! 1");
             return;
         }
@@ -149,7 +148,7 @@ public class GlyphPreview {
                         glyphFile);
 
         if (!file.exists()){
-            player.sendMessage(ColorUtil.colored("&cLooks like the glyphFile is null? Contact a developer!"));
+            player.sendMessage(ColorUtil.translate("&cLooks like the glyphFile is null? Contact a developer!"));
             Logger.getLogger("Minecraft").log(Level.SEVERE, glyphFile + " is null! 2");
             return;
         }

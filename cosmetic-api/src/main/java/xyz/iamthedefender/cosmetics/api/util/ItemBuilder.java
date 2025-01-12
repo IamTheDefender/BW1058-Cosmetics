@@ -1,6 +1,5 @@
 package xyz.iamthedefender.cosmetics.api.util;
 
-import com.hakan.core.utils.ColorUtil;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -45,7 +44,7 @@ public class ItemBuilder {
 
     public ItemBuilder name(String name){
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ColorUtil.colored(name));
+        itemMeta.setDisplayName(ColorUtil.translate(name));
         itemStack.setItemMeta(itemMeta);
 
         return this;
@@ -55,7 +54,7 @@ public class ItemBuilder {
     public ItemBuilder lore(String... lore){
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        itemMeta.setLore(new ArrayList<>(List.of(lore)).stream().map(ColorUtil::colored).collect(Collectors.toList()));
+        itemMeta.setLore(new ArrayList<>(List.of(lore)).stream().map(ColorUtil::translate).collect(Collectors.toList()));
         itemStack.setItemMeta(itemMeta);
 
         return this;

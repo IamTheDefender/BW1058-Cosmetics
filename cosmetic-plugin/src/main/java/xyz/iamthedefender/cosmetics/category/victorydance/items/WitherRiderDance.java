@@ -1,7 +1,7 @@
 package xyz.iamthedefender.cosmetics.category.victorydance.items;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.hakan.core.utils.ColorUtil;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Wither;
@@ -61,7 +61,7 @@ public class WitherRiderDance extends VictoryDance implements Listener {
         Wither wither = (Wither) winner.getWorld().spawnEntity(winner.getLocation(), EntityType.WITHER);
         wither.setPassenger(winner);
         wither.setMetadata("VD", new FixedMetadataValue(Cosmetics.getInstance(), ""));
-        wither.setCustomName(ColorUtil.colored("&a" + winner.getName() + "'s Wither!"));
+        wither.setCustomName(ColorUtil.translate("&a" + winner.getName() + "'s Wither!"));
         wither.setNoDamageTicks(Integer.MAX_VALUE);
 
         Run.every(r -> {

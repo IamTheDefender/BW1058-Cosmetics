@@ -1,6 +1,6 @@
 package xyz.iamthedefender.cosmetics.category.killmessage.util;
 
-import com.hakan.core.utils.ColorUtil;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -71,7 +71,7 @@ public class KillMessageUtils {
                 if (killMessage.getIdentifier().equals(previewID)) {
                     if (killMessage.getField(FieldsType.RARITY, player) != RarityType.NONE) {
                         for (String message : messages) {
-                            player.sendMessage(ColorUtil.colored(message
+                            player.sendMessage(ColorUtil.translate(message
                                     .replace("{killer}", killerColor + previewKillerName)
                                     .replace("{victim}", victimColor + victim)));
                         }
@@ -91,7 +91,7 @@ public class KillMessageUtils {
         if (finalKill) {
             message += " &b&lFINAL KILL!";
         }
-        player.sendMessage(ColorUtil.colored(message));
+        player.sendMessage(ColorUtil.translate(message));
     }
 
 
@@ -123,6 +123,6 @@ public class KillMessageUtils {
         if (finalKill) {
             message += " " + ConfigUtils.getMainConfig().getString("Final-Kill-Suffix");
         }
-        return ColorUtil.colored(message);
+        return ColorUtil.translate(message);
     }
 }

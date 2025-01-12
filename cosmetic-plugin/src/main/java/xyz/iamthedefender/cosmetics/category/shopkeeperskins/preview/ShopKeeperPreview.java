@@ -4,8 +4,6 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.ui.inventory.InventoryGui;
-import com.hakan.core.utils.ColorUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -21,6 +19,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.ShopKeeperSkin;
 import xyz.iamthedefender.cosmetics.api.menu.SystemGui;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.category.shopkeeperskins.utils.ShopKeeperSkinsUtils;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
@@ -73,7 +72,7 @@ public class ShopKeeperPreview {
              playerLocation = getPlayerLocation();
         }catch (Exception exception){
             exception.printStackTrace();
-            player.sendMessage(ColorUtil.colored("&cEither Preview location or Player location is not set! Contact the admin."));
+            player.sendMessage(ColorUtil.translate("&cEither Preview location or Player location is not set! Contact the admin."));
         }
 
         if (cosmeticLocation == null || playerLocation == null) return;

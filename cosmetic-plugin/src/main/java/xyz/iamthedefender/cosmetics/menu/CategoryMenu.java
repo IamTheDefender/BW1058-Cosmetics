@@ -1,7 +1,7 @@
 package xyz.iamthedefender.cosmetics.menu;
 
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.utils.ColorUtil;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
@@ -202,25 +202,25 @@ public class CategoryMenu extends ChestSystemGui {
         CosmeticsAPI api = Cosmetics.getInstance().getApi();
         String selected = api.getSelectedCosmetic(p, type);
         if (selected.equals(unformattedName)){
-            return ColorUtil.colored(Utility.getMSGLang(p, "cosmetics.selected"));
+            return ColorUtil.translate(Utility.getMSGLang(p, "cosmetics.selected"));
         }
 
         if (p.hasPermission(type.getPermissionFormat() + "." + unformattedName)){
-            return ColorUtil.colored(Utility.getMSGLang(p, "cosmetics.click-to-select"));
+            return ColorUtil.translate(Utility.getMSGLang(p, "cosmetics.click-to-select"));
         }
 
         if (type.getConfig().getString(type.getSectionKey() + "." + unformattedName + ".purchase-able") != null){
             boolean purchaseAble = type.getConfig().getBoolean(type.getSectionKey() + "." + unformattedName + ".purchase-able");
             if (!purchaseAble){
-                return ColorUtil.colored(Utility.getMSGLang(p, "cosmetics.not-purchase-able"));
+                return ColorUtil.translate(Utility.getMSGLang(p, "cosmetics.not-purchase-able"));
             }
         }
 
         if (Cosmetics.getInstance().getEconomy().getBalance(p) >= price){
-            return ColorUtil.colored(Utility.getMSGLang(p, "cosmetics.click-to-purchase"));
+            return ColorUtil.translate(Utility.getMSGLang(p, "cosmetics.click-to-purchase"));
         }
 
-        return ColorUtil.colored(Utility.getMSGLang(p, "cosmetics.no-coins"));
+        return ColorUtil.translate(Utility.getMSGLang(p, "cosmetics.no-coins"));
     }
 
     public int onClick(Player p, CosmeticsType type, int price, String id, boolean isOnlyForCheck) {

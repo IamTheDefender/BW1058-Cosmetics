@@ -4,7 +4,7 @@ package xyz.iamthedefender.cosmetics.category.sprays;
 
 import com.andrei1058.bedwars.api.events.gameplay.GameStateChangeEvent;
 import com.cryptomorin.xseries.XMaterial;
-import com.hakan.core.utils.ColorUtil;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -58,7 +58,7 @@ public class SpraysHandler1058 implements Listener
                         ArmorStand stand = (ArmorStand) e.getWorld().spawnEntity(e.getLocation().subtract(0.0, 0.9, 0.0), EntityType.ARMOR_STAND);
                         stand.setVisible(false);
                         stand.setGravity(false);
-                        stand.setCustomName(ColorUtil.colored("&eClick!"));
+                        stand.setCustomName(ColorUtil.translate("&eClick!"));
                         stand.setMetadata("HOLO_ITEM_FRAME", new FixedMetadataValue(Cosmetics.getInstance(), ""));
                         stand.setCustomNameVisible(true);
                         stand.setMarker(true);

@@ -5,7 +5,6 @@ package xyz.iamthedefender.cosmetics.api.util;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.hakan.core.utils.ColorUtil;
 import lombok.Getter;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -56,7 +55,7 @@ public class Utility {
      * @return the result
      */
     public static String getMSGLang(Player p, String path) {
-        return ColorUtil.colored(api.getHandler().getLanguageUtil().getMessage(p, path));
+        return ColorUtil.translate(api.getHandler().getLanguageUtil().getMessage(p, path));
     }
 
     /**
@@ -67,7 +66,7 @@ public class Utility {
      */
     public static List<String> getListLang(Player p, String path) {
        return api.getHandler().getLanguageUtil().getMessageList(p, path)
-               .stream().map(ColorUtil::colored).collect(Collectors.toList());
+               .stream().map(ColorUtil::translate).collect(Collectors.toList());
     }
 
     /**
