@@ -24,11 +24,22 @@ public abstract class SystemGui {
     public abstract void onOpen(Player player);
     public abstract void onClose(Player player);
     public abstract Inventory getInventory();
+
     public abstract void setItem(int slot, ItemStack item);
     public abstract void setItem(int slot, ItemStack itemStack, @NonNull Consumer<InventoryClickEvent> action);
+
+    public void setItem(int slot, ClickableItem item) {
+        setItem(slot, item.getItemStack(), item.getAction());
+    }
+
     public abstract ClickableItem getItem(int slot);
     public abstract void removeItem(int slot);
     public void onClick(InventoryClickEvent event) {}
+
+    public void clearInventory(){
+        itemsStorage.clear();
+        getInventory().clear();
+    }
 
     public void addOption(Option option){
         options.add(option);

@@ -23,6 +23,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.Glyph;
+import xyz.iamthedefender.cosmetics.api.menu.SystemGui;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.category.glyphs.util.GlyphUtil;
@@ -46,7 +47,7 @@ public class GlyphPreview {
 
     private final Map<UUID, Map<Integer, ItemStack>> inventories = new HashMap<>();
 
-    public void sendPreviewGlyph(Player player, String selected, InventoryGui gui) {
+    public void sendPreviewGlyph(Player player, String selected, SystemGui gui) {
         for (Glyph glyph : StartupUtils.glyphsList) {
             if (glyph.getIdentifier().equals(selected)){
                 if (glyph.getField(FieldsType.RARITY, player) == RarityType.NONE) {

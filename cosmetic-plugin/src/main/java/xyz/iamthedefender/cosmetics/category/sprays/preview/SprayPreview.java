@@ -25,6 +25,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.Spray;
+import xyz.iamthedefender.cosmetics.api.menu.SystemGui;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.category.sprays.util.SpraysUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
@@ -46,7 +47,7 @@ public class SprayPreview {
     private int currentID;
     private PacketAdapter adapter;
 
-    public void sendSprayPreview(Player player, String selected, InventoryGui gui){
+    public void sendSprayPreview(Player player, String selected, SystemGui gui){
         for (Spray spray : StartupUtils.sprayList) {
             if (spray.getIdentifier().equals(selected)){
                 if (spray.getField(FieldsType.RARITY, player) == RarityType.NONE) {

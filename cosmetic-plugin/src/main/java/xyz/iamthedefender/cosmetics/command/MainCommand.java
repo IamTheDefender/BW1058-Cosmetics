@@ -17,6 +17,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.handler.ISetupSession;
+import xyz.iamthedefender.cosmetics.api.menu.SystemGui;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigType;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
@@ -155,10 +156,11 @@ public class MainCommand {
                 return;
             String title = CosmeticsType.KillMessage.getFormatedName();
             boolean placeholder = Cosmetics.isPlaceholderAPI();
+
             if (placeholder){
                 title = PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, title);
             }
-            InventoryGui inv = new CategoryMenu(CosmeticsType.KillMessage, title);
+            SystemGui inv = new CategoryMenu(CosmeticsType.KillMessage, title);
             inv.open(((Player) sender).getPlayer());
         } else {
             sender.sendMessage(ChatColor.RED + "You need to be in-game!");
@@ -177,7 +179,7 @@ public class MainCommand {
             if (placeholder){
                 title = PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, title);
             }
-            InventoryGui inv = new CategoryMenu(CosmeticsType.ShopKeeperSkin, title);
+            SystemGui inv = new CategoryMenu(CosmeticsType.ShopKeeperSkin, title);
             inv.open(((Player) sender).getPlayer());
         } else {
             sender.sendMessage(ChatColor.RED + "You need to be in-game!");
@@ -196,7 +198,7 @@ public class MainCommand {
             if (placeholder){
                 title = PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, title);
             }
-            InventoryGui inv = new CategoryMenu(CosmeticsType.Sprays, title);
+            SystemGui inv = new CategoryMenu(CosmeticsType.Sprays, title);
             inv.open(((Player) sender).getPlayer());
         } else {
             sender.sendMessage(ChatColor.RED + "You need to be in-game!");
@@ -215,7 +217,7 @@ public class MainCommand {
             if (placeholder){
                 title = PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, title);
             }
-            InventoryGui inv = new CategoryMenu(CosmeticsType.DeathCries, title);
+            SystemGui inv = new CategoryMenu(CosmeticsType.DeathCries, title);
             inv.open(((Player) sender).getPlayer());
         } else {
             sender.sendMessage(ChatColor.RED + "You need to be in-game!");
@@ -234,7 +236,7 @@ public class MainCommand {
             if (placeholder){
                 title = PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, title);
             }
-            InventoryGui inv = new CategoryMenu(CosmeticsType.Glyphs, title);
+            SystemGui inv = new CategoryMenu(CosmeticsType.Glyphs, title);
             inv.open(((Player) sender).getPlayer());
         } else {
             sender.sendMessage(ChatColor.RED + "You need to be in-game!");
@@ -253,7 +255,7 @@ public class MainCommand {
             if (placeholder){
                 title = PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, title);
             }
-            InventoryGui inv = new CategoryMenu(CosmeticsType.BedBreakEffects, title);
+            SystemGui inv = new CategoryMenu(CosmeticsType.BedBreakEffects, title);
             inv.open(((Player) sender).getPlayer());
         } else {
             sender.sendMessage(ChatColor.RED + "You need to be in-game!");
@@ -272,7 +274,7 @@ public class MainCommand {
             if (placeholder){
                 title = PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, title);
             }
-            InventoryGui inv = new CategoryMenu(CosmeticsType.FinalKillEffects, title);
+            SystemGui inv = new CategoryMenu(CosmeticsType.FinalKillEffects, title);
             inv.open(((Player) sender).getPlayer());
         } else {
             sender.sendMessage(ChatColor.RED + "You need to be in-game!");
@@ -291,7 +293,7 @@ public class MainCommand {
             if (placeholder){
                 title = PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, title);
             }
-            InventoryGui inv = new CategoryMenu(CosmeticsType.ProjectileTrails, title);
+            SystemGui inv = new CategoryMenu(CosmeticsType.ProjectileTrails, title);
             inv.open(((Player) sender).getPlayer());
         } else {
             sender.sendMessage(ChatColor.RED + "You need to be in-game!");
@@ -310,7 +312,7 @@ public class MainCommand {
             if (placeholder){
                 title = PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, title);
             }
-            InventoryGui inv = new CategoryMenu(CosmeticsType.VictoryDances, title);
+            SystemGui inv = new CategoryMenu(CosmeticsType.VictoryDances, title);
             inv.open(((Player) sender).getPlayer());
         } else {
             sender.sendMessage(ChatColor.RED + "You need to be in-game!");
@@ -329,7 +331,7 @@ public class MainCommand {
             if (placeholder){
                 title = PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, title);
             }
-            InventoryGui inv = new CategoryMenu(CosmeticsType.WoodSkins, title);
+            SystemGui inv = new CategoryMenu(CosmeticsType.WoodSkins, title);
             inv.open(((Player) sender).getPlayer());
         } else {
             sender.sendMessage(ChatColor.RED + "You need to be in-game!");
@@ -348,7 +350,7 @@ public class MainCommand {
             if (placeholder){
                 title = PlaceholderAPI.setPlaceholders((OfflinePlayer) sender, title);
             }
-            InventoryGui inv = new CategoryMenu(CosmeticsType.IslandTopper, title);
+            SystemGui inv = new CategoryMenu(CosmeticsType.IslandTopper, title);
             inv.open(((Player) sender).getPlayer());
         } else {
             sender.sendMessage(ChatColor.RED + "You need to be in-game!");

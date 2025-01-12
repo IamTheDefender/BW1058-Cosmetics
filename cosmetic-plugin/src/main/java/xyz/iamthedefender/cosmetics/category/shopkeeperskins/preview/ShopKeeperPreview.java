@@ -20,6 +20,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.ShopKeeperSkin;
+import xyz.iamthedefender.cosmetics.api.menu.SystemGui;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.category.shopkeeperskins.utils.ShopKeeperSkinsUtils;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
@@ -36,7 +37,7 @@ public class ShopKeeperPreview {
     private final Map<UUID, Map<Integer, org.bukkit.inventory.ItemStack>> inventories = new HashMap<>();
 
 
-    public void sendPreviewShopKeeperSkin(Player player, String selected, InventoryGui gui){
+    public void sendPreviewShopKeeperSkin(Player player, String selected, SystemGui gui){
         for (ShopKeeperSkin shopKeeperSkin : StartupUtils.shopKeeperSkinList) {
             if (shopKeeperSkin.getIdentifier().equals(selected)){
                 if (shopKeeperSkin.getField(FieldsType.RARITY, player) == RarityType.NONE) {

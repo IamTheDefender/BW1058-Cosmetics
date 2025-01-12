@@ -50,6 +50,7 @@ public class Cosmetics extends JavaPlugin {
     private Metrics metrics;
 
     public boolean dependenciesMissing = false;
+    @Getter
     static boolean placeholderAPI;
 
     @Getter

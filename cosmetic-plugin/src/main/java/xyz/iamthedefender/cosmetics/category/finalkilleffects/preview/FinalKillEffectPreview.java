@@ -31,6 +31,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
+import xyz.iamthedefender.cosmetics.api.menu.SystemGui;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
@@ -46,7 +47,7 @@ public class FinalKillEffectPreview {
 
     private FinalKillEffect killEffect;
 
-    public void sendPreviewKillEffect(Player player, String selected, InventoryGui gui) {
+    public void sendPreviewKillEffect(Player player, String selected, SystemGui gui) {
         for (FinalKillEffect killEffect : StartupUtils.finalKillList) {
             if (killEffect.getIdentifier().equals(selected)){
                 if (killEffect.getField(FieldsType.RARITY, player) == RarityType.NONE) {

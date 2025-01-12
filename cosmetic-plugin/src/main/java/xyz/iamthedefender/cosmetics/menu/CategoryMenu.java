@@ -1,9 +1,6 @@
 package xyz.iamthedefender.cosmetics.menu;
 
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.ui.inventory.InventoryGui;
-import com.hakan.core.ui.inventory.item.ClickableItem;
-import com.hakan.core.ui.inventory.pagination.Pagination;
 import com.hakan.core.utils.ColorUtil;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -14,7 +11,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -25,6 +21,9 @@ import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.event.CosmeticPurchaseEvent;
+import xyz.iamthedefender.cosmetics.api.menu.ClickableItem;
+import xyz.iamthedefender.cosmetics.api.menu.impl.ChestSystemGui;
+import xyz.iamthedefender.cosmetics.api.util.ItemBuilder;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.category.deathcries.preview.DeathCryPreview;
 import xyz.iamthedefender.cosmetics.category.finalkilleffects.preview.FinalKillEffectPreview;
@@ -34,14 +33,13 @@ import xyz.iamthedefender.cosmetics.category.killmessage.preview.KillMessagePrev
 import xyz.iamthedefender.cosmetics.category.shopkeeperskins.preview.ShopKeeperPreview;
 import xyz.iamthedefender.cosmetics.category.sprays.preview.SprayPreview;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
-import xyz.iamthedefender.cosmetics.api.util.ItemBuilder;
 import xyz.iamthedefender.cosmetics.util.StringUtils;
 import xyz.iamthedefender.cosmetics.util.VaultUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class CategoryMenu extends InventoryGui {
+public class CategoryMenu extends ChestSystemGui {
 
     ConfigManager config;
     CosmeticsType cosmeticsType;
@@ -50,7 +48,7 @@ public class CategoryMenu extends InventoryGui {
     int page;
 
     public CategoryMenu(CosmeticsType type, String title, int page) {
-        super(type.getFormatedName(), title, 6, InventoryType.CHEST);
+        super(title, 6);
         this.config = type.getConfig();
         this.cosmeticsType = type;
         this.title = title;
@@ -68,16 +66,17 @@ public class CategoryMenu extends InventoryGui {
     }
 
     public CategoryMenu(CosmeticsType type, String title) {
-        this(type, title, 0);
+        this(type, title, 1);
     }
 
     @Override
     public void onOpen(@NotNull Player player) {
-        toInventory().clear();
-        List<ClickableItem> items = new ArrayList<>();
         ConfigManager configManager = cosmeticsType.getConfig();
         ConfigurationSection section = config.getYml().getConfigurationSection(cosmeticsType.getSectionKey());
+
         if (section == null) return;
+
+        clearInventory();
         Map<ClickableItem, RarityType> rarityMap = new HashMap<>();
 
         // Set up the items
@@ -96,6 +95,7 @@ public class CategoryMenu extends InventoryGui {
             // Items
             ClickableItem item = null;
             List<String> lore1 = new ArrayList<>(lore);
+
             if (stack != null && !disabled) {
                 String colorCode = "&a";
                 int returnValue = onClick(player, cosmeticsType, price, id, true);
@@ -120,42 +120,46 @@ public class CategoryMenu extends InventoryGui {
                     }
                 });
             }
-            if (item != null && !disabled) {
-                items.add(item);
+
+            if (item != null) {
                 rarityMap.put(item, rarity);
             }
         }
+
         if (Cosmetics.getInstance().getConfig().getBoolean("BackItemInCosmeticsMenu")) {
             setItem(49, new ItemBuilder().material(Material.ARROW).name("&aBack").build(), (e) -> new MainMenu((Player) e.getWhoClicked()).open((Player) e.getWhoClicked()));
         }
-        createPages(items, rarityMap);
+
+        createPages(rarityMap);
     }
 
-    public void createPages(List<ClickableItem> items, Map<ClickableItem, RarityType> rarityMap) {
-        // Page system
-        Pagination pages = new Pagination(this);
-        pages.setSlots(slots);
-        pages.setItems(items);
-        // Using try and ignoring it because it will only throw exception when the page doesn't exist so no need for
-        // these items in the GUI
-        try {
-            if (!pages.getPage(page - 1).getItems().isEmpty()) {
-                setItem(45, new ItemBuilder().material(Material.ARROW).name("&aPrevious page").build(), (e) -> new CategoryMenu(cosmeticsType, title, page - 1).open((Player) e.getWhoClicked()));
-            }
-        }catch (IndexOutOfBoundsException ignored){}
+    @Override
+    public void onClose(Player player) {
 
-        try {
-            if (!pages.getPage(page + 1).getItems().isEmpty()) {
-                setItem(53, new ItemBuilder().material(Material.ARROW).name("&aNext page").build(), (e) -> new CategoryMenu(cosmeticsType, title, page + 1).open((Player) e.getWhoClicked()));
-            }
-        }catch (IndexOutOfBoundsException ignored){}
+    }
 
-        Map<ClickableItem, RarityType> rarityMapNew = new HashMap<>();
-        for (ClickableItem value : pages.getPage(page).getItems().values()) {
-            if (value.getItem().getType() != Material.AIR) {
-                rarityMapNew.put(value, rarityMap.get(value));
-            }
+    public void createPages(Map<ClickableItem, RarityType> rarityMap) {
+        List<ClickableItem> items = new ArrayList<>(rarityMap.keySet());
+
+        int itemsPerPage = slots.size();
+        int totalPages = items.size() / itemsPerPage;
+        int itemStartIndex = (page - 1) * itemsPerPage;
+        int itemEndIndex = Math.min(items.size(), itemStartIndex + itemsPerPage);
+
+        List<ClickableItem> pageItems = items.subList(itemStartIndex, itemEndIndex);
+
+        if(page < totalPages) {
+            setItem(47, new ItemBuilder().material(Material.ARROW).name("&aNext page").build(), (e) -> new CategoryMenu(cosmeticsType, title, page + 1).open((Player) e.getWhoClicked()));
         }
+
+        if(page > 1) {
+            setItem(39, new ItemBuilder().material(Material.ARROW).name("&aPrevious page").build(), (e) -> new CategoryMenu(cosmeticsType, title, page - 1).open((Player) e.getWhoClicked()));
+        }
+
+        Map<ClickableItem, RarityType> rarityMapNew = new HashMap<>(
+                pageItems.stream().collect(Collectors.toMap(c -> c, rarityMap::get))
+        );
+
         addItemsAccordingToRarity(rarityMapNew);
     }
 
@@ -176,19 +180,19 @@ public class CategoryMenu extends InventoryGui {
     public void addItemsAccordingToRarity(Map<ClickableItem, RarityType> rarityMap) {
         rarityMap.entrySet().stream()
                 .sorted(Comparator.comparing(entry -> entry.getValue().ordinal()))
-                .sorted(Comparator.comparing(entry -> ChatColor.stripColor(entry.getKey().getItem().getItemMeta().getDisplayName())))
+                .sorted(Comparator.comparing(entry -> ChatColor.stripColor(entry.getKey().getItemStack().getItemMeta().getDisplayName())))
                 .collect(Collectors.groupingBy(Map.Entry::getValue, LinkedHashMap::new, Collectors.mapping(Map.Entry::getKey, Collectors.toList())))
                 .forEach((rarity, items) -> items.forEach(item -> {
-                    if (!isFull(toInventory())) {
-                        super.setItem(findFirstEmptySlot(toInventory()), item);
+                    if (!isFull(getInventory())) {
+                        setItem(findFirstEmptySlot(getInventory()), item);
                     }
                 }));
 
         String extrasPath = "Extras.fill-empty.";
         if (config.getBoolean(extrasPath + "enabled")) {
             ItemStack stack = ConfigManager.getItemStack(config.getYml(), extrasPath + "item");
-            while (toInventory().firstEmpty() != -1) {
-                setItem(toInventory().firstEmpty(), new ItemBuilder(stack).name("&r").build());
+            while (getInventory().firstEmpty() != -1) {
+                setItem(getInventory().firstEmpty(), new ItemBuilder(stack).name("&r").build());
             }
         }
     }
@@ -225,45 +229,41 @@ public class CategoryMenu extends InventoryGui {
         String permissionFormat = type.getPermissionFormat();
         Economy eco = VaultUtils.getEconomy();
         Permission perm = VaultUtils.getPermissions();
-        // If the player did not have the item selected.
-        if (!selected.equals(id)) {
-            // Select
-            if (p.hasPermission(permissionFormat + "." + id)) {
-                if (isOnlyForCheck) return 0;
-                DebugUtil.addMessage("Selected " + id + " for " + type);
-                api.setSelectedCosmetic(p, type, id);
-                XSound.ENTITY_VILLAGER_YES.play(p);
-                new CategoryMenu(cosmeticsType, title, page).open(p);
-                return -2;
-                // Can't purchase, cuz locked
-            } else if (type.getConfig().getString(type.getSectionKey() + "." + id + ".purchase-able") != null){
-                boolean purchaseAble = type.getConfig().getBoolean(type.getSectionKey() + "." + id + ".purchase-able");
-                if (!purchaseAble){
-                    return 2;
-                }
-                // Purchase
-        } else if (eco != null && eco.getBalance(Bukkit.getOfflinePlayer(p.getUniqueId())) >= price) {
-                if (isOnlyForCheck) return 1;
-                CosmeticPurchaseEvent event = new CosmeticPurchaseEvent(p, type);
-                Bukkit.getServer().getPluginManager().callEvent(event);
-                if (event.isCancelled())
-                    return -1;
-                // they bought the cosmetic and re-opened the GUI
-                if (perm != null) {
-                    perm.playerAdd(p, permissionFormat + "." + id);
-                }
-                api.setSelectedCosmetic(p, type, id);
-                eco.withdrawPlayer(p, price);
-                p.playSound(p.getLocation(), XSound.ENTITY_VILLAGER_YES.parseSound(), 1.0f, 1.0f);
-                new CategoryMenu(cosmeticsType, title, page).open(p);
-                // Don't have money and is purchasable
-            } else {
+
+        if (selected.equals(id)) return -2;
+
+        if (!p.hasPermission(permissionFormat + "." + id)) {
+            if (!type.getConfig().getBoolean(type.getSectionKey() + "." + id + ".purchase-able")) return 2;
+
+            if (eco == null || eco.getBalance(Bukkit.getOfflinePlayer(p.getUniqueId())) < price) {
                 if (isOnlyForCheck) return 2;
                 p.playSound(p.getLocation(), XSound.ENTITY_ENDERMAN_TELEPORT.parseSound(), 1.0f, 1.0f);
+                return -2;
             }
+
+            if (isOnlyForCheck) return 1;
+
+            CosmeticPurchaseEvent event = new CosmeticPurchaseEvent(p, type);
+            Bukkit.getServer().getPluginManager().callEvent(event);
+            if (event.isCancelled()) return -1;
+
+            if (perm != null) perm.playerAdd(p, permissionFormat + "." + id);
+            api.setSelectedCosmetic(p, type, id);
+            eco.withdrawPlayer(p, price);
+            p.playSound(p.getLocation(), XSound.ENTITY_VILLAGER_YES.parseSound(), 1.0f, 1.0f);
+            new CategoryMenu(cosmeticsType, title, page).open(p);
+            return -2;
         }
+
+        if (isOnlyForCheck) return 0;
+
+        DebugUtil.addMessage("Selected " + id + " for " + type);
+        api.setSelectedCosmetic(p, type, id);
+        XSound.ENTITY_VILLAGER_YES.play(p);
+        new CategoryMenu(cosmeticsType, title, page).open(p);
         return -2;
     }
+
 
     public void previewClick(Player player, CosmeticsType type, String id, int price){
         switch (type){

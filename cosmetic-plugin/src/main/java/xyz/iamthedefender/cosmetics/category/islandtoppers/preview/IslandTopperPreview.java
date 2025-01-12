@@ -5,7 +5,6 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.HCore;
 import com.hakan.core.ui.inventory.InventoryGui;
 import com.hakan.core.utils.ColorUtil;
 import com.sk89q.worldedit.CuboidClipboard;
@@ -31,6 +30,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.IslandTopper;
+import xyz.iamthedefender.cosmetics.api.menu.SystemGui;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.category.islandtoppers.util.BlockData;
@@ -47,7 +47,7 @@ public class IslandTopperPreview {
 
     private final Map<UUID, Map<Integer, ItemStack>> inventories = new HashMap<>();
 
-    public void sendIslandTopperPreview(Player player, String selected, InventoryGui gui) {
+    public void sendIslandTopperPreview(Player player, String selected, SystemGui gui) {
         for (IslandTopper islandTopper : StartupUtils.islandTopperList) {
             if (islandTopper.getIdentifier().equals(selected)){
                 if (islandTopper.getField(FieldsType.RARITY, player) == RarityType.NONE) {

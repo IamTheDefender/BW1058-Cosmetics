@@ -1,8 +1,6 @@
 package xyz.iamthedefender.cosmetics.category.killmessage.preview;
 
 import com.cryptomorin.xseries.XSound;
-import com.hakan.core.HCore;
-import com.hakan.core.ui.inventory.InventoryGui;
 import com.hakan.core.utils.ColorUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

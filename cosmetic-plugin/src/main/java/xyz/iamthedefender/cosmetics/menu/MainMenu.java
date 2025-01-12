@@ -12,24 +12,25 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
-import xyz.iamthedefender.cosmetics.api.util.Utility;
+import xyz.iamthedefender.cosmetics.api.menu.impl.ChestSystemGui;
 import xyz.iamthedefender.cosmetics.api.util.ItemBuilder;
+import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.util.MainMenuUtils;
 
 import java.util.List;
 
-public class MainMenu extends InventoryGui {
-
-    FileConfiguration config = Cosmetics.getInstance().menuData.getYml();
+public class MainMenu extends ChestSystemGui {
 
     public MainMenu(Player player) {
-        super("none", Utility.getMSGLang(player, "cosmetics.gui-title") , 6, InventoryType.CHEST);
+        super(Utility.getMSGLang(player, "cosmetics.gui-title") , 6);
     }
 
     @Override
     public void onOpen(@NotNull Player player) {
         String loc = "Main-Menu";
         String langLoc = "cosmetics.main-menu";
+        FileConfiguration config = Cosmetics.getInstance().getMenuData().getYml();
+
         for(String name : config.getConfigurationSection(loc).getKeys(false)) {
             try {
                 ItemStack itemStack = ConfigManager.getItemStack(config, loc + "." + name + ".item");
@@ -58,9 +59,14 @@ public class MainMenu extends InventoryGui {
         String extrasPath = "Extras.fill-empty.";
         if (config.getBoolean(extrasPath + "enabled")){
             ItemStack stack = ConfigManager.getItemStack(config, extrasPath + "item");
-            while (toInventory().firstEmpty() != -1){
-                setItem(toInventory().firstEmpty(), new ItemBuilder(stack).name("&r").build());
+            while (getInventory().firstEmpty() != -1){
+                setItem(getInventory().firstEmpty(), new ItemBuilder(stack).name("&r").build());
             }
         }
+    }
+
+    @Override
+    public void onClose(Player player) {
+
     }
 }
