@@ -3,12 +3,12 @@ package xyz.iamthedefender.cosmetics.api.cosmetics;
 import org.bukkit.ChatColor;
 
 public enum RarityType {
-    NONE(ChatColor.GREEN),
-    RANDOM(ChatColor.GREEN),
-    COMMON(ChatColor.GREEN),
-    RARE(ChatColor.AQUA),
+    LEGENDARY(ChatColor.GOLD),
     EPIC(ChatColor.DARK_PURPLE),
-    LEGENDARY(ChatColor.GOLD);
+    RARE(ChatColor.AQUA),
+    COMMON(ChatColor.GREEN),
+    RANDOM(ChatColor.GREEN),
+    NONE(ChatColor.GREEN);
 
     private final ChatColor color;
     RarityType(ChatColor color) {

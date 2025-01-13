@@ -142,7 +142,7 @@ public class CategoryMenu extends ChestSystemGui {
         List<ClickableItem> items = new ArrayList<>(rarityMap.keySet());
 
         int itemsPerPage = slots.size();
-        int totalPages = items.size() / itemsPerPage;
+        int totalPages = (items.size() / itemsPerPage) + 1;
         int itemStartIndex = (page - 1) * itemsPerPage;
         int itemEndIndex = Math.min(items.size(), itemStartIndex + itemsPerPage);
 
@@ -153,7 +153,7 @@ public class CategoryMenu extends ChestSystemGui {
         }
 
         if(page > 1) {
-            setItem(39, new ItemBuilder().material(Material.ARROW).name("&aPrevious page").build(), (e) -> new CategoryMenu(cosmeticsType, title, page - 1).open((Player) e.getWhoClicked()));
+            setItem(51, new ItemBuilder().material(Material.ARROW).name("&aPrevious page").build(), (e) -> new CategoryMenu(cosmeticsType, title, page - 1).open((Player) e.getWhoClicked()));
         }
 
         Map<ClickableItem, RarityType> rarityMapNew = new HashMap<>(
@@ -161,6 +161,16 @@ public class CategoryMenu extends ChestSystemGui {
         );
 
         addItemsAccordingToRarity(rarityMapNew);
+
+        String extrasPath = "Extras.fill-empty.";
+        boolean extrasEnabled = config.getBoolean(extrasPath + "enabled");
+
+        if(!extrasEnabled) return;
+
+        ItemStack stack = ConfigManager.getItemStack(config.getYml(), extrasPath + "item");
+        while (getInventory().firstEmpty() != -1) {
+            setItem(getInventory().firstEmpty(), new ItemBuilder(stack).name("&r").build());
+        }
     }
 
 
@@ -178,23 +188,18 @@ public class CategoryMenu extends ChestSystemGui {
     }
 
     public void addItemsAccordingToRarity(Map<ClickableItem, RarityType> rarityMap) {
-        rarityMap.entrySet().stream()
-                .sorted(Comparator.comparing(entry -> entry.getValue().ordinal()))
-                .sorted(Comparator.comparing(entry -> ChatColor.stripColor(entry.getKey().getItemStack().getItemMeta().getDisplayName())))
-                .collect(Collectors.groupingBy(Map.Entry::getValue, LinkedHashMap::new, Collectors.mapping(Map.Entry::getKey, Collectors.toList())))
-                .forEach((rarity, items) -> items.forEach(item -> {
-                    if (!isFull(getInventory())) {
-                        setItem(findFirstEmptySlot(getInventory()), item);
-                    }
-                }));
+        List<ClickableItem> sortedClickableItems = new ArrayList<>(rarityMap.keySet()).stream()
+                .sorted(Comparator.comparing(item -> item.getItemStack().getItemMeta().getDisplayName()))
+                .sorted(Comparator.comparing(rarityMap::get, Comparator.reverseOrder()))
+                .collect(Collectors.toList());
 
-        String extrasPath = "Extras.fill-empty.";
-        if (config.getBoolean(extrasPath + "enabled")) {
-            ItemStack stack = ConfigManager.getItemStack(config.getYml(), extrasPath + "item");
-            while (getInventory().firstEmpty() != -1) {
-                setItem(getInventory().firstEmpty(), new ItemBuilder(stack).name("&r").build());
-            }
-        }
+        sortedClickableItems.forEach(item -> {
+            int slot = findFirstEmptySlot(getInventory());
+
+            if (slot == -1) return;
+
+            setItem(slot, item);
+        });
     }
 
 
