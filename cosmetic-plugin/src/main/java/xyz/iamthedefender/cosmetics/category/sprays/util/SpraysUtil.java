@@ -106,26 +106,19 @@ public class SpraysUtil
             player.getInventory().setItem(0, map);
         }
 
-        ParticleWrapper particleWrapper;
+        ParticleWrapper particleWrapper = ParticleWrapper.getParticle("FALLING_DUST").orElse(ParticleWrapper.getParticle("BLOCK_DUST").orElseThrow());
 
-        try {
-            particleWrapper = new ParticleWrapper(WrappedParticle.create(Particle.FALLING_DUST, null));
-        }catch (Exception exception){
-            particleWrapper = new ParticleWrapper(EnumWrappers.Particle.FALLING_DUST);
-        }
-
-        Cosmetics.getInstance().getVersionSupport().displayParticle(
+        particleWrapper.support().displayParticle(
                 player,
                 itemFrame.getLocation(),
                 particleWrapper,
                 10
         );
 
-        for (final Entity entity : itemFrame.getNearbyEntities(1.0, 1.0, 1.0)) {
-            if (entity.getType() == EntityType.ARMOR_STAND && entity.hasMetadata("HOLO_ITEM_FRAME")) {
-                entity.remove();
-            }
-        }
+        itemFrame.getNearbyEntities(1,1,1)
+                .stream()
+                .filter(entity -> entity.getType() == EntityType.ARMOR_STAND && entity.hasMetadata("HOLO_ITEM_FRAME"))
+                .forEach(Entity::remove);
     }
 
 }

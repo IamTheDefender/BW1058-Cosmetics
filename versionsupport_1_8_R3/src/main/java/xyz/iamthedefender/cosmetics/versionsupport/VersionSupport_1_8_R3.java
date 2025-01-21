@@ -6,6 +6,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.cryptomorin.xseries.XMaterial;
 import com.cryptomorin.xseries.profiles.builder.XSkull;
 import com.cryptomorin.xseries.profiles.objects.Profileable;
+import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -19,6 +20,11 @@ import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
 import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
 
 public class VersionSupport_1_8_R3 implements IVersionSupport {
+
+    @Override
+    public @NotNull String getVersion() {
+        return "v1.8.8 handler";
+    }
 
     @Override
     public ItemStack getSkull(String base64) {
@@ -47,133 +53,78 @@ public class VersionSupport_1_8_R3 implements IVersionSupport {
     }
 
     @Override
-    public void displayParticle(Player player, Location location, ParticleWrapper particleWrapper, Color color) {
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.WORLD_PARTICLES);
+    public boolean isValidParticle(String name) {
 
-        packet.getFloat().write(0, (float) location.getX());
-        packet.getFloat().write(1, (float) location.getY());
-        packet.getFloat().write(2, (float) location.getZ());
-
-        packet.getFloat().write(6, 1.0f);
-
-        packet.getIntegers().write(0, 0);
-
-        packet.getFloat().write(3, color.getRed() / 255f);
-        packet.getFloat().write(4, color.getGreen() / 255f);
-        packet.getFloat().write(5, color.getBlue() / 255f);
-
-        packet.getParticles().write(0, particleWrapper.getWrapperParticle());
-
-        if(player != null){
-            ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
-            return;
+        try{
+            EnumParticle.valueOf(name.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return false;
         }
 
-        ProtocolLibrary.getProtocolManager().broadcastServerPacket(packet);
+        return true;
     }
 
     @Override
     public void displayParticle(Player player, Location location, ParticleWrapper particle) {
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.WORLD_PARTICLES);
-
-        packet.getDoubles().write(0, location.getX());
-        packet.getDoubles().write(1, location.getY());
-        packet.getDoubles().write(2, location.getZ());
-
-        packet.getFloat().write(0, 0f);
-        packet.getFloat().write(1, 0f);
-        packet.getFloat().write(2, 0f);
-
-        packet.getFloat().write(3, 1.0f);
-
-        packet.getIntegers().write(0, 1);
-
-        packet.getParticles().write(0, particle.getWrapperParticle());
-
-        if(player != null){
-            ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
-            return;
-        }
-
-        ProtocolLibrary.getProtocolManager().broadcastServerPacket(packet);
+        displayParticle(player, location, particle, 1, 1.0f, null, null);
     }
 
     @Override
     public void displayParticle(Player player, Location location, ParticleWrapper particle, int count) {
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.WORLD_PARTICLES);
-
-        packet.getDoubles().write(0, location.getX());
-        packet.getDoubles().write(1, location.getY());
-        packet.getDoubles().write(2, location.getZ());
-
-        packet.getFloat().write(0, 0f);
-        packet.getFloat().write(1, 0f);
-        packet.getFloat().write(2, 0f);
-
-        packet.getFloat().write(3, 1.0f);
-
-        packet.getIntegers().write(0, count);
-
-        packet.getParticles().write(0, particle.getWrapperParticle());
-
-        if(player != null){
-            ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
-            return;
-        }
-
-        ProtocolLibrary.getProtocolManager().broadcastServerPacket(packet);
+        displayParticle(player, location, particle, count, 1.0f, null, null);
     }
 
     @Override
     public void displayParticle(Player player, Location location, ParticleWrapper particle, int count, float speed) {
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.WORLD_PARTICLES);
-
-        packet.getDoubles().write(0, location.getX());
-        packet.getDoubles().write(1, location.getY());
-        packet.getDoubles().write(2, location.getZ());
-
-        packet.getFloat().write(0, 0f);
-        packet.getFloat().write(1, 0f);
-        packet.getFloat().write(2, 0f);
-
-        packet.getFloat().write(3, speed);
-
-        packet.getIntegers().write(0, count);
-
-        packet.getParticles().write(0, particle.getWrapperParticle());
-
-        if(player != null){
-            ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
-            return;
-        }
-
-        ProtocolLibrary.getProtocolManager().broadcastServerPacket(packet);
+        displayParticle(player, location, particle, count, speed, null, null);
     }
 
     @Override
     public void displayParticle(Player player, Location location, ParticleWrapper particle, int count, float speed, Vector offset) {
+        displayParticle(player, location, particle, count, speed, offset, null);
+    }
+
+    @Override
+    public void displayParticle(Player player, Location location, ParticleWrapper particleWrapper, Color color) {
+        displayParticle(player, location, particleWrapper, 1, 1.0f, null, color);
+    }
+
+    private void displayParticle(Player player, Location location, ParticleWrapper particle, int count, float speed, Vector offset, Color color) {
         PacketContainer packet = new PacketContainer(PacketType.Play.Server.WORLD_PARTICLES);
 
-        packet.getDoubles().write(0, location.getX());
-        packet.getDoubles().write(1, location.getY());
-        packet.getDoubles().write(2, location.getZ());
+        for (int i = 0; i < count; i++) {
+            double offsetX = offset != null ? (Math.random() * 2 - 1) * offset.getX() : 0;
+            double offsetY = offset != null ? (Math.random() * 2 - 1) * offset.getY() : 0;
+            double offsetZ = offset != null ? (Math.random() * 2 - 1) * offset.getZ() : 0;
 
-        packet.getFloat().write(0, (float) offset.getX());
-        packet.getFloat().write(1, (float) offset.getY());
-        packet.getFloat().write(2, (float) offset.getZ());
+            // Location
+            packet.getFloat().write(0, (float) (location.getX() + offsetX));
+            packet.getFloat().write(1, (float) (location.getY() + offsetY));
+            packet.getFloat().write(2, (float) (location.getZ() + offsetZ));
 
-        packet.getFloat().write(3, speed);
+            // Speed
+            packet.getFloat().write(6, speed);
 
-        packet.getIntegers().write(0, count);
+            // Count
+            packet.getIntegers().write(0, color != null ? 0 : 1);
 
-        packet.getParticles().write(0, particle.getWrapperParticle());
+            // Particle type
+            packet.getParticles().write(0, particle.getWrapperParticle());
 
-        if(player != null){
-            ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
-            return;
+            // Color (if applicable)
+            if (color != null) {
+                packet.getFloat().write(3, color.getRed() / 255f);
+                packet.getFloat().write(4, color.getGreen() / 255f);
+                packet.getFloat().write(5, color.getBlue() / 255f);
+            }
+
+            // Send packet
+            if (player != null) {
+                ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
+            } else {
+                ProtocolLibrary.getProtocolManager().broadcastServerPacket(packet);
+            }
         }
-
-        ProtocolLibrary.getProtocolManager().broadcastServerPacket(packet);
     }
 
 

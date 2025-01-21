@@ -9,6 +9,7 @@ import com.cryptomorin.xseries.profiles.objects.Profileable;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -29,6 +30,11 @@ import java.util.Base64;
 import java.util.UUID;
 
 public class VersionSupport_1_20 implements IVersionSupport {
+
+    @Override
+    public @NotNull String getVersion() {
+        return "v1.20 handler";
+    }
 
     @Override
     public ItemStack getSkull(String base64) {
@@ -60,6 +66,18 @@ public class VersionSupport_1_20 implements IVersionSupport {
         mapMeta.setMapView(mapView);
         map.setItemMeta(mapMeta);
         return map;
+    }
+
+    @Override
+    public boolean isValidParticle(String name) {
+
+        try{
+            Particle.valueOf(name.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+
+        return true;
     }
 
     private PlayerProfile getProfile(String url) {

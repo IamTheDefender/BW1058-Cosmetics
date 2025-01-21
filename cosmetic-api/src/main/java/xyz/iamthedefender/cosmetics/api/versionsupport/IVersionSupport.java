@@ -12,13 +12,20 @@ import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
 
 public interface IVersionSupport {
 
+    @NotNull String getVersion();
+
     ItemStack getSkull(String base64);
 
     @NotNull
     ItemStack applyRenderer(MapRenderer mapRenderer, MapView mapView);
 
+    /**
+        Checks if a particle is valid depending on the version
+     **/
+    boolean isValidParticle(String name);
+
     default void displayRedstoneParticle(Player player, Location location, Color color) {
-        displayParticle(player, location, ParticleWrapper.getParticle("REDSTONE").orElse(ParticleWrapper.getParticle("DUST").orElseThrow()), color);
+        displayParticle(player, location, ParticleWrapper.getParticle("REDSTONE").orElseGet(() -> (ParticleWrapper.getParticle("DUST").orElseThrow())), color);
     }
 
     void displayParticle(Player player, Location location, ParticleWrapper particleWrapper, Color color);

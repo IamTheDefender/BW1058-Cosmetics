@@ -87,20 +87,14 @@ public class BatCruxEffect extends FinalKillEffect {
                 for (Bat bat : bats) {
                     Location batLocation = bat.getLocation().clone();
 
-                    ParticleWrapper particleWrapper;
-
-                    try{
-                        particleWrapper = new ParticleWrapper(WrappedParticle.create(Particle.SMOKE_LARGE, null));
-                    }catch (Exception exception){
-                        particleWrapper = new ParticleWrapper(EnumWrappers.Particle.SMOKE_LARGE);
-                    }
-
-                    Cosmetics.getInstance().getVersionSupport().displayParticle(
-                            null,
-                            batLocation,
-                            particleWrapper,
-                            1
-                    );
+                    ParticleWrapper.getParticle("SMOKE_LARGE").ifPresent(particleWrapper -> {
+                       particleWrapper.support().displayParticle(
+                               null,
+                               batLocation,
+                               particleWrapper,
+                               1
+                        );
+                    });
 
                 }
             }

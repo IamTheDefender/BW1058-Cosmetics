@@ -83,21 +83,16 @@ public class GhostBedDestroy extends BedDestroy {
             for(Entity entity : standsAndBats){
                 if (entity instanceof Bat) {
                     Location location = entity.getLocation();
-                    ParticleWrapper particleWrapper;
-
-                    try{
-                        particleWrapper = new ParticleWrapper(WrappedParticle.create(Particle.EXPLOSION_LARGE, null));
-                    }catch (Exception exception){
-                        particleWrapper = new ParticleWrapper(EnumWrappers.Particle.EXPLOSION_LARGE);
-                    }
-
-                    Cosmetics.getInstance().getVersionSupport().displayParticle(
-                            player,
-                            location,
-                            particleWrapper,
-                            1,
-                            0.0f
-                    );
+                    
+                    ParticleWrapper.getParticle("EXPLOSION_LARGE").ifPresent(particle -> {
+                        particle.support().displayParticle(
+                                player,
+                                location,
+                                particle,
+                                1,
+                                0.0f
+                        );
+                    });
 
                     XSound.ENTITY_GENERIC_EXPLODE.play(location);
                     entity.getPassenger().remove();

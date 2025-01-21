@@ -80,16 +80,8 @@ public class PigMissileBedDestroy extends BedDestroy {
                 stand.teleport(stand.getLocation().add(0.0, 0.5, 0.0));
                 stand.setPassenger(pig);
 
-                ParticleWrapper particleWrapper;
-
-                try{
-                    particleWrapper = new ParticleWrapper(WrappedParticle.create(Particle.FLAME, null));
-                }catch (Exception exception){
-                    particleWrapper = new ParticleWrapper(EnumWrappers.Particle.FLAME);
-                }
-
-                Cosmetics.getInstance().getVersionSupport()
-                        .displayParticle(player, stand.getLocation(), particleWrapper, 1, 0.0f);
+                ParticleWrapper.getParticle("FLAME").ifPresent(particleWrapper ->
+                        particleWrapper.support().displayParticle(null, stand.getLocation(), particleWrapper, 1, 0.0f));
 
                 XSound.ENTITY_CHICKEN_EGG.play(stand.getLocation(), 1.0f, 1.0f);
                 if (this.i1 == 13) {

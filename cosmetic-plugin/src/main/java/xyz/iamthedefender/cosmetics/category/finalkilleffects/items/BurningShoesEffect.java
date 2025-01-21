@@ -63,20 +63,11 @@ public class BurningShoesEffect extends FinalKillEffect {
                     double z = 0.11D * (12.5D - this.t) * Math.sin(this.t + phi);
                     location.add(x, y, z);
 
-                    ParticleWrapper particleWrapper;
-                    try{
-                        particleWrapper = new ParticleWrapper(WrappedParticle.create(org.bukkit.Particle.FLAME, null));
-                    }catch (Exception exception){
-                        particleWrapper = new ParticleWrapper(EnumWrappers.Particle.FLAME);
-                    }
 
-                    if (onlyVictim) {
-                        Cosmetics.getInstance().getVersionSupport()
-                                .displayParticle(victim, location, particleWrapper, 1, 0.0f);
-                    } else {
-                        Cosmetics.getInstance().getVersionSupport()
-                                .displayParticle(null, location, particleWrapper, 1, 0.0f);
-                    }
+
+                    ParticleWrapper.getParticle("FLAME").ifPresent(particleWrapper ->
+                            particleWrapper.support().displayParticle(onlyVictim ? victim : null,
+                                    location, particleWrapper, 1, 0.0f));
 
 
                     location.subtract(x, y, z);

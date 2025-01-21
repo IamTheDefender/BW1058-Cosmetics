@@ -13,13 +13,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 
 public class GlyphUtil
 {
     
-    public static void sendGlyphs(File file, Location loc) {
+    public static boolean sendGlyphs(File file, Location loc) {
         BufferedImage image = null;
+        AtomicBoolean failed = new AtomicBoolean(false);
 
         try {
             image = ImageIO.read(file);
@@ -33,8 +35,19 @@ public class GlyphUtil
         Map<Location, Color> particle = particles.getParticles(loc, loc.getPitch(), 180.0f);
 
         for (Location spot : particle.keySet()) {
-            Run.sync(() -> sendRedstoneParticle(null, spot, particle.get(spot)));
+            if (failed.get()) continue;
+
+            Run.sync(() -> {
+                try {
+                    sendRedstoneParticle(null, spot, particle.get(spot));
+                }catch (Exception exception) {
+                    failed.set(true);
+                    exception.printStackTrace();
+                }
+            });
         }
+
+        return !failed.get();
     }
 
     public static void sendRedstoneParticle(Player player, Location location, Color color){

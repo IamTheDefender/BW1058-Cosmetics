@@ -58,12 +58,11 @@ public class HeartAuraEffect extends FinalKillEffect {
 
     private void sendParticles(Player victim, Location location, boolean onlyVictim) {
         IVersionSupport versionSupport = Cosmetics.getInstance().getVersionSupport();
-        ParticleWrapper particleWrapper;
+        ParticleWrapper particleWrapper = ParticleWrapper.getParticle("HEART").orElse(null);
 
-        try{
-            particleWrapper = new ParticleWrapper(WrappedParticle.create(org.bukkit.Particle.HEART, null));
-        }catch (Exception exception){
-            particleWrapper = new ParticleWrapper(EnumWrappers.Particle.HEART);
+        if (particleWrapper == null) {
+            Cosmetics.getInstance().getLogger().severe("Particle not found: HEART" + " - " + versionSupport.getVersion());
+            return;
         }
 
         if (!onlyVictim) {

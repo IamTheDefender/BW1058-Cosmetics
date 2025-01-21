@@ -9,6 +9,7 @@ import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.Glyph;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.category.glyphs.util.GlyphUtil;
@@ -69,7 +70,14 @@ public class GlyphItems {
                     String fileLocation = config.getString(path + "file");
                     File file = new File(Cosmetics.getInstance().getHandler().getAddonPath() + "/Glyphs/" + fileLocation);
 
-                    Run.everyAsync(()-> GlyphUtil.sendGlyphs(file, location), 2, 10);
+                    Run.everyAsync((r)-> {
+                        boolean status = GlyphUtil.sendGlyphs(file, location);
+
+                        if (status) return;
+
+                        player.sendMessage(ColorUtil.translate("&cGlyph failed to spawn! Please contact a administrator."));
+                        r.cancel();
+                    }, 2, 10);
                 }
             };
             glyphs.register();

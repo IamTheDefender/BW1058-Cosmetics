@@ -79,15 +79,8 @@ public class SquidMissileBedDestroy extends BedDestroy {
                 stand.teleport(stand.getLocation().add(0.0, 0.5, 0.0));
                 stand.setPassenger(squid);
 
-                ParticleWrapper particleWrapper;
-                try{
-                    particleWrapper = new ParticleWrapper(WrappedParticle.create(Particle.FLAME, null));
-                }catch (Exception exception){
-                    particleWrapper = new ParticleWrapper(EnumWrappers.Particle.FLAME);
-                }
-
-                Cosmetics.getInstance().getVersionSupport()
-                        .displayParticle(player, stand.getLocation(), particleWrapper, 1, 0.0f);
+                ParticleWrapper.getParticle("FLAME").ifPresent(particleWrapper ->
+                        particleWrapper.support().displayParticle(null, stand.getLocation(), particleWrapper, 1, 0.0f));
 
                 player.playSound(player.getLocation(), XSound.ENTITY_CHICKEN_EGG.parseSound(), 1.0f, 1.0f);
 

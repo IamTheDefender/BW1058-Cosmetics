@@ -83,4 +83,17 @@ public class Run {
             runnable.run();
         }, time);
     }
+
+    public static BukkitTask everyAsync(Consumer<BukkitRunnable> runnableConsumer, long time, int iterations){
+        AtomicInteger counter = new AtomicInteger(0);
+        return everyAsync((r) -> {
+            if(counter.incrementAndGet() == iterations){
+                counter.set(0);
+                r.cancel();
+                return;
+            }
+
+            runnableConsumer.accept(r);
+        }, time);
+    }
 }
