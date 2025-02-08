@@ -106,14 +106,17 @@ public class SpraysUtil
             player.getInventory().setItem(0, map);
         }
 
-        ParticleWrapper particleWrapper = ParticleWrapper.getParticle("FALLING_DUST").orElse(ParticleWrapper.getParticle("BLOCK_DUST").orElseThrow());
+        ParticleWrapper particleWrapper = ParticleWrapper.getParticle("FALLING_DUST").orElse(ParticleWrapper.getParticle("BLOCK_DUST").orElse(null));
 
-        particleWrapper.support().displayParticle(
-                player,
-                itemFrame.getLocation(),
-                particleWrapper,
-                10
-        );
+        if (particleWrapper != null) {
+            particleWrapper.support().displayParticle(
+                    player,
+                    itemFrame.getLocation(),
+                    particleWrapper,
+                    10,
+                    0.0f
+            );
+        }
 
         itemFrame.getNearbyEntities(1,1,1)
                 .stream()

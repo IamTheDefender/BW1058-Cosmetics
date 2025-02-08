@@ -56,8 +56,9 @@ public class ParticleWrapper {
                 particleWrapper = new ParticleWrapper(EnumWrappers.Particle.valueOf(name));
                 Objects.requireNonNull(particleWrapper.getWrapperParticle());
 
-                if (!Utility.getApi().getVersionSupport().isValidParticle(particleWrapper.getWrapperParticle().getName()))
+                if (!Utility.getApi().getVersionSupport().isValidParticle(particleWrapper.getWrapperParticle().name())) {
                     throw new RuntimeException("Invalid particle: " + particleWrapper.getWrapperParticle().getName());
+                }
 
             }catch (Exception exception1) {
                 particleWrapper = null;
