@@ -24,7 +24,9 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class ToyStickDance extends VictoryDance implements Listener {
+
     private final Map<Player, Long> cooldown = new HashMap<>();
+    private final Map<Player, ItemStack> itemStackMap = new HashMap<>();
 
     @Override
     public ItemStack getItem() {
@@ -66,22 +68,36 @@ public class ToyStickDance extends VictoryDance implements Listener {
         ItemStack i = new ItemStack(Material.STICK);
         ItemMeta im = i.getItemMeta();
         im.setDisplayName(ColorUtil.translate("&aToy Stick"));
+
         ArrayList<String> lore = new ArrayList<String>();
         lore.add(ColorUtil.translate("&7Right Click on a block"));
         lore.add(ColorUtil.translate("&7to fly!"));
+        im.setLore(lore);
+
         i.setItemMeta(im);
+
+        itemStackMap.put(winner, i);
         winner.getInventory().addItem(i);
     }
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (event.getItem() == null || !event.getItem().equals(getItem())) return;
+        Player player = event.getPlayer();
+
+        if (!itemStackMap.containsKey(player)) return;
+
+        ItemStack storedItem = itemStackMap.get(player);
+        ItemStack eventItem = event.getItem();
+
+        if (eventItem == null || !eventItem.equals(storedItem)) return;
+
         if (cooldown.containsKey(event.getPlayer())) {
             long difference = System.currentTimeMillis() - cooldown.get(event.getPlayer());
             if (difference < TimeUnit.SECONDS.toMillis(1)) {
                 return;
             }
         }
+
         event.getPlayer().setVelocity(event.getPlayer().getLocation().getDirection().multiply(-6).setY(6));
         for (Location loc : UsefulUtilsVD.generateSphere(event.getPlayer().getLocation(), 6, false)) {
             final Block block = loc.getBlock();
@@ -89,6 +105,7 @@ public class ToyStickDance extends VictoryDance implements Listener {
             block.breakNaturally();
         }
         cooldown.put(event.getPlayer(), System.currentTimeMillis());
+
         new BukkitRunnable() {
             @Override
             public void run() {

@@ -99,14 +99,10 @@ public class VersionSupport_1_8_R3 implements IVersionSupport {
            for (int i = 0; i < count; i++) {
                PacketContainer packet = new PacketContainer(PacketType.Play.Server.WORLD_PARTICLES);
 
-               double offsetX = offset != null ? (Math.random() * 2 - 1) * offset.getX() : 0;
-               double offsetY = offset != null ? (Math.random() * 2 - 1) * offset.getY() : 0;
-               double offsetZ = offset != null ? (Math.random() * 2 - 1) * offset.getZ() : 0;
-
                // Location
-               packet.getFloat().write(0, (float) (location.getX() + offsetX));
-               packet.getFloat().write(1, (float) (location.getY() + offsetY));
-               packet.getFloat().write(2, (float) (location.getZ() + offsetZ));
+               packet.getFloat().write(0, (float) location.getX());
+               packet.getFloat().write(1, (float) location.getY());
+               packet.getFloat().write(2, (float) location.getZ());
 
                // Speed
                packet.getFloat().write(6, speed);
@@ -118,6 +114,13 @@ public class VersionSupport_1_8_R3 implements IVersionSupport {
 
                if (particle.getWrapperParticle() != null && extraDataParticles.contains(particle.getWrapperParticle())) {
                    packet.getIntegerArrays().write(0, new int[] { Material.SAND.getId() });
+               }
+
+               if (offset != null) {
+                   // Offset but it will get replaced by color if color is not null!
+                   packet.getFloat().write(3, (float) offset.getX());
+                   packet.getFloat().write(4, (float) offset.getY());
+                   packet.getFloat().write(5, (float) offset.getZ());
                }
 
                // Particle type
