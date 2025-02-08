@@ -5,6 +5,7 @@ import net.citizensnpcs.api.npc.MemoryNPCDataStore;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import net.citizensnpcs.api.trait.trait.PlayerFilter;
+import net.citizensnpcs.npc.skin.Skin;
 import net.citizensnpcs.trait.HologramTrait;
 import net.citizensnpcs.trait.LookClose;
 import net.citizensnpcs.trait.SkinTrait;
@@ -80,11 +81,13 @@ public class ShopKeeperSkinsUtils {
             sign = values.get(1);
         }
         NPCRegistry registry = CitizensAPI.createAnonymousNPCRegistry(new MemoryNPCDataStore());
+
         // Shop NPC
         NPC npc = registry.createNPC(EntityType.PLAYER, "");
         npc.setName("&r");
-        npc.getTrait(SkinTrait.class).setSkinPersistent(UUID.randomUUID().toString(), sign, value);
-        npc.getTrait(SkinTrait.class).setTexture(value, sign);
+
+        npc.getOrAddTrait(SkinTrait.class).setSkinPersistent(UUID.randomUUID().toString(), sign, value);
+
         npc.getTrait(LookClose.class).lookClose(true);
         npc.getOrAddTrait(HologramTrait.class).clear();
         npc.spawn(loc);
