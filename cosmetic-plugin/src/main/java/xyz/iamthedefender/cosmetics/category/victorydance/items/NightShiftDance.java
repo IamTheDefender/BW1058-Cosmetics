@@ -48,7 +48,7 @@ public class NightShiftDance extends VictoryDance {
 
     @Override
     public void execute(Player winner) {
-        Run.every((r) -> {
+        addTask(winner, Run.every((r) -> {
             if(Cosmetics.getInstance().getHandler().getArenaUtil().getArenaByPlayer(winner) == null) {
                 r.cancel();
                 return;
@@ -59,6 +59,6 @@ public class NightShiftDance extends VictoryDance {
                 time = 0;
             }
             winner.getWorld().setTime(time);
-        }, 8L);
+        }, 8L));
     }
 }

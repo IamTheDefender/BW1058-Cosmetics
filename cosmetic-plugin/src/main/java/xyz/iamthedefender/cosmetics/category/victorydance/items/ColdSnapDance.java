@@ -8,16 +8,21 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ColdSnapDance extends VictoryDance {
+
     @Override
     public ItemStack getItem() {
         return XMaterial.PACKED_ICE.parseItem();
@@ -59,21 +64,23 @@ public class ColdSnapDance extends VictoryDance {
         AtomicInteger radius = new AtomicInteger(2);
         AtomicReference<Float> pitch = new AtomicReference<>(0.6f);
 
-        int task = Bukkit.getScheduler().runTaskTimer(Cosmetics.getInstance(), () -> {
+
+        addTask(winner, Run.every(() -> {
             Location loc = winner.getLocation().subtract(0, 1, 0);
-            List<Block> blocks = Utility.getSphere(loc, radius.get());
-            for (Block block : blocks) {
-                if (block.getType() != Material.AIR && block.getType() != XMaterial.PACKED_ICE.parseMaterial() && block.getType() != XMaterial.ICE.parseMaterial()) {
-                    block.setType(XMaterial.ICE.parseMaterial());
-                }
-            }
+            List<Block> blocks = Utility.getSphere(loc, radius.get(), block -> block.getType() != Material.AIR && block.getType() != XMaterial.PACKED_ICE.parseMaterial() && block.getType() != XMaterial.ICE.parseMaterial());
+
+            winner.getWorld().getPlayers().forEach(player -> {
+                blocks.forEach(block -> player.sendBlockChange(block.getLocation(), XMaterial.PACKED_ICE.parseMaterial(), (byte) 0));
+            });
+
             XSound.ENTITY_EXPERIENCE_ORB_PICKUP.play(winner, 1, pitch.get());
             pitch.set(pitch.get() + 0.15f);
             radius.addAndGet(1);
-        }, 0, 10).getTaskId();
+        }, 10L));
 
-        Bukkit.getScheduler().runTaskLater(Cosmetics.getInstance(), () -> {
-            Bukkit.getScheduler().cancelTask(task);
-        }, duration * 20L + 5L);
+        addTask(winner, Run.delayed(() -> getTasks().computeIfPresent(winner, (k, tasks) -> {
+            tasks.forEach(BukkitTask::cancel);
+            return null;
+        }) , duration * 20L + 5L));
     }
 }

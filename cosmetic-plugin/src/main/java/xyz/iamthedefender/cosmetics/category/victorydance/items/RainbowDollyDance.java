@@ -55,12 +55,12 @@ public class RainbowDollyDance extends VictoryDance implements Listener {
 
     @Override
     public void execute(Player winner) {
-        Sheep sheep1 = (Sheep) winner.getWorld().spawnEntity(winner.getLocation(), EntityType.SHEEP);
-        sheep1.setColor(DyeColor.RED);
-        sheep1.setCustomName("Dolly");
-        sheep1.setNoDamageTicks(Integer.MAX_VALUE);
+        Sheep sheep = (Sheep) winner.getWorld().spawnEntity(winner.getLocation(), EntityType.SHEEP);
+        sheep.setColor(DyeColor.RED);
+        sheep.setCustomName("Dolly");
+        sheep.setNoDamageTicks(Integer.MAX_VALUE);
 
-
+        addEntity(winner, sheep);
     }
 
     @EventHandler
@@ -70,6 +70,7 @@ public class RainbowDollyDance extends VictoryDance implements Listener {
             if (sheep.getCustomName() == null) {
                 return;
             }
+
             if (Objects.equals(sheep.getCustomName(), "Dolly")) {
                 final ArrayList<String> color = new ArrayList<>();
                 color.add("RED");
@@ -82,12 +83,14 @@ public class RainbowDollyDance extends VictoryDance implements Listener {
                 color.add("LIME");
                 color.add("CYAN");
                 color.add("MAGENTA");
-                final String colors = color.get(MathUtil.getRandom(0, color.size() - 1));
-                final Sheep sheep2 = (Sheep) sheep.getWorld().spawnEntity(sheep.getLocation(), EntityType.SHEEP);
-                sheep2.getWorld().createExplosion(sheep2.getLocation(), 1.0f);
-                sheep2.setColor(DyeColor.valueOf(colors));
-                sheep2.setVelocity(sheep.getLocation().getDirection().multiply(-0.5).setY(1));
-                sheep2.setCustomName("Dolly");
+                String colors = color.get(MathUtil.getRandom(0, color.size() - 1));
+
+                Sheep newSheep = (Sheep) sheep.getWorld().spawnEntity(sheep.getLocation(), EntityType.SHEEP);
+                newSheep.getWorld().createExplosion(newSheep.getLocation(), 1.0f);
+                newSheep.setColor(DyeColor.valueOf(colors));
+                newSheep.setVelocity(sheep.getLocation().getDirection().multiply(-0.5).setY(1));
+                newSheep.setCustomName("Dolly");
+                addEntity(event.getPlayer(), newSheep);
             }
         }
     }

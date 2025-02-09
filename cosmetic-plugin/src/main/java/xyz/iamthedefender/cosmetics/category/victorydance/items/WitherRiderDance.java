@@ -64,7 +64,9 @@ public class WitherRiderDance extends VictoryDance implements Listener {
         wither.setCustomName(ColorUtil.translate("&a" + winner.getName() + "'s Wither!"));
         wither.setNoDamageTicks(Integer.MAX_VALUE);
 
-        Run.every(r -> {
+        addEntity(winner, wither);
+
+        addTask(winner, Run.every(r -> {
             if(!ShopKeeperHandler1058.arenas.containsKey(winner.getWorld().getName())) {
                 wither.remove();
                 r.cancel();
@@ -78,7 +80,7 @@ public class WitherRiderDance extends VictoryDance implements Listener {
             Vector direction = winner.getEyeLocation().clone().getDirection().normalize().multiply(0.5);
             wither.setVelocity(direction);
             wither.setTarget(null);
-        }, 1L);
+        }, 1L));
     }
 
     @EventHandler
@@ -94,5 +96,7 @@ public class WitherRiderDance extends VictoryDance implements Listener {
         WitherSkull witherSkull = player.getWorld().spawn(player.getEyeLocation().clone().add(player.getEyeLocation().getDirection().normalize().multiply(2)), WitherSkull.class);
         witherSkull.setShooter(player);
         witherSkull.setVelocity(player.getEyeLocation().clone().getDirection().normalize().multiply(3));
+
+        addEntity(player, witherSkull);
     }
 }

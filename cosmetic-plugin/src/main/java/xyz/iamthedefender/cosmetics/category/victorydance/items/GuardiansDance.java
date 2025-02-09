@@ -64,13 +64,13 @@ public class GuardiansDance extends VictoryDance implements Listener {
         guardians.put(winner, guardianTriangle);
     }
 
+    @Override
+    public void stopExecution(Player winner) {
+        super.stopExecution(winner);
 
-    // TODO create a wrapper for this event
-    @EventHandler
-    public void onPlayerLeaveArena(PlayerLeaveArenaEvent event) {
-        if(!guardians.containsKey(event.getPlayer())) return;
-
-        guardians.get(event.getPlayer()).stop();
+        if (guardians.containsKey(winner)) {
+            guardians.remove(winner).stop();
+        }
     }
 }
 

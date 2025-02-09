@@ -80,6 +80,13 @@ public class ToyStickDance extends VictoryDance implements Listener {
         winner.getInventory().addItem(i);
     }
 
+    @Override
+    public void stopExecution(Player winner) {
+        super.stopExecution(winner);
+
+        itemStackMap.remove(winner);
+    }
+
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();

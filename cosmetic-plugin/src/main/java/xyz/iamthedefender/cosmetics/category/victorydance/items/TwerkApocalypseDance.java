@@ -21,13 +21,14 @@ import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 import xyz.iamthedefender.cosmetics.util.MathUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.bukkit.Bukkit.getLogger;
 
 public class TwerkApocalypseDance extends VictoryDance {
+
+    private final Map<Player, List<NPC>> npcsStorage = new HashMap<>();
+
     @Override
     public ItemStack getItem() {
         return XMaterial.LEATHER_BOOTS.parseItem();
@@ -66,9 +67,8 @@ public class TwerkApocalypseDance extends VictoryDance {
     @Override
     public void execute(Player winner) {
         NPCRegistry registry = CitizensAPI.getNPCRegistry();
-        List<NPC> npcs = new ArrayList<>();
 
-        Run.every(() -> {
+        addTask(winner, Run.every(() -> {
             List<Block> freeBlocks = UsefulUtilsVD.getFreeBlocks(winner.getLocation());
             Location loc = freeBlocks.get(MathUtil.getRandom(0, freeBlocks.size() -1)).getLocation();
             loc.setYaw((float) MathUtil.getRandom(0.0D, 360.0D));
@@ -80,7 +80,7 @@ public class TwerkApocalypseDance extends VictoryDance {
 
                 npc.getOrAddTrait(LookClose.class).lookClose(false);
                 npc.spawn(loc.add(0,1,0));
-                npcs.add(npc);
+                npcsStorage.computeIfAbsent(winner, k -> new ArrayList<>()).add(npc);
 
                 Run.every((r) -> {
                     if(!npc.isSpawned()) {
@@ -93,9 +93,17 @@ public class TwerkApocalypseDance extends VictoryDance {
                     NMS.setSneaking(npcP, npcP.isSneaking());
                 }, 20L);
             }
-        }, 1L, 15);
+        }, 1L, 15));
 
-        Run.delayed(() -> npcs.forEach(NPC::destroy), 20L * 9 + 10L);
+        Run.delayed(() ->
+                Optional.ofNullable(npcsStorage.get(winner)).ifPresent(list -> list.forEach(NPC::destroy))
+                , 20L * 9 + 10L);
+    }
 
+    @Override
+    public void stopExecution(Player winner) {
+        super.stopExecution(winner);
+
+        Optional.ofNullable(npcsStorage.get(winner)).ifPresent(list -> list.forEach(NPC::destroy));
     }
 }

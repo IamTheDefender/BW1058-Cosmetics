@@ -1,9 +1,12 @@
 package xyz.iamthedefender.cosmetics.api.cosmetics.category;
 
 import com.cryptomorin.xseries.XMaterial;
+import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
@@ -16,18 +19,22 @@ import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import static xyz.iamthedefender.cosmetics.api.util.Utility.saveIfNotExistsLang;
 import static xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils.get;
 import static xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils.saveIfNotFound;
 
+@Getter
 public abstract class VictoryDance extends Cosmetics {
 
 
     private final String category = "victory-dance";
-    ConfigManager config = ConfigUtils.getVictoryDances();
-    ConfigType type = ConfigType.VICTORY_DANCES;
+    private final ConfigManager config = ConfigUtils.getVictoryDances();
+    private final ConfigType type = ConfigType.VICTORY_DANCES;
+    private final HashMap<Player, List<BukkitTask>> tasks = new HashMap<>();
+    private final HashMap<Player, List<Entity>> entities = new HashMap<>();
 
     /**
      * Register the victory dance
@@ -96,6 +103,21 @@ public abstract class VictoryDance extends Cosmetics {
      */
     public abstract void execute(Player winner);
 
+    public void stopExecution(Player winner) {
+        if (tasks.containsKey(winner)) tasks.get(winner).forEach(BukkitTask::cancel);
+
+        if (entities.containsKey(winner)) {
+            entities.get(winner).forEach(Entity::remove);
+        }
+    }
+
+    public void addTask(Player winner, BukkitTask task) {
+        tasks.computeIfAbsent(winner, k -> new ArrayList<>()).add(task);
+    }
+
+    public void addEntity(Player winner, Entity entity) {
+        entities.computeIfAbsent(winner, k -> new ArrayList<>()).add(entity);
+    }
 
     /**
      * Get the default victory dance

@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.category.shopkeeperskins.ShopKeeperHandler1058;
 import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 
@@ -53,18 +54,14 @@ public class RainingPigsDance extends VictoryDance {
 
     @Override
     public void execute(Player winner) {
-        new BukkitRunnable() {
-            public void run() {
-                if (ShopKeeperHandler1058.arenas.containsKey(winner.getWorld().getName())) {
-                    final Location loc = UsefulUtilsVD.getRandomLocation(winner.getLocation(), 20);
-                    final Pig pig = (Pig) winner.getWorld().spawnEntity(loc, EntityType.PIG);
-                    pig.setSaddle(true);
-                    pig.setNoDamageTicks(Integer.MAX_VALUE);
-                }
-                else {
-                    this.cancel();
-                }
-            }
-        }.runTaskTimer(Cosmetics.getInstance(), 1L, 1L);
+
+        addTask(winner, Run.every(() -> {
+            Location loc = UsefulUtilsVD.getRandomLocation(winner.getLocation(), 20);
+            Pig pig = (Pig) winner.getWorld().spawnEntity(loc, EntityType.PIG);
+            pig.setSaddle(true);
+            pig.setNoDamageTicks(Integer.MAX_VALUE);
+
+            addEntity(winner, pig);
+        }, 1L));
     }
 }

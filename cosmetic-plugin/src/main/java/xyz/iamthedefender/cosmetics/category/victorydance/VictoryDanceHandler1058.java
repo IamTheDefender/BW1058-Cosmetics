@@ -3,6 +3,7 @@
 package xyz.iamthedefender.cosmetics.category.victorydance;
 
 import com.andrei1058.bedwars.api.events.gameplay.GameEndEvent;
+import com.andrei1058.bedwars.api.events.player.PlayerLeaveArenaEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,9 +17,15 @@ import xyz.iamthedefender.cosmetics.api.event.VictoryDancesExecuteEvent;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 public class VictoryDanceHandler1058 implements Listener {
+
+    private final Map<UUID, VictoryDance> victoryDanceMap = new HashMap<>();
+
     @EventHandler
     public void onGameEnd1058(GameEndEvent e) {
 
@@ -39,8 +46,18 @@ public class VictoryDanceHandler1058 implements Listener {
                 if (selected.equals(victoryDance.getIdentifier())){
                     if (victoryDance.getField(FieldsType.RARITY, p) == RarityType.NONE) return;
                     victoryDance.execute(p);
+
+                    victoryDanceMap.put(uuid, victoryDance);
                 }
             }
         }
+    }
+
+    @EventHandler
+    public void onPlayerLeaveArena(PlayerLeaveArenaEvent event) {
+        Player player = event.getPlayer();
+
+        Optional.ofNullable(victoryDanceMap.get(player.getUniqueId()))
+                .ifPresent(victoryDance -> victoryDance.stopExecution(player));
     }
 }

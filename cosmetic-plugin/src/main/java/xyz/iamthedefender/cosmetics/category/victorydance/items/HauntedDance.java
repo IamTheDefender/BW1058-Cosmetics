@@ -16,6 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import xyz.iamthedefender.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.category.shopkeeperskins.ShopKeeperHandler1058;
 import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 
@@ -59,27 +60,27 @@ public class HauntedDance extends VictoryDance {
 
     @Override
     public void execute(Player winner) {
-        new BukkitRunnable() {
-            public void run() {
-                if (ShopKeeperHandler1058.arenas.containsKey(winner.getWorld().getName())) {
-                    final Location loc = UsefulUtilsVD.getRandomLocation(winner.getLocation(), 10);
-                    final Bat bat = (Bat)winner.getWorld().spawnEntity(loc, EntityType.BAT);
-                    bat.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 19999980, 1));
-                    final ArmorStand stand = (ArmorStand)winner.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
-                    stand.setVisible(false);
-                    bat.setPassenger(stand);
-                    bat.setNoDamageTicks(Integer.MAX_VALUE);
-                    final ItemStack leather = new ItemStack(Material.LEATHER_CHESTPLATE);
-                    final LeatherArmorMeta lm = (LeatherArmorMeta)leather.getItemMeta();
-                    lm.setColor(Color.GRAY);
-                    leather.setItemMeta(lm);
-                    stand.setChestplate(leather);
-                    stand.setHelmet(UsefulUtilsVD.gethead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjhkMjE4MzY0MDIxOGFiMzMwYWM1NmQyYWFiN2UyOWE5NzkwYTU0NWY2OTE2MTllMzg1NzhlYTRhNjlhZTBiNiJ9fX0="));
-                }
-                else {
-                    this.cancel();
-                }
-            }
-        }.runTaskTimer(Cosmetics.getInstance(), 1L, 8L);
+        addTask(winner, Run.every(() -> {
+            Location loc = UsefulUtilsVD.getRandomLocation(winner.getLocation(), 10);
+            Bat bat = (Bat)winner.getWorld().spawnEntity(loc, EntityType.BAT);
+            bat.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1));
+            addEntity(winner, bat);
+
+            ArmorStand stand = (ArmorStand)winner.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
+            stand.setVisible(false);
+
+            addEntity(winner, stand);
+
+            bat.setPassenger(stand);
+            bat.setNoDamageTicks(Integer.MAX_VALUE);
+
+            ItemStack leather = new ItemStack(Material.LEATHER_CHESTPLATE);
+            LeatherArmorMeta lm = (LeatherArmorMeta)leather.getItemMeta();
+            lm.setColor(Color.GRAY);
+            leather.setItemMeta(lm);
+            stand.setChestplate(leather);
+            stand.setHelmet(UsefulUtilsVD.gethead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjhkMjE4MzY0MDIxOGFiMzMwYWM1NmQyYWFiN2UyOWE5NzkwYTU0NWY2OTE2MTllMzg1NzhlYTRhNjlhZTBiNiJ9fX0="));
+
+        }, 8L));
     }
 }

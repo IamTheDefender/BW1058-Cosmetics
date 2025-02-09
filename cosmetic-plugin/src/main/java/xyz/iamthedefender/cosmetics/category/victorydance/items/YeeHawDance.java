@@ -64,7 +64,9 @@ public class YeeHawDance extends VictoryDance {
         horse.setTamed(true);
         horse.setOwner(winner);
 
-        Run.every((r) -> {
+        addEntity(winner, horse);
+
+        addTask(winner, Run.every((r) -> {
             IArenaHandler arena = Cosmetics.getInstance().getHandler().getArenaUtil().getArenaByPlayer(winner);
             if(arena == null){
                 horse.remove();
@@ -76,6 +78,6 @@ public class YeeHawDance extends VictoryDance {
                 horse.remove();
                 r.cancel();
             }
-        }, 20 * 20L);
+        }, 20 * 20L));
     }
 }

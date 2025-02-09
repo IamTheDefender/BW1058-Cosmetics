@@ -23,6 +23,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 
@@ -140,12 +141,12 @@ public class Utility {
         return (mat.toString().contains("WOOD") || mat.toString().contains("PLANKS") || mat.toString().contains("LOG")) && mat.isBlock();
     }
 
-    public static List<Block> getSphere(Location loc, int radius) {
+    public static List<Block> getSphere(Location loc, int radius, Predicate<Block> condition) {
         List<Block> blocks = new ArrayList<>();
         for (int x = -radius; x <= radius; x++) {
             for (int y = -radius; y <= radius; y++) {
                 for (int z = -radius; z <= radius; z++) {
-                    if (Math.sqrt(x * x + y * y + z * z) <= radius) {
+                    if (Math.sqrt(x * x + y * y + z * z) <= radius && condition.test(loc.clone().add(x, y, z).getBlock())) {
                         blocks.add(loc.clone().add(x, y, z).getBlock());
                     }
                 }
