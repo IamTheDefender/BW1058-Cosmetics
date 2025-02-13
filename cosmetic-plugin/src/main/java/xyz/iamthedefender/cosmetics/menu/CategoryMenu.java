@@ -275,6 +275,14 @@ public class CategoryMenu extends ChestSystemGui {
 
     public void previewClick(Player player, CosmeticsType type, String id, int price){
         Cosmetics cosmetics = CosmeticsPlugin.findCosmetic(id);
+
+        if (cosmetics == null) return;
+
+        if (cosmetics.getRarity() == RarityType.NONE) {
+            XSound.ENTITY_VILLAGER_NO.play(player, 1.0f, 1.0f);
+            return;
+        }
+
         Location playerLocation = StartupUtils.getPlayerLocation();
         Location previewLocation = StartupUtils.getCosmeticLocation();
 

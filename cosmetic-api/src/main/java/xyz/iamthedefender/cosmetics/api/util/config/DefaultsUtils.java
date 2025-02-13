@@ -19,11 +19,19 @@ public class DefaultsUtils {
         for(ConfigType type : ConfigType.values()){
             ConfigManager config = ConfigUtils.get(type);
             InputStream defaultConfigStream = Utility.getPlugin().getResource(type.getFileName() + ".yml");
+
+            if (config == null) {
+                Utility.getPlugin().getLogger().warning("Could not find config " + type.getFileName());
+                continue;
+            }
+
             if (defaultConfigStream != null) {
                 YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defaultConfigStream));
+
                 config.addDefaults(defaultConfig);
                 config.save();
             }
+
             config.reload();
             config.save();
             String extrasPath = "Extras.fill-empty.";

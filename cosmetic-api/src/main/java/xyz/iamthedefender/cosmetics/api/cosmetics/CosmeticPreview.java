@@ -16,19 +16,6 @@ import java.util.Map;
 @Getter
 public abstract class CosmeticPreview {
 
-    /*
-    TODO: Handle "None" cosmetics!
-     for (Spray spray : StartupUtils.sprayList) {
-            if (spray.getIdentifier().equals(selected)){
-                if (spray.getField(FieldsType.RARITY, player) == RarityType.NONE) {
-                    gui.open(player);
-                    XSound.ENTITY_VILLAGER_NO.play(player, 1.0f, 1.0f);
-                    return;
-                }
-            }
-        }
-     */
-
     private final CosmeticsType type;
     private final Map<Player, List<ItemStack>> inventoryStorage;
     private final Map<Player, Runnable> onEnd;

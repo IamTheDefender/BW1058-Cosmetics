@@ -24,7 +24,7 @@ import xyz.iamthedefender.cosmetics.api.handler.HandlerType;
 import xyz.iamthedefender.cosmetics.api.handler.IHandler;
 import xyz.iamthedefender.cosmetics.api.menu.SystemGuiManager;
 import xyz.iamthedefender.cosmetics.api.util.Run;
-import xyz.iamthedefender.cosmetics.api.util.Utility;
+import xyz.iamthedefender.cosmetics.api.util.config.ConfigType;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.api.util.config.DefaultsUtils;
 import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
@@ -48,6 +48,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 public class CosmeticsPlugin extends JavaPlugin {
@@ -120,21 +121,19 @@ public class CosmeticsPlugin extends JavaPlugin {
         StartupUtils.addEntityHideListener();
         // Download Glyphs
         StartupUtils.downloadGlyphs();
-        ConfigUtils.getBedDestroys().save();
-        ConfigUtils.getDeathCries().save();
-        ConfigUtils.getFinalKillEffects().save();
-        ConfigUtils.getGlyphs().save();
-        ConfigUtils.getIslandToppers().save();
-        ConfigUtils.getKillMessages().save();
-        ConfigUtils.getProjectileTrails().save();
-        ConfigUtils.getShopKeeperSkins().save();
-        ConfigUtils.getSprays().save();
-        ConfigUtils.getVictoryDances().save();
-        ConfigUtils.getWoodSkins().save();
-        ConfigUtils.getMainConfig().save();
+        this.menuData = new ConfigManager(this, "MainMenu", getHandler().getAddonPath());
+
+        for (ConfigType configType : ConfigType.values()) {
+            Optional.ofNullable(ConfigUtils.get(configType)).ifPresent(ConfigManager::save);
+        }
+
         ConfigUtils.addExtrasToLang();
 
-        this.menuData = new ConfigManager(this, "MainMenu", getHandler().getAddonPath());
+        getLogger().info("Loading data from resources in jar...");
+        DefaultsUtils defaultsUtils = new DefaultsUtils();
+        defaultsUtils.saveAllDefaults();
+        StartupUtils.unzipSpray();
+
         StartupUtils.loadLists();
         getLogger().info("Cosmetics list successfully loaded.");
 
@@ -144,11 +143,6 @@ public class CosmeticsPlugin extends JavaPlugin {
         getLogger().info("Creating folders...");
         StartupUtils.createFolders();
         ConfigUtils.addSlotsList();
-
-        getLogger().info("Loading data from resources in jar...");
-        DefaultsUtils defaultsUtils = new DefaultsUtils();
-        defaultsUtils.saveAllDefaults();
-        StartupUtils.unzipSpray();
 
         getLogger().info("Configuration file successfully loaded.");
         getLogger().info("Loading " + (api.isMySQL() ? "MySQL" : "SQLite") + " database...");

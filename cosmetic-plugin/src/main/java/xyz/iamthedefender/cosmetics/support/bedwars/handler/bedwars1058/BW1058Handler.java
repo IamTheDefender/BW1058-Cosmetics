@@ -140,7 +140,7 @@ public class BW1058Handler implements IHandler {
     public ISetupSession getSetupSession(UUID playerUUID) {
         com.andrei1058.bedwars.api.server.ISetupSession session = api.getSetupSession(playerUUID);
         if (session == null) return null;
-        ISetupSession cosmeticsSessionHandler = new ISetupSession() {
+        return new ISetupSession() {
             @Override
             public UUID getPlayerUUID() {
                 return session.getPlayer().getUniqueId();
@@ -161,6 +161,5 @@ public class BW1058Handler implements IHandler {
                 session.getConfig().save();
             }
         };
-        return cosmeticsSessionHandler;
     }
 }
