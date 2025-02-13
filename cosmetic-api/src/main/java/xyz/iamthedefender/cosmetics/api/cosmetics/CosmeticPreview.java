@@ -37,6 +37,8 @@ public abstract class CosmeticPreview {
         this.type = type;
         inventoryStorage = new HashMap<>();
         onEnd = new HashMap<>();
+
+        Utility.getApi().getPreviewList().add(this);
     }
 
     public abstract void showPreview(Player player, Cosmetics selected, Location previewLocation, Location playerLocation) throws IllegalArgumentException;

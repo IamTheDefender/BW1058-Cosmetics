@@ -12,8 +12,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.Nullable;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
+import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticPreview;
+import xyz.iamthedefender.cosmetics.api.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
 import xyz.iamthedefender.cosmetics.api.database.DatabaseType;
 import xyz.iamthedefender.cosmetics.api.database.IDatabase;
@@ -21,6 +24,7 @@ import xyz.iamthedefender.cosmetics.api.handler.HandlerType;
 import xyz.iamthedefender.cosmetics.api.handler.IHandler;
 import xyz.iamthedefender.cosmetics.api.menu.SystemGuiManager;
 import xyz.iamthedefender.cosmetics.api.util.Run;
+import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.api.util.config.DefaultsUtils;
 import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
@@ -41,7 +45,10 @@ import xyz.iamthedefender.cosmetics.util.VersionSupportUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 @Getter
 public class CosmeticsPlugin extends JavaPlugin {
 
@@ -68,11 +75,14 @@ public class CosmeticsPlugin extends JavaPlugin {
 
     private SystemGuiManager systemGuiManager;
 
+    private List<CosmeticPreview> previewList;
+
 
     @Override
     public void onEnable() {
         instance = this;
         api = new BwcAPI();
+        previewList = new ArrayList<>();
         Bukkit.getServicesManager().register(CosmeticsAPI.class, api, this, ServicePriority.Highest);
         systemGuiManager = new SystemGuiManager(this);
 
@@ -233,7 +243,24 @@ public class CosmeticsPlugin extends JavaPlugin {
         CosmeticsPlugin.placeholderAPI = placeholderAPI;
     }
 
+    public static @Nullable Cosmetics findCosmetic(String cosmeticId) {
+        CosmeticsAPI cosmeticsAPI = instance.getApi();
 
+        List<Cosmetics> cosmetics = new ArrayList<>();
+        cosmetics.addAll(cosmeticsAPI.getBedDestroyList());
+        cosmetics.addAll(cosmeticsAPI.getDeathCryList());
+        cosmetics.addAll(cosmeticsAPI.getFinalKillList());
+        cosmetics.addAll(cosmeticsAPI.getProjectileTrailList());
+        cosmetics.addAll(cosmeticsAPI.getGlyphsList());
+        cosmetics.addAll(cosmeticsAPI.getVictoryDanceList());
+        cosmetics.addAll(cosmeticsAPI.getWoodSkinList());
+        cosmetics.addAll(cosmeticsAPI.getSprayList());
+        cosmetics.addAll(cosmeticsAPI.getKillMessageList());
+        cosmetics.addAll(cosmeticsAPI.getShopKeeperSkinList());
+        cosmetics.addAll(cosmeticsAPI.getIslandTopperList());
+
+        return cosmetics.stream().filter(cosmetic -> cosmetic.getIdentifier().equals(cosmeticId)).findFirst().orElse(null);
+    }
 
 
 

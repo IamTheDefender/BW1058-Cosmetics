@@ -1,6 +1,8 @@
 package xyz.iamthedefender.cosmetics.menu;
 
 import com.cryptomorin.xseries.XSound;
+import org.bukkit.Location;
+import xyz.iamthedefender.cosmetics.api.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -32,10 +34,12 @@ import xyz.iamthedefender.cosmetics.category.killmessage.preview.KillMessagePrev
 import xyz.iamthedefender.cosmetics.category.shopkeeperskins.preview.ShopKeeperPreview;
 import xyz.iamthedefender.cosmetics.category.sprays.preview.SprayPreview;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
+import xyz.iamthedefender.cosmetics.util.StartupUtils;
 import xyz.iamthedefender.cosmetics.util.StringUtils;
 import xyz.iamthedefender.cosmetics.util.VaultUtils;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class CategoryMenu extends ChestSystemGui {
@@ -270,31 +274,18 @@ public class CategoryMenu extends ChestSystemGui {
 
 
     public void previewClick(Player player, CosmeticsType type, String id, int price){
-        switch (type){
-            case KillMessage:
-                new KillMessagePreview().sendPreviewMessage(player, id);
-                break;
-            case DeathCries:
-                new DeathCryPreview().sendPreviewCry(player, id);
-                break;
-            case ShopKeeperSkin:
-                new ShopKeeperPreview().sendPreviewShopKeeperSkin(player, id, this);
-                break;
-            case Sprays:
-                new SprayPreview().sendSprayPreview(player, id, this);
-                break;
-            case Glyphs:
-                new GlyphPreview().sendPreviewGlyph(player, id, this);
-                break;
-            case IslandTopper:
-                new IslandTopperPreview().sendIslandTopperPreview(player, id, this);
-                break;
-            case FinalKillEffects:
-                new FinalKillEffectPreview().sendPreviewKillEffect(player, id, this);
-                break;
-            default:
-                onClick(player,type, price, id, false);
-                break;
-        }
+        Cosmetics cosmetics = CosmeticsPlugin.findCosmetic(id);
+        Location playerLocation = StartupUtils.getPlayerLocation();
+        Location previewLocation = StartupUtils.getCosmeticLocation();
+
+        AtomicBoolean found = new AtomicBoolean(false);
+        CosmeticsPlugin.getInstance().getPreviewList().stream().filter(p -> p.getType() == type).forEach(cosmeticPreview -> {
+            cosmeticPreview.showPreview(player, cosmetics, previewLocation, playerLocation);
+            found.set(true);
+        });
+
+        if (found.get()) return;
+
+        onClick(player, type, price, id, false);
     }
 }

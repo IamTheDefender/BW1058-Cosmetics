@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
+import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticPreview;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.*;
 import xyz.iamthedefender.cosmetics.api.database.IDatabase;
@@ -106,6 +107,11 @@ public class BwcAPI implements CosmeticsAPI {
     @Override
     public IVersionSupport getVersionSupport() {
         return CosmeticsPlugin.getInstance().getVersionSupport();
+    }
+
+    @Override
+    public List<CosmeticPreview> getPreviewList() {
+        return List.of();
     }
 
     /**
