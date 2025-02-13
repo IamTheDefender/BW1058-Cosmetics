@@ -3,7 +3,7 @@ package xyz.iamthedefender.cosmetics.category.victorydance.items;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
 import xyz.iamthedefender.cosmetics.api.util.Run;
@@ -49,7 +49,7 @@ public class NightShiftDance extends VictoryDance {
     @Override
     public void execute(Player winner) {
         addTask(winner, Run.every((r) -> {
-            if(Cosmetics.getInstance().getHandler().getArenaUtil().getArenaByPlayer(winner) == null) {
+            if(CosmeticsPlugin.getInstance().getHandler().getArenaUtil().getArenaByPlayer(winner) == null) {
                 r.cancel();
                 return;
             }

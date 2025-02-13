@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.bukkit.Bukkit;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
 
 import java.sql.Connection;
@@ -31,7 +31,7 @@ public class PlayerData {
 
     public void load() {
         try {
-            Connection connection = Cosmetics.getInstance().getRemoteDatabase().getConnection();
+            Connection connection = CosmeticsPlugin.getInstance().getRemoteDatabase().getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM cosmetics_player_data WHERE uuid = ?");
             statement.setString(1, uuid.toString());
             ResultSet result = statement.executeQuery();
@@ -60,7 +60,7 @@ public class PlayerData {
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         try {
-            Connection connection = Cosmetics.getInstance().getRemoteDatabase().getConnection();
+            Connection connection = CosmeticsPlugin.getInstance().getRemoteDatabase().getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, uuid.toString());
             statement.setString(2, bedDestroy);
@@ -85,7 +85,7 @@ public class PlayerData {
     public void save() {
         try {
             DebugUtil.addMessage("Saving player-data for " + uuid.toString());
-            Connection connection = Cosmetics.getInstance().getRemoteDatabase().getConnection();
+            Connection connection = CosmeticsPlugin.getInstance().getRemoteDatabase().getConnection();
             PreparedStatement statement = connection.prepareStatement(
                     "UPDATE cosmetics_player_data SET bed_destroy = ?, wood_skin = ?, victory_dance = ?, shopkeeper_skin = ?, glyph = ?, spray = ?, projectile_trail = ?, kill_message = ?, final_kill_effect = ?, island_topper = ?, death_cry = ? WHERE uuid = ?");
             statement.setString(1, bedDestroy);

@@ -1,53 +1,49 @@
 package xyz.iamthedefender.cosmetics.category.killmessage.preview;
 
 import com.cryptomorin.xseries.XSound;
-import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import xyz.iamthedefender.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.category.KillMessage;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
+import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticPreview;
+import xyz.iamthedefender.cosmetics.api.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.menu.SystemGui;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 import xyz.iamthedefender.cosmetics.category.killmessage.util.KillMessageUtils;
-import xyz.iamthedefender.cosmetics.util.StartupUtils;
 
 import java.util.List;
 
-public class KillMessagePreview {
+public class KillMessagePreview extends CosmeticPreview {
 
 
-    /**
-     * Sends preview message to given player from given previewID or selected.
-     * @param player Player object that needs to receive the messages.
-     * @param selected previewID for the selected preview, example is "bbq".
-     */
-    public void sendPreviewMessage(Player player, String selected){
-        for(KillMessage killMessage : StartupUtils.killMessageList){
-            if (killMessage.getIdentifier().equals(selected)){
-                if (killMessage.getField(FieldsType.RARITY, player) == RarityType.NONE) return;
-            }
-        }
+    public KillMessagePreview() {
+        super(CosmeticsType.KillMessage);
+    }
 
-        SystemGui systemGui = Cosmetics.getInstance().getSystemGuiManager().getByPlayer(player);
-
-        player.closeInventory();
-
+    @Override
+    public void showPreview(Player player, Cosmetics selected, Location previewLocation, Location playerLocation) throws IllegalArgumentException {
         XSound.ENTITY_ARROW_HIT_PLAYER.play(player, 1.0f, 1.0f);
         List<String> message = Utility.getListLang(player, "cosmetics." + "kill-message" + ".preview.message");
+        String selectedId = selected.getIdentifier();
+
+        SystemGui systemGui = CosmeticsPlugin.getInstance().getSystemGuiManager().getByPlayer(player);
+
         for (String s : message) {
             if (s.contains("%message%")){
-                KillMessageUtils.sendKillMessage(player, "Player", null, false, ChatColor.GREEN, ChatColor.GRAY, "PvP", "Old Message" ,true, selected, player.getDisplayName());
-                KillMessageUtils.sendKillMessage(player, "Player", null, false, ChatColor.GREEN, ChatColor.GRAY, "Void", "Old Message" ,true, selected, player.getDisplayName());
-                KillMessageUtils.sendKillMessage(player, "Player", null, false, ChatColor.GREEN, ChatColor.GRAY, "Shoot", "Old Message" ,true, selected, player.getDisplayName());
-                KillMessageUtils.sendKillMessage(player, "Player", null, false, ChatColor.GREEN, ChatColor.GRAY, "Explosion", "Old Message" ,true, selected, player.getDisplayName());
+                KillMessageUtils.sendKillMessage(player, "Player", null, false, ChatColor.GREEN, ChatColor.GRAY, "PvP", "Old Message" ,true, selectedId, player.getDisplayName());
+                KillMessageUtils.sendKillMessage(player, "Player", null, false, ChatColor.GREEN, ChatColor.GRAY, "Void", "Old Message" ,true, selectedId, player.getDisplayName());
+                KillMessageUtils.sendKillMessage(player, "Player", null, false, ChatColor.GREEN, ChatColor.GRAY, "Shoot", "Old Message" ,true, selectedId, player.getDisplayName());
+                KillMessageUtils.sendKillMessage(player, "Player", null, false, ChatColor.GREEN, ChatColor.GRAY, "Explosion", "Old Message" ,true, selectedId, player.getDisplayName());
             }else{
                 player.sendMessage(ColorUtil.translate(s));
             }
         }
 
-        Run.delayed(() -> systemGui.open(player), 5 * 20L);
+        if (systemGui != null) {
+            Run.delayed(() -> systemGui.open(player), getEndDelay());
+        }
     }
 }

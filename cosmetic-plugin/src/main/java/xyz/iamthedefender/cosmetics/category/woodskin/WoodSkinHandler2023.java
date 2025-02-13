@@ -11,7 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.WoodSkin;
@@ -22,7 +22,7 @@ public class WoodSkinHandler2023 implements Listener {
 
     @EventHandler
     public void onShopBuy(ShopBuyEvent e) {
-        boolean isWoodSkinsEnabled = Cosmetics.getInstance().getConfig().getBoolean("wood-skins.enabled");
+        boolean isWoodSkinsEnabled = CosmeticsPlugin.getInstance().getConfig().getBoolean("wood-skins.enabled");
         if (!isWoodSkinsEnabled) return;
 
         Player p = e.getBuyer();
@@ -30,7 +30,7 @@ public class WoodSkinHandler2023 implements Listener {
         ItemStack stack = item.getItemStack();
 
         if (Utility.isWoodOrLogBlock(stack.getType())) {
-            String selected = Cosmetics.getInstance().getApi().getSelectedCosmetic(p, CosmeticsType.WoodSkins);
+            String selected = CosmeticsPlugin.getInstance().getApi().getSelectedCosmetic(p, CosmeticsType.WoodSkins);
             WoodSkin selectedWoodSkin = find(selected);
 
             if(selectedWoodSkin == null) return;
@@ -48,7 +48,7 @@ public class WoodSkinHandler2023 implements Listener {
 
         Player p = (Player) e.getPlayer();
         IArena arena = BedWars.getAPI().getArenaUtil().getArenaByPlayer(p);
-        String selected = Cosmetics.getInstance().getApi().getSelectedCosmetic(p, CosmeticsType.WoodSkins);
+        String selected = CosmeticsPlugin.getInstance().getApi().getSelectedCosmetic(p, CosmeticsType.WoodSkins);
         WoodSkin selectedWoodSkin = find(selected);
 
         if(selectedWoodSkin == null) return;

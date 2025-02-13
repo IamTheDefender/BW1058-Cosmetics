@@ -6,7 +6,7 @@ import com.andrei1058.bedwars.api.server.ServerType;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.handler.*;
 import xyz.iamthedefender.cosmetics.category.bedbreakeffects.BedDestroyHandler1058;
 import xyz.iamthedefender.cosmetics.category.deathcries.DeathCryHandler1058;
@@ -39,7 +39,7 @@ public class BW1058Handler implements IHandler {
         StartupUtils.registerListeners(new BedDestroyHandler1058());
         StartupUtils.registerListeners(new WoodSkinHandler1058());
         StartupUtils.registerListeners(new IslandTopperHandler1058());
-        StartupUtils.registerListeners(new ProjectileHandler(Cosmetics.getInstance()));
+        StartupUtils.registerListeners(new ProjectileHandler(CosmeticsPlugin.getInstance()));
         StartupUtils.registerListeners(new DeathCryHandler1058());
         StartupUtils.registerListeners(new SpraysHandler1058());
     }
@@ -133,7 +133,7 @@ public class BW1058Handler implements IHandler {
 
     @Override
     public String getAddonPath() {
-        return api.getAddonsPath().getPath() + File.separator + Cosmetics.getInstance().getDescription().getName();
+        return api.getAddonsPath().getPath() + File.separator + CosmeticsPlugin.getInstance().getDescription().getName();
     }
 
     @Override

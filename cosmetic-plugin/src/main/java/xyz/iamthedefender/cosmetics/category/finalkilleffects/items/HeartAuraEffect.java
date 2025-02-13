@@ -1,12 +1,10 @@
 package xyz.iamthedefender.cosmetics.category.finalkilleffects.items;
 
-import com.comphenix.protocol.wrappers.EnumWrappers;
-import com.comphenix.protocol.wrappers.WrappedParticle;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
 import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
@@ -57,11 +55,11 @@ public class HeartAuraEffect extends FinalKillEffect {
     }
 
     private void sendParticles(Player victim, Location location, boolean onlyVictim) {
-        IVersionSupport versionSupport = Cosmetics.getInstance().getVersionSupport();
+        IVersionSupport versionSupport = CosmeticsPlugin.getInstance().getVersionSupport();
         ParticleWrapper particleWrapper = ParticleWrapper.getParticle("HEART").orElse(null);
 
         if (particleWrapper == null) {
-            Cosmetics.getInstance().getLogger().severe("Particle not found: HEART" + " - " + versionSupport.getVersion());
+            CosmeticsPlugin.getInstance().getLogger().severe("Particle not found: HEART" + " - " + versionSupport.getVersion());
             return;
         }
 

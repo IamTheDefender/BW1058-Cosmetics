@@ -6,8 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
 import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
@@ -86,6 +85,6 @@ public class TornadoEffect extends FinalKillEffect {
                     this.cancel();
                 }
             }
-        }.runTaskTimer(Cosmetics.getInstance(), 2L, 0L);
+        }.runTaskTimer(CosmeticsPlugin.getInstance(), 2L, 0L);
     }
 }

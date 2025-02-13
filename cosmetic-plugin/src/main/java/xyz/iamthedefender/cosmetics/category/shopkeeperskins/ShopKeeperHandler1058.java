@@ -17,7 +17,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.ShopKeeperSkin;
 import xyz.iamthedefender.cosmetics.api.util.Run;
@@ -32,17 +32,17 @@ import static org.bukkit.Bukkit.getServer;
 
 public class ShopKeeperHandler1058 implements Listener
 {
-    private final Cosmetics plugin;
+    private final CosmeticsPlugin plugin;
     public static HashMap<String, Boolean> arenas = new HashMap<>();
     
     public ShopKeeperHandler1058() {
-        this.plugin = Cosmetics.getPlugin(Cosmetics.class);
+        this.plugin = CosmeticsPlugin.getPlugin(CosmeticsPlugin.class);
     }
     
     @EventHandler
     public void onGameStart1058(GameStateChangeEvent event) {
 
-        boolean isShopkeepersEnabled = Cosmetics.getInstance().getConfig().getBoolean("shopkeeper-skins.enabled");
+        boolean isShopkeepersEnabled = CosmeticsPlugin.getInstance().getConfig().getBoolean("shopkeeper-skins.enabled");
         if (!isShopkeepersEnabled) return;
 
         if (event.getNewState().name().equals("playing")) {
@@ -65,7 +65,7 @@ public class ShopKeeperHandler1058 implements Listener
 
                         // Choose random player from the team
                         Player player = team.getMembers().get(MathUtil.getRandom(0, team.getMembers().size() -1));
-                        String skin = Cosmetics.getInstance().getApi().getSelectedCosmetic(player, CosmeticsType.ShopKeeperSkin);
+                        String skin = CosmeticsPlugin.getInstance().getApi().getSelectedCosmetic(player, CosmeticsType.ShopKeeperSkin);
                        DebugUtil.addMessage("Selected skin: " + skin);
                         // Spawn new NPCs
                         for (ShopKeeperSkin skins : StartupUtils.shopKeeperSkinList) {
@@ -100,7 +100,7 @@ public class ShopKeeperHandler1058 implements Listener
     @EventHandler
     public void onPlayerTeleportEvent(PlayerTeleportEvent e){
 
-        boolean isShopkeepersEnabled = Cosmetics.getInstance().getConfig().getBoolean("shopkeeper-skins.enabled");
+        boolean isShopkeepersEnabled = CosmeticsPlugin.getInstance().getConfig().getBoolean("shopkeeper-skins.enabled");
         if (!isShopkeepersEnabled) return;
 
         if (e.getPlayer().hasMetadata("NPC2")){
@@ -114,7 +114,7 @@ public class ShopKeeperHandler1058 implements Listener
 
     @EventHandler
     public void onGameEnd1058(GameEndEvent e) {
-        boolean isShopkeepersEnabled = Cosmetics.getInstance().getConfig().getBoolean("shopkeeper-skins.enabled");
+        boolean isShopkeepersEnabled = CosmeticsPlugin.getInstance().getConfig().getBoolean("shopkeeper-skins.enabled");
         if (!isShopkeepersEnabled) return;
 
         String name = e.getArena().getWorldName();
@@ -125,7 +125,7 @@ public class ShopKeeperHandler1058 implements Listener
     @EventHandler
     public void onGameStartEvent(GameStateChangeEvent event){
         if (event.getNewState() != GameState.playing) return;
-        getServer().getScheduler().runTaskLater(Cosmetics.getInstance(), () -> {
+        getServer().getScheduler().runTaskLater(CosmeticsPlugin.getInstance(), () -> {
             World world = event.getArena().getWorld();
             for (Entity entity : world.getEntities()) {
                 boolean isCitizensNPC = entity.hasMetadata("NPC");

@@ -3,132 +3,64 @@ package xyz.iamthedefender.cosmetics.category.glyphs.preview;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
-import com.cryptomorin.xseries.XSound;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
+import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticPreview;
+import xyz.iamthedefender.cosmetics.api.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.category.Glyph;
-import xyz.iamthedefender.cosmetics.api.menu.SystemGui;
 import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.category.glyphs.util.GlyphUtil;
 import xyz.iamthedefender.cosmetics.category.glyphs.util.ImageParticles;
-import xyz.iamthedefender.cosmetics.util.StartupUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static xyz.iamthedefender.cosmetics.util.StartupUtils.getCosmeticLocation;
-import static xyz.iamthedefender.cosmetics.util.StartupUtils.getPlayerLocation;
+public class GlyphPreview extends CosmeticPreview {
 
-public class GlyphPreview {
+    public GlyphPreview() {
+        super(CosmeticsType.Glyphs);
+    }
 
-    private final Map<UUID, Map<Integer, ItemStack>> inventories = new HashMap<>();
+    @Override
+    public void showPreview(Player player, Cosmetics selected, Location previewLocation, Location playerLocation) throws IllegalArgumentException {
+        handleLocation(player, playerLocation);
 
-    public void sendPreviewGlyph(Player player, String selected, SystemGui gui) {
-        for (Glyph glyph : StartupUtils.glyphsList) {
-            if (glyph.getIdentifier().equals(selected)){
-                if (glyph.getField(FieldsType.RARITY, player) == RarityType.NONE) {
-                    gui.open(player);
-                    XSound.ENTITY_VILLAGER_NO.play(player, 1.0f, 1.0f);
-                    return;
-                }
-            }
-        }
-        UUID playerUUID = player.getUniqueId();
-
-        Location beforeLocation = player.getLocation().clone();
-
-        Inventory playerInv = player.getInventory();
-        if (!inventories.containsKey(playerUUID)) inventories.put(playerUUID, new HashMap<>());
-
-        Map<Integer, org.bukkit.inventory.ItemStack> items = inventories.get(playerUUID);
-
-        for (int i = 0; i < playerInv.getSize(); i++) {
-            if (playerInv.getItem(i) == null) continue;
-            if (playerInv.getItem(i).getType() == null) continue;
-            if (playerInv.getItem(i).getType() == Material.AIR) continue;
-
-            items.put(i, playerInv.getItem(i));
-        }
-
-        playerInv.clear();
-        player.closeInventory();
-        Location cosmeticLocation = null, playerLocation = null;
-
-        try {
-            cosmeticLocation = getCosmeticLocation();
-            playerLocation = getPlayerLocation();
-        }catch (Exception exception){
-            exception.printStackTrace();
-            player.sendMessage(ColorUtil.translate("&cEither Preview location or Player location is not set! Contact the admin."));
-        }
-        if (cosmeticLocation == null || playerLocation == null) return;
-
-        final Location finalPlayerLocation = playerLocation;
-        final Location finalCosmeticLocation = cosmeticLocation;
-
-        ArmorStand as = (ArmorStand) player.getWorld().spawnEntity(finalPlayerLocation, EntityType.ARMOR_STAND);
+        ArmorStand as = (ArmorStand) player.getWorld().spawnEntity(previewLocation, EntityType.ARMOR_STAND);
         as.setVisible(false);
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,
                 100, 2));
 
-        for (Player player1 : Bukkit.getOnlinePlayers()) {
-            if (player1.equals(player)) continue;
-
-            player1.hidePlayer(player);
-        }
-
-        sendGlyphParticles(player, finalCosmeticLocation, selected);
+        sendGlyphParticles(player, previewLocation, selected.getIdentifier());
 
         PacketContainer cameraPacket = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.CAMERA);
         cameraPacket.getIntegers().write(0, as.getEntityId());
 
         PacketContainer resetPacket = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.CAMERA);
         resetPacket.getIntegers().write(0, player.getEntityId());
-        Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, cameraPacket);
+        CosmeticsPlugin.getInstance().getProtocolManager().sendServerPacket(player, cameraPacket);
 
 
-        Run.delayed(() -> {
+        setOnEnd(player, () -> {
             if (!as.isDead()) as.remove();
 
-            Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, resetPacket);
+            CosmeticsPlugin.getInstance().getProtocolManager().sendServerPacket(player, resetPacket);
             player.removePotionEffect(PotionEffectType.INVISIBILITY);
-            player.teleport(beforeLocation);
-
-            for (Player player1 : Bukkit.getOnlinePlayers()) {
-                if (player1.equals(player)) continue;
-
-                player1.showPlayer(player);
-            }
-            for (Map.Entry<Integer, org.bukkit.inventory.ItemStack> entry: items.entrySet()) {
-                playerInv.setItem(entry.getKey(), entry.getValue());
-            }
-
-            gui.open(player);
-        }, 5 * 20L);
+        });
     }
 
     private void sendGlyphParticles(Player player, Location location, String selected) {
@@ -143,7 +75,7 @@ public class GlyphPreview {
         }
 
         File file = new File(
-                Cosmetics.getInstance().getHandler().getAddonPath() +
+                CosmeticsPlugin.getInstance().getHandler().getAddonPath() +
                         "/Glyphs/" +
                         glyphFile);
 

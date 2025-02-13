@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
 import xyz.iamthedefender.cosmetics.api.handler.IArenaHandler;
@@ -67,7 +67,7 @@ public class YeeHawDance extends VictoryDance {
         addEntity(winner, horse);
 
         addTask(winner, Run.every((r) -> {
-            IArenaHandler arena = Cosmetics.getInstance().getHandler().getArenaUtil().getArenaByPlayer(winner);
+            IArenaHandler arena = CosmeticsPlugin.getInstance().getHandler().getArenaUtil().getArenaByPlayer(winner);
             if(arena == null){
                 horse.remove();
                 r.cancel();

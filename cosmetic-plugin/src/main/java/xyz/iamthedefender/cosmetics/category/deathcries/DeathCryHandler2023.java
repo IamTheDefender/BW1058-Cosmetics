@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.DeathCry;
@@ -20,9 +20,9 @@ public class DeathCryHandler2023 implements Listener {
     @EventHandler
     public void onPlayerDeath2023(PlayerKillEvent e) {
         Player killed = e.getVictim();
-        String selected = Cosmetics.getInstance().getApi().getSelectedCosmetic(killed, CosmeticsType.DeathCries);
+        String selected = CosmeticsPlugin.getInstance().getApi().getSelectedCosmetic(killed, CosmeticsType.DeathCries);
 
-        boolean isDeathCriesEnabled = Cosmetics.getInstance().getConfig().getBoolean("death-cries.enabled");
+        boolean isDeathCriesEnabled = CosmeticsPlugin.getInstance().getConfig().getBoolean("death-cries.enabled");
         if (!isDeathCriesEnabled) return;
 
         for (DeathCry deathCry : StartupUtils.deathCryList) {

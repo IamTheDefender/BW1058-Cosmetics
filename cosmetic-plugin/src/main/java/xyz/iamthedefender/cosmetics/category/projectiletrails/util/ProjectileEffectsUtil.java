@@ -3,7 +3,7 @@ package xyz.iamthedefender.cosmetics.category.projectiletrails.util;
 import org.bukkit.Color;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
@@ -25,7 +25,7 @@ public class ProjectileEffectsUtil {
 	 */
 	public static void sendEffect(Entity e, Player p) {
 		CosmeticsType type = CosmeticsType.ProjectileTrails;
-		String selected = Cosmetics.getInstance().getApi().getSelectedCosmetic(p, type);
+		String selected = CosmeticsPlugin.getInstance().getApi().getSelectedCosmetic(p, type);
 		String effect = ConfigUtils.getProjectileTrails().getString(type.getSectionKey() + "." + selected + ".particle");
 		Color color = ConfigUtils.getProjectileTrails().getYml().getColor(type.getSectionKey() + "." + selected + ".color");
 		ProjectileTrail projectileTrail = null;
@@ -38,7 +38,7 @@ public class ProjectileEffectsUtil {
 			Optional<ParticleWrapper> particleWrapper = ParticleWrapper.getParticle(effect);
 
 			if (particleWrapper.isEmpty()) {
-				Cosmetics.getInstance().getLogger().warning("Unknown particle effect: " + effect);
+				CosmeticsPlugin.getInstance().getLogger().warning("Unknown particle effect: " + effect);
 				return;
 			}
 

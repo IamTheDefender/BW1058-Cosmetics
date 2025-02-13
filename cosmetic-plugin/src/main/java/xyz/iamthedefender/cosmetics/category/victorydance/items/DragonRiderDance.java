@@ -8,17 +8,14 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
 import xyz.iamthedefender.cosmetics.api.handler.IArenaHandler;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class DragonRiderDance extends VictoryDance {
@@ -69,7 +66,7 @@ public class DragonRiderDance extends VictoryDance {
         ArmorStand stand = (ArmorStand) winner.getWorld().spawnEntity(winner.getLocation(), EntityType.ARMOR_STAND);
         stand.setVisible(false);
         stand.setGravity(false);
-        stand.setMetadata("FAKE_TARGET", new FixedMetadataValue(Cosmetics.getInstance(), ""));
+        stand.setMetadata("FAKE_TARGET", new FixedMetadataValue(CosmeticsPlugin.getInstance(), ""));
         World startingWorld = winner.getWorld();
         // create a task to move the dragon towards the fake target
 
@@ -77,7 +74,7 @@ public class DragonRiderDance extends VictoryDance {
         addEntity(winner, stand);
 
         addTask(winner, Run.every((r) -> {
-            IArenaHandler arena = Cosmetics.getInstance().getHandler().getArenaUtil().getArenaByPlayer(winner);
+            IArenaHandler arena = CosmeticsPlugin.getInstance().getHandler().getArenaUtil().getArenaByPlayer(winner);
 
             if(arena == null){
                 r.cancel();

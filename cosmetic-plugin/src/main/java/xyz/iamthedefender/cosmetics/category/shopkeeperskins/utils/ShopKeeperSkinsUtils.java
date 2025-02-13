@@ -5,7 +5,6 @@ import net.citizensnpcs.api.npc.MemoryNPCDataStore;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import net.citizensnpcs.api.trait.trait.PlayerFilter;
-import net.citizensnpcs.npc.skin.Skin;
 import net.citizensnpcs.trait.HologramTrait;
 import net.citizensnpcs.trait.LookClose;
 import net.citizensnpcs.trait.SkinTrait;
@@ -14,7 +13,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
@@ -67,7 +66,7 @@ public class ShopKeeperSkinsUtils {
                 }
                 tick--;
             }
-        }.runTaskTimer(Cosmetics.getInstance(), 0, 20);
+        }.runTaskTimer(CosmeticsPlugin.getInstance(), 0, 20);
     }
 
     /**
@@ -91,7 +90,7 @@ public class ShopKeeperSkinsUtils {
         npc.getTrait(LookClose.class).lookClose(true);
         npc.getOrAddTrait(HologramTrait.class).clear();
         npc.spawn(loc);
-        npc.getEntity().setMetadata("NPC2", new FixedMetadataValue(Cosmetics.getInstance(), ""));
+        npc.getEntity().setMetadata("NPC2", new FixedMetadataValue(CosmeticsPlugin.getInstance(), ""));
         npc.data().setPersistent(NPC.Metadata.DEATH_SOUND, "");
         npc.data().setPersistent(NPC.Metadata.AMBIENT_SOUND, "");
         npc.data().setPersistent(NPC.Metadata.HURT_SOUND, "");
@@ -106,7 +105,7 @@ public class ShopKeeperSkinsUtils {
         npc1.getTrait(LookClose.class).lookClose(true);
         npc1.getOrAddTrait(HologramTrait.class).clear();
         npc1.spawn(loc1);
-        npc1.getEntity().setMetadata("NPC2", new FixedMetadataValue(Cosmetics.getInstance(), ""));
+        npc1.getEntity().setMetadata("NPC2", new FixedMetadataValue(CosmeticsPlugin.getInstance(), ""));
         npc1.data().setPersistent(NPC.Metadata.DEATH_SOUND, "");
         npc1.data().setPersistent(NPC.Metadata.AMBIENT_SOUND, "");
         npc1.data().setPersistent(NPC.Metadata.HURT_SOUND, "");
@@ -136,7 +135,7 @@ public class ShopKeeperSkinsUtils {
         npc.getOrAddTrait(PlayerFilter.class).addPlayer(p.getUniqueId());
 
         npc.spawn(loc);
-        npc.getEntity().setMetadata("NPC2", new FixedMetadataValue(Cosmetics.getInstance(), ""));
+        npc.getEntity().setMetadata("NPC2", new FixedMetadataValue(CosmeticsPlugin.getInstance(), ""));
 
         new BukkitRunnable() {
             int tick = ticks;
@@ -148,7 +147,7 @@ public class ShopKeeperSkinsUtils {
                 }
                 tick--;
             }
-        }.runTaskTimer(Cosmetics.getInstance(), 0, 20);
+        }.runTaskTimer(CosmeticsPlugin.getInstance(), 0, 20);
     }
 
 
@@ -162,7 +161,7 @@ public class ShopKeeperSkinsUtils {
      @param loc1 The location where the second NPC will be spawned.
      */
     public static void spawnShopKeeperNPC(Player p, Location loc, Location loc1) {
-        Cosmetics plugin = Cosmetics.getInstance();
+        CosmeticsPlugin plugin = CosmeticsPlugin.getInstance();
         String skin = plugin.getApi().getSelectedCosmetic(p, CosmeticsType.ShopKeeperSkin);
         ConfigManager config = ConfigUtils.getShopKeeperSkins();
         String key = CosmeticsType.ShopKeeperSkin.getSectionKey();
@@ -204,7 +203,7 @@ public class ShopKeeperSkinsUtils {
     }
 
     public static void spawnShopKeeperNPCForPreview(Player p, Location loc, String skin) {
-        Cosmetics plugin = Cosmetics.getInstance();
+        CosmeticsPlugin plugin = CosmeticsPlugin.getInstance();
         ConfigManager config = ConfigUtils.getShopKeeperSkins();
         String key = CosmeticsType.ShopKeeperSkin.getSectionKey();
         String skinvalue = config.getString(key + "." + skin + ".skin-value");

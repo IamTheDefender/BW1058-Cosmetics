@@ -4,7 +4,7 @@ import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
@@ -59,7 +59,7 @@ public class KillMessageUtils {
      * @param oldMessage        never used, leave as null.
      */
     public static void sendKillMessage(Player player, String victim, Player killer, boolean finalKill, ChatColor victimColor, ChatColor killerColor, String type, String oldMessage, boolean preview, String previewID, String previewKillerName) {
-        String selectedMessage = Cosmetics.getInstance().getApi().getSelectedCosmetic(killer, CosmeticsType.KillMessage);
+        String selectedMessage = CosmeticsPlugin.getInstance().getApi().getSelectedCosmetic(killer, CosmeticsType.KillMessage);
         List<String> messages;
         if (preview) {
             messages = ConfigUtils.getKillMessages().getYml().getStringList(CosmeticsType.KillMessage.getSectionKey() + "." + previewID + "." + type + "-Kill");
@@ -107,7 +107,7 @@ public class KillMessageUtils {
      * @param type              The type of death. Accepted values: "PvP", "Void", "Shoot", "Explosion"
      */
     public static String sendKillMessage(Player player, String victim, Player killer, boolean finalKill, ChatColor victimColor, ChatColor killerColor, String type) {
-        String selectedMessage = Cosmetics.getInstance().getApi().getSelectedCosmetic(killer, CosmeticsType.KillMessage);
+        String selectedMessage = CosmeticsPlugin.getInstance().getApi().getSelectedCosmetic(killer, CosmeticsType.KillMessage);
         if (victim.equalsIgnoreCase(killer.getName())) type = "Void";
         List<String> messages = ConfigUtils.getKillMessages().getYml().getStringList(CosmeticsType.KillMessage.getSectionKey() + "." + selectedMessage + "." + type + "-Kill");
         for (KillMessage killMessage : StartupUtils.killMessageList) {

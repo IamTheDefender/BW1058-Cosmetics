@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
 import xyz.iamthedefender.cosmetics.api.util.Run;
@@ -60,7 +60,7 @@ public class WitherRiderDance extends VictoryDance implements Listener {
     public void execute(Player winner) {
         Wither wither = (Wither) winner.getWorld().spawnEntity(winner.getLocation(), EntityType.WITHER);
         wither.setPassenger(winner);
-        wither.setMetadata("VD", new FixedMetadataValue(Cosmetics.getInstance(), ""));
+        wither.setMetadata("VD", new FixedMetadataValue(CosmeticsPlugin.getInstance(), ""));
         wither.setCustomName(ColorUtil.translate("&a" + winner.getName() + "'s Wither!"));
         wither.setNoDamageTicks(Integer.MAX_VALUE);
 

@@ -2,12 +2,12 @@ package xyz.iamthedefender.cosmetics.support.bedwars.handler.bedwars2023;
 
 import com.tomkeuper.bedwars.BedWars;
 import org.bukkit.Bukkit;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 
 public class BedWars2023 {
-    private final Cosmetics plugin;
+    private final CosmeticsPlugin plugin;
 
-    public BedWars2023(Cosmetics plugin) {
+    public BedWars2023(CosmeticsPlugin plugin) {
         this.plugin = plugin;
     }
 

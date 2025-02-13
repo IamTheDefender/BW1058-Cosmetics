@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
@@ -18,7 +18,7 @@ public class IslandTopperHandler2023 implements Listener {
     @EventHandler
     public void onSpawn2023(GameStateChangeEvent e) {
 
-        boolean isIslandToppersEnabled = Cosmetics.getInstance().getConfig().getBoolean("island-toppers.enabled");
+        boolean isIslandToppersEnabled = CosmeticsPlugin.getInstance().getConfig().getBoolean("island-toppers.enabled");
         if (!isIslandToppersEnabled) return;
 
         if (e.getNewState() == GameState.playing) {
@@ -34,7 +34,7 @@ public class IslandTopperHandler2023 implements Listener {
                 for (com.tomkeuper.bedwars.api.arena.team.ITeam teams : e.getArena().getTeams()) {
                     Player player = null;
                     for (Player p : teams.getMembers()) {
-                        if (!Cosmetics.getInstance().getApi().getSelectedCosmetic(p, CosmeticsType.IslandTopper).equals("none")) {
+                        if (!CosmeticsPlugin.getInstance().getApi().getSelectedCosmetic(p, CosmeticsType.IslandTopper).equals("none")) {
                             player = p;
                         }
                     }
@@ -46,7 +46,7 @@ public class IslandTopperHandler2023 implements Listener {
                     if (location == null) {
                         return;
                     }
-                    String selected = Cosmetics.getInstance().getApi().getSelectedCosmetic(player, CosmeticsType.IslandTopper);
+                    String selected = CosmeticsPlugin.getInstance().getApi().getSelectedCosmetic(player, CosmeticsType.IslandTopper);
                     for(IslandTopper islandTopper : StartupUtils.islandTopperList){
                         if (islandTopper.getIdentifier().equals(selected)){
                             if (islandTopper.getField(FieldsType.RARITY, player) != RarityType.NONE) {
@@ -56,6 +56,6 @@ public class IslandTopperHandler2023 implements Listener {
                     }
                 }
             }
-        }.runTaskLater(Cosmetics.getInstance(), 20L);
+        }.runTaskLater(CosmeticsPlugin.getInstance(), 20L);
     }
 }

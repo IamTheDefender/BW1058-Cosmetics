@@ -1,12 +1,12 @@
 package xyz.iamthedefender.cosmetics.util;
 
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 
 public class DebugUtil {
 
     public static void addMessage(Object message){
-        if (Cosmetics.getInstance().getConfig().getBoolean("Debug")) {
-            Cosmetics.getInstance().getLogger().info("DEBUG: " + message);
+        if (CosmeticsPlugin.getInstance().getConfig().getBoolean("Debug")) {
+            CosmeticsPlugin.getInstance().getLogger().info("DEBUG: " + message);
         }
     }
 }

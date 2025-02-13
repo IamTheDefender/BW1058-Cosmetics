@@ -23,7 +23,7 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
@@ -107,7 +107,7 @@ public class IslandTopperPreview {
 
         PacketContainer resetPacket = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.CAMERA);
         resetPacket.getIntegers().write(0, player.getEntityId());
-        Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, cameraPacket);
+        CosmeticsPlugin.getInstance().getProtocolManager().sendServerPacket(player, cameraPacket);
 
 
         sendIslandTopper(player, finalCosmeticLocation, selected);
@@ -115,7 +115,7 @@ public class IslandTopperPreview {
         Run.delayed(() -> {
             if (!as.isDead()) as.remove();
 
-            Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, resetPacket);
+            CosmeticsPlugin.getInstance().getProtocolManager().sendServerPacket(player, resetPacket);
             player.removePotionEffect(PotionEffectType.INVISIBILITY);
             player.teleport(beforeLocation);
 
@@ -143,7 +143,7 @@ public class IslandTopperPreview {
             return;
         }
 
-        File file = new File(Cosmetics.getInstance().getHandler().getAddonPath() + "/IslandToppers/" + topperFileName);
+        File file = new File(CosmeticsPlugin.getInstance().getHandler().getAddonPath() + "/IslandToppers/" + topperFileName);
         if (!file.exists()){
             Bukkit.getLogger().severe("The file " + file.getName() + " does not exists!");
             return;
@@ -162,7 +162,7 @@ public class IslandTopperPreview {
             Vector newOrigin = new Vector(location.getX(), location.getY(), location.getZ());
             newOrigin = newOrigin.add(clipboard.getOffset());
 
-            boolean order = Cosmetics.getInstance().getConfig().getBoolean("island-toppers.order");
+            boolean order = CosmeticsPlugin.getInstance().getConfig().getBoolean("island-toppers.order");
 
             if (!order){
                 HashMap<Location, BlockData> blockLocations = new HashMap<>();
@@ -232,7 +232,7 @@ public class IslandTopperPreview {
                             }
                         }
                     }
-                }.runTaskTimerAsynchronously(Cosmetics.getInstance(), 0L, 0L);
+                }.runTaskTimerAsynchronously(CosmeticsPlugin.getInstance(), 0L, 0L);
             } else {
                 LinkedHashMap<Location, BlockData> blockLocations = new LinkedHashMap<>();
 
@@ -300,7 +300,7 @@ public class IslandTopperPreview {
                             }
                         }
                     }
-                }.runTaskTimerAsynchronously(Cosmetics.getInstance(), 0L, 0L);
+                }.runTaskTimerAsynchronously(CosmeticsPlugin.getInstance(), 0L, 0L);
             }
 
         } catch (DataException | IOException e) {

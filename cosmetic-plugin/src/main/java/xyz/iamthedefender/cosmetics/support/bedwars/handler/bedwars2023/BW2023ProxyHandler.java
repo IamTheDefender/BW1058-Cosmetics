@@ -3,7 +3,7 @@ package xyz.iamthedefender.cosmetics.support.bedwars.handler.bedwars2023;
 import com.tomkeuper.bedwars.proxy.BedWarsProxy;
 import com.tomkeuper.bedwars.proxy.api.BedWars;
 import org.bukkit.entity.Player;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.handler.*;
 
 import java.io.File;
@@ -23,7 +23,7 @@ public class BW2023ProxyHandler implements IHandler {
 
     @Override
     public String getAddonPath() {
-        return BedWarsProxy.getPlugin().getDataFolder().getPath() + File.separator + "Addons" + File.separator + Cosmetics.getInstance().getDescription().getName();
+        return BedWarsProxy.getPlugin().getDataFolder().getPath() + File.separator + "Addons" + File.separator + CosmeticsPlugin.getInstance().getDescription().getName();
     }
 
     @Override

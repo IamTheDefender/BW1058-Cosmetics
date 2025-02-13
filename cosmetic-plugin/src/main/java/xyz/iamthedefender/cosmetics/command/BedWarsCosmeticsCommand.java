@@ -15,7 +15,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.handler.ISetupSession;
@@ -33,7 +33,7 @@ import xyz.iamthedefender.cosmetics.util.StartupUtils;
 @Description("Main command for the cosmetics plugin.")
 public class BedWarsCosmeticsCommand extends BaseCommand {
 
-    private final Cosmetics plugin = Cosmetics.getInstance();
+    private final CosmeticsPlugin plugin = CosmeticsPlugin.getInstance();
     
     @Subcommand("help")
     @CommandPermission("bwcosmetics.help")
@@ -202,7 +202,7 @@ public class BedWarsCosmeticsCommand extends BaseCommand {
         }
 
         String title = cosmeticsType.getFormatedName();
-        if (Cosmetics.isPlaceholderAPI()) {
+        if (CosmeticsPlugin.isPlaceholderAPI()) {
             title = PlaceholderAPI.setPlaceholders(player, title);
         }
 

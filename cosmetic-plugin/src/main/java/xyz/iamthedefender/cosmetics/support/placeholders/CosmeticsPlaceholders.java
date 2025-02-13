@@ -3,7 +3,7 @@ package xyz.iamthedefender.cosmetics.support.placeholders;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.data.PlayerOwnedData;
@@ -33,8 +33,8 @@ public class CosmeticsPlaceholders extends PlaceholderExpansion {
 
     @Override
     public String onPlaceholderRequest(Player player, String placeholder) {
-        CosmeticsAPI api = Cosmetics.getInstance().getApi();
-        PlayerOwnedData ownedData = Cosmetics.getInstance().getPlayerManager().getPlayerOwnedData(player.getUniqueId());
+        CosmeticsAPI api = CosmeticsPlugin.getInstance().getApi();
+        PlayerOwnedData ownedData = CosmeticsPlugin.getInstance().getPlayerManager().getPlayerOwnedData(player.getUniqueId());
         switch (placeholder.toLowerCase()) {
             case "selected_dc":
                 return api.getSelectedCosmetic(player, CosmeticsType.DeathCries);

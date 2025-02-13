@@ -5,7 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
@@ -19,12 +19,12 @@ public class BedDestroyHandler2023 implements Listener {
 
     @EventHandler
     public void onBedBreak2023(com.tomkeuper.bedwars.api.events.player.PlayerBedBreakEvent e) {
-        String selected = Cosmetics.getInstance().getApi().getSelectedCosmetic(e.getPlayer(), CosmeticsType.BedBreakEffects);
+        String selected = CosmeticsPlugin.getInstance().getApi().getSelectedCosmetic(e.getPlayer(), CosmeticsType.BedBreakEffects);
         BedBreakEffectExecuteEvent event = new BedBreakEffectExecuteEvent(e.getPlayer());
         Bukkit.getServer().getPluginManager().callEvent(event);
 
         if (event.isCancelled()) return;
-        boolean isBedDestroysEnabled = Cosmetics.getInstance().getConfig().getBoolean("bed-break-effects.enabled");
+        boolean isBedDestroysEnabled = CosmeticsPlugin.getInstance().getConfig().getBoolean("bed-break-effects.enabled");
         if (!isBedDestroysEnabled) return;
 
         DebugUtil.addMessage("Executing " + selected + " Bed Break Effect for " + e.getPlayer().getDisplayName());

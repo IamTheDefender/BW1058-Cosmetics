@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
 import xyz.iamthedefender.cosmetics.category.victorydance.util.UsefulUtilsVD;
@@ -118,6 +118,6 @@ public class ToyStickDance extends VictoryDance implements Listener {
             public void run() {
                 cooldown.remove(event.getPlayer());
             }
-        }.runTaskLater(Cosmetics.getInstance(), 20);
+        }.runTaskLater(CosmeticsPlugin.getInstance(), 20);
     }
 }

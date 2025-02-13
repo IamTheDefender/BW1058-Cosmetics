@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.*;
 import xyz.iamthedefender.cosmetics.api.util.Run;
@@ -17,10 +17,10 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        CosmeticsAPI api = Cosmetics.getInstance().getApi();
+        CosmeticsAPI api = CosmeticsPlugin.getInstance().getApi();
 
         if (api.isMySQL()) {
-            PlayerData playerData = Cosmetics.getInstance().getPlayerManager().getPlayerData(event.getPlayer().getUniqueId());
+            PlayerData playerData = CosmeticsPlugin.getInstance().getPlayerManager().getPlayerData(event.getPlayer().getUniqueId());
             if (!playerData.exists()) {
                 setDefaultCosmetics(playerData, event.getPlayer());
                 playerData.createData();
@@ -30,16 +30,16 @@ public class PlayerJoinListener implements Listener {
             return;
         }
 
-        if (!Cosmetics.getInstance().getPlayerManager().getPlayerDataHashMap().containsKey(event.getPlayer().getUniqueId())) {
+        if (!CosmeticsPlugin.getInstance().getPlayerManager().getPlayerDataHashMap().containsKey(event.getPlayer().getUniqueId())) {
             PlayerData playerData = createNewPlayerData(event.getPlayer());
             if (!playerData.exists()) {
                 setDefaultCosmetics(playerData, event.getPlayer());
                 playerData.createData();
             }
-            Cosmetics.getInstance().getPlayerManager().addPlayerData(playerData);
+            CosmeticsPlugin.getInstance().getPlayerManager().addPlayerData(playerData);
         }
 
-        if (!Cosmetics.getInstance().getPlayerManager().getPlayerOwnedDataHashMap().containsKey(event.getPlayer().getUniqueId())) {
+        if (!CosmeticsPlugin.getInstance().getPlayerManager().getPlayerOwnedDataHashMap().containsKey(event.getPlayer().getUniqueId())) {
             updatePlayerOwnedDataAsync(event.getPlayer());
         } else {
             updatePlayerOwnedData(event.getPlayer());
@@ -65,13 +65,13 @@ public class PlayerJoinListener implements Listener {
     }
 
     private void updatePlayerOwnedData(Player player) {
-        PlayerOwnedData playerOwnedData = Cosmetics.getInstance().getPlayerManager().getPlayerOwnedData(player.getUniqueId());
+        PlayerOwnedData playerOwnedData = CosmeticsPlugin.getInstance().getPlayerManager().getPlayerOwnedData(player.getUniqueId());
         playerOwnedData.updateOwned();
     }
 
     private void updatePlayerOwnedDataAsync(Player player) {
         Run.async(() -> {
-            PlayerOwnedData playerOwnedData = Cosmetics.getInstance().getPlayerManager().getPlayerOwnedData(player.getUniqueId());
+            PlayerOwnedData playerOwnedData = CosmeticsPlugin.getInstance().getPlayerManager().getPlayerOwnedData(player.getUniqueId());
             playerOwnedData.updateOwned();
         });
     }

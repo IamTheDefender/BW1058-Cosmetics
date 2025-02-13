@@ -4,7 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.database.DatabaseType;
 import xyz.iamthedefender.cosmetics.api.database.IDatabase;
 
@@ -14,10 +14,10 @@ import java.sql.Statement;
 
 public class SQLite implements IDatabase {
 
-    private final Cosmetics plugin;
+    private final CosmeticsPlugin plugin;
     @Getter
     public HikariDataSource dataSource;
-    public SQLite(Cosmetics plugin){
+    public SQLite(CosmeticsPlugin plugin){
         this.plugin = plugin;
         connect();
         createTable();

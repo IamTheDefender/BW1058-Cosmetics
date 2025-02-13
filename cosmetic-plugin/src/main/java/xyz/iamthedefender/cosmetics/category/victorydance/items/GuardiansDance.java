@@ -1,6 +1,5 @@
 package xyz.iamthedefender.cosmetics.category.victorydance.items;
 
-import com.andrei1058.bedwars.api.events.player.PlayerLeaveArenaEvent;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -8,10 +7,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Guardian;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
 
@@ -101,7 +99,7 @@ class GuardianTriangle {
             }
 
             // Make guardians float and attack player with beams
-            Bukkit.getScheduler().runTaskTimer(Cosmetics.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskTimer(CosmeticsPlugin.getInstance(), () -> {
                 if (!stopped) {
                     for (Entity guardian : guardians) {
                         ((Guardian) guardian).setNoDamageTicks(Integer.MAX_VALUE);

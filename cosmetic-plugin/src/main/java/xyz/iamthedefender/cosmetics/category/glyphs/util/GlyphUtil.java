@@ -5,7 +5,7 @@ package xyz.iamthedefender.cosmetics.category.glyphs.util;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 
 import javax.imageio.ImageIO;
@@ -26,7 +26,7 @@ public class GlyphUtil
         try {
             image = ImageIO.read(file);
         } catch (final IOException e) {
-            Cosmetics.getInstance().getLogger().log(Level.SEVERE, "Unable to read glyph file! please check your config!");
+            CosmeticsPlugin.getInstance().getLogger().log(Level.SEVERE, "Unable to read glyph file! please check your config!");
         }
 
         ImageParticles particles = new ImageParticles(image, 1);
@@ -51,6 +51,6 @@ public class GlyphUtil
     }
 
     public static void sendRedstoneParticle(Player player, Location location, Color color){
-        Cosmetics.getInstance().getVersionSupport().displayRedstoneParticle(player, location, color);
+        CosmeticsPlugin.getInstance().getVersionSupport().displayRedstoneParticle(player, location, color);
     }
 }

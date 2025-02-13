@@ -3,7 +3,7 @@ package xyz.iamthedefender.cosmetics.support.bedwars.handler.bedwars1058;
 import com.andrei1058.bedwars.proxy.BedWarsProxy;
 import com.andrei1058.bedwars.proxy.api.BedWars;
 import org.bukkit.entity.Player;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.handler.*;
 
 import java.io.File;
@@ -38,7 +38,7 @@ public class BW1058ProxyHandler implements IHandler {
 
     @Override
     public String getAddonPath() {
-        return BedWarsProxy.getPlugin().getDataFolder() + File.separator + "Addons" + File.separator + Cosmetics.getInstance().getDescription().getName();
+        return BedWarsProxy.getPlugin().getDataFolder() + File.separator + "Addons" + File.separator + CosmeticsPlugin.getInstance().getDescription().getName();
     }
 
     @Override

@@ -5,7 +5,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.Glyph;
@@ -68,7 +68,7 @@ public class GlyphItems {
                 @Override
                 public void execute(Player player, Location location) {
                     String fileLocation = config.getString(path + "file");
-                    File file = new File(Cosmetics.getInstance().getHandler().getAddonPath() + "/Glyphs/" + fileLocation);
+                    File file = new File(CosmeticsPlugin.getInstance().getHandler().getAddonPath() + "/Glyphs/" + fileLocation);
 
                     Run.everyAsync((r)-> {
                         boolean status = GlyphUtil.sendGlyphs(file, location);

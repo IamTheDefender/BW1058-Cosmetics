@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.BedDestroy;
 import xyz.iamthedefender.cosmetics.api.handler.ITeamHandler;
@@ -87,7 +87,7 @@ public class TornadoBedDestroy extends BedDestroy {
                     this.cancel();
                 }
             }
-        }.runTaskTimer(Cosmetics.getInstance(), 2L, 0L);
+        }.runTaskTimer(CosmeticsPlugin.getInstance(), 2L, 0L);
     }
 
 }

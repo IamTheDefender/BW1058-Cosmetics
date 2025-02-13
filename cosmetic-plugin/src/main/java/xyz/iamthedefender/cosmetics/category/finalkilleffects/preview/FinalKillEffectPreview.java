@@ -3,8 +3,6 @@ package xyz.iamthedefender.cosmetics.category.finalkilleffects.preview;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
-import com.cryptomorin.xseries.XSound;
-import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.MemoryNPCDataStore;
 import net.citizensnpcs.api.npc.NPC;
@@ -12,7 +10,6 @@ import net.citizensnpcs.api.npc.NPCRegistry;
 import net.citizensnpcs.api.trait.trait.Equipment;
 import net.citizensnpcs.api.trait.trait.PlayerFilter;
 import net.citizensnpcs.trait.SkinTrait;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -20,121 +17,58 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import xyz.iamthedefender.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
-import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
+import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticPreview;
+import xyz.iamthedefender.cosmetics.api.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
-import xyz.iamthedefender.cosmetics.api.menu.SystemGui;
-import xyz.iamthedefender.cosmetics.api.util.Run;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
-import xyz.iamthedefender.cosmetics.util.StartupUtils;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
-import static xyz.iamthedefender.cosmetics.util.StartupUtils.getCosmeticLocation;
-import static xyz.iamthedefender.cosmetics.util.StartupUtils.getPlayerLocation;
+public class FinalKillEffectPreview extends CosmeticPreview {
 
-public class FinalKillEffectPreview {
+    public FinalKillEffectPreview() {
+        super(CosmeticsType.FinalKillEffects);
+    }
 
-    private final Map<UUID, Map<Integer, ItemStack>> inventories = new HashMap<>();
+    @Override
+    public void showPreview(Player player, Cosmetics selected, Location previewLocation, Location playerLocation) throws IllegalArgumentException {
+        handleLocation(player, playerLocation);
 
-    private FinalKillEffect killEffect;
-
-    public void sendPreviewKillEffect(Player player, String selected, SystemGui gui) {
-        for (FinalKillEffect killEffect : StartupUtils.finalKillList) {
-            if (killEffect.getIdentifier().equals(selected)){
-                if (killEffect.getField(FieldsType.RARITY, player) == RarityType.NONE) {
-                    gui.open(player);
-                    XSound.ENTITY_VILLAGER_NO.play(player, 1.0f, 1.0f);
-                    return;
-                } else {
-                    this.killEffect = killEffect;
-                }
-            }
-        }
-
-        UUID playerUUID = player.getUniqueId();
-
-        Location beforeLocation = player.getLocation().clone();
-
-        Inventory playerInv = player.getInventory();
-        if (!inventories.containsKey(playerUUID)) inventories.put(playerUUID, new HashMap<>());
-
-        Map<Integer, org.bukkit.inventory.ItemStack> items = inventories.get(playerUUID);
-
-        for (int i = 0; i < playerInv.getSize(); i++) {
-            if (playerInv.getItem(i) == null) continue;
-            if (playerInv.getItem(i).getType() == null) continue;
-            if (playerInv.getItem(i).getType() == Material.AIR) continue;
-
-            items.put(i, playerInv.getItem(i));
-        }
-
-        playerInv.clear();
-        player.closeInventory();
-        Location cosmeticLocation = null, playerLocation = null;
-
-        try {
-            cosmeticLocation = getCosmeticLocation();
-            playerLocation = getPlayerLocation();
-        }catch (Exception exception){
-            exception.printStackTrace();
-            player.sendMessage(ColorUtil.translate("&cEither Preview location or Player location is not set! Contact the admin."));
-        }
-        if (cosmeticLocation == null || playerLocation == null) return;
-
-        final Location finalPlayerLocation = playerLocation;
-        final Location finalCosmeticLocation = cosmeticLocation;
-
-        ArmorStand as = (ArmorStand) player.getWorld().spawnEntity(finalPlayerLocation, EntityType.ARMOR_STAND);
+        ArmorStand as = (ArmorStand) player.getWorld().spawnEntity(playerLocation, EntityType.ARMOR_STAND);
         as.setVisible(false);
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,
                 100, 2));
 
-        for (Player player1 : Bukkit.getOnlinePlayers()) {
-            if (player1.equals(player)) continue;
-
-            player1.hidePlayer(player);
-        }
-
-        sendKillEffect(player, finalCosmeticLocation);
+        sendKillEffect(player, previewLocation, (FinalKillEffect) selected);
 
         PacketContainer cameraPacket = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.CAMERA);
         cameraPacket.getIntegers().write(0, as.getEntityId());
 
         PacketContainer resetPacket = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.CAMERA);
         resetPacket.getIntegers().write(0, player.getEntityId());
-        Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, cameraPacket);
+        CosmeticsPlugin.getInstance().getProtocolManager().sendServerPacket(player, cameraPacket);
 
-        Run.delayed(() -> {
+        setOnEnd(player, () -> {
             if (!as.isDead()) as.remove();
 
-            Cosmetics.getInstance().getProtocolManager().sendServerPacket(player, resetPacket);
+            CosmeticsPlugin.getInstance().getProtocolManager().sendServerPacket(player, resetPacket);
             player.removePotionEffect(PotionEffectType.INVISIBILITY);
-            player.teleport(beforeLocation);
-
-            for (Player player1 : Bukkit.getOnlinePlayers()) {
-                if (player1.equals(player)) continue;
-
-                player1.showPlayer(player);
-            }
-            for (Map.Entry<Integer, org.bukkit.inventory.ItemStack> entry: items.entrySet()) {
-                playerInv.setItem(entry.getKey(), entry.getValue());
-            }
-
-            gui.open(player);
-        }, 5 * 20L);
+        });
     }
 
-    public void sendKillEffect(Player player, Location location) {
-        if (this.killEffect == null) return;
+    public void sendKillEffect(Player player, Location location, FinalKillEffect killEffect) {
         NPCRegistry registry = CitizensAPI.createAnonymousNPCRegistry(new MemoryNPCDataStore());
 
         Block block = location.getBlock();
@@ -183,23 +117,22 @@ public class FinalKillEffectPreview {
 
         victimNPC.spawn(bottomLeftLocation);
         derperinoNPC.spawn(leftLocation);
-        victimNPC.getEntity().setMetadata("NPC2", new FixedMetadataValue(Cosmetics.getInstance(), ""));
-        derperinoNPC.getEntity().setMetadata("NPC1", new FixedMetadataValue(Cosmetics.getInstance(), ""));
+        victimNPC.getEntity().setMetadata("NPC2", new FixedMetadataValue(CosmeticsPlugin.getInstance(), ""));
+        derperinoNPC.getEntity().setMetadata("NPC1", new FixedMetadataValue(CosmeticsPlugin.getInstance(), ""));
         victimNPC.getNavigator().setTarget(derperinoNPC.getEntity(), true);
 
         new BukkitRunnable() {
             @Override
             public void run() {
-                Player deperinoPlayer = (Player) derperinoNPC.getEntity();
                 derperinoNPC.despawn();
                 new BukkitRunnable() {
                     @Override
                     public void run() {
                         killEffect.execute(player, player, leftLocation, true);
                     }
-                }.runTask(Cosmetics.getInstance());
+                }.runTask(CosmeticsPlugin.getInstance());
             }
-        }.runTaskLater(Cosmetics.getInstance(), 22L);
+        }.runTaskLater(CosmeticsPlugin.getInstance(), 22L);
 
         new BukkitRunnable() {
             int tick = 5;
@@ -222,6 +155,6 @@ public class FinalKillEffectPreview {
                 }
                 tick--;
             }
-        }.runTaskTimer(Cosmetics.getInstance(), 0, 20);
+        }.runTaskTimer(CosmeticsPlugin.getInstance(), 0, 20);
     }
 }

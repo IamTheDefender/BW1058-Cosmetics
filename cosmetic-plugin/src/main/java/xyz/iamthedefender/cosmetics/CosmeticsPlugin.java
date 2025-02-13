@@ -43,7 +43,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 @Getter
-public class Cosmetics extends JavaPlugin {
+public class CosmeticsPlugin extends JavaPlugin {
 
     public ConfigManager menuData;
     private PlayerManager playerManager;
@@ -54,7 +54,7 @@ public class Cosmetics extends JavaPlugin {
     static boolean placeholderAPI;
 
     @Getter
-    private static Cosmetics instance;
+    private static CosmeticsPlugin instance;
 
     private ProtocolManager protocolManager;
 
@@ -230,7 +230,7 @@ public class Cosmetics extends JavaPlugin {
     }
 
     public static void setPlaceholderAPI(boolean placeholderAPI) {
-        Cosmetics.placeholderAPI = placeholderAPI;
+        CosmeticsPlugin.placeholderAPI = placeholderAPI;
     }
 
 

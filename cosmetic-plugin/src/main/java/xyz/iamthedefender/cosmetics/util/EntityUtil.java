@@ -7,13 +7,13 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 
 public class EntityUtil {
 
     public static void entityForPlayerOnly(Entity entityToHide, Player player){
-        if (!Cosmetics.getInstance().getEntityPlayerHashMap().containsKey(entityToHide.getEntityId())){
-            Cosmetics.getInstance().getEntityPlayerHashMap().put(entityToHide.getEntityId(), player);
+        if (!CosmeticsPlugin.getInstance().getEntityPlayerHashMap().containsKey(entityToHide.getEntityId())){
+            CosmeticsPlugin.getInstance().getEntityPlayerHashMap().put(entityToHide.getEntityId(), player);
         }
         PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_DESTROY);
         int[] entityIds = new int[] { entityToHide.getEntityId() };

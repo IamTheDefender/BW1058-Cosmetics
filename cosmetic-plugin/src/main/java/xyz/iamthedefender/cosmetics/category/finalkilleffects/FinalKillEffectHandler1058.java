@@ -5,7 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
@@ -19,10 +19,10 @@ public class FinalKillEffectHandler1058 implements Listener {
 
     @EventHandler
     public void onFinalKill1058(PlayerKillEvent e){
-        CosmeticsAPI api = Cosmetics.getInstance().getApi();
+        CosmeticsAPI api = CosmeticsPlugin.getInstance().getApi();
         if (e.getKiller() == null) return;
 
-        boolean isFinalKillEffectsEnabled = Cosmetics.getInstance().getConfig().getBoolean("final-kill-effects.enabled");
+        boolean isFinalKillEffectsEnabled = CosmeticsPlugin.getInstance().getConfig().getBoolean("final-kill-effects.enabled");
         if (!isFinalKillEffectsEnabled) return;
 
         String selected = api.getSelectedCosmetic(e.getKiller(), CosmeticsType.FinalKillEffects);

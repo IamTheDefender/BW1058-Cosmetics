@@ -6,7 +6,7 @@ import com.tomkeuper.bedwars.api.server.ServerType;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.handler.*;
 import xyz.iamthedefender.cosmetics.category.bedbreakeffects.BedDestroyHandler2023;
 import xyz.iamthedefender.cosmetics.category.deathcries.DeathCryHandler2023;
@@ -31,7 +31,7 @@ public class BW2023Handler implements IHandler {
 
     @Override
     public void register() {
-        Cosmetics plugin = Cosmetics.getInstance();
+        CosmeticsPlugin plugin = CosmeticsPlugin.getInstance();
 
         BedWars2023 bedWars2023 = new BedWars2023(plugin);
         bedWars2023.start();
@@ -139,7 +139,7 @@ public class BW2023Handler implements IHandler {
 
     @Override
     public String getAddonPath() {
-        return api.getAddonsPath().getPath() + File.separator + Cosmetics.getInstance().getDescription().getName();
+        return api.getAddonsPath().getPath() + File.separator + CosmeticsPlugin.getInstance().getDescription().getName();
     }
 
     @Override

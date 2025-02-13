@@ -13,7 +13,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.material.Directional;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.handler.IArenaHandler;
 
 import java.io.File;
@@ -31,7 +31,7 @@ public class IslandToppersUtil
                 Bukkit.getLogger().severe("Schematic format is null! most probably file is invalid! (" + file.getName() + ")");
                 return;
             }
-            IArenaHandler arena = Cosmetics.getInstance().getHandler().getArenaUtil().getArenaByPlayer(p);
+            IArenaHandler arena = CosmeticsPlugin.getInstance().getHandler().getArenaUtil().getArenaByPlayer(p);
             if (arena != null) {
                 Block block = arena.getTeam(p).getBed().getBlock();
                 if (block.getType() == Material.BED_BLOCK){

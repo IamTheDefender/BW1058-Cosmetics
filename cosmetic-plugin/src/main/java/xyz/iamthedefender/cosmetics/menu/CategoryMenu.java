@@ -5,7 +5,6 @@ import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
@@ -15,7 +14,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
@@ -126,7 +125,7 @@ public class CategoryMenu extends ChestSystemGui {
             }
         }
 
-        if (Cosmetics.getInstance().getConfig().getBoolean("BackItemInCosmeticsMenu")) {
+        if (CosmeticsPlugin.getInstance().getConfig().getBoolean("BackItemInCosmeticsMenu")) {
             setItem(49, new ItemBuilder().material(Material.ARROW).name("&aBack").build(), (e) -> new MainMenu((Player) e.getWhoClicked()).open((Player) e.getWhoClicked()));
         }
 
@@ -204,7 +203,7 @@ public class CategoryMenu extends ChestSystemGui {
 
 
     public String getItemStatus(Player p, CosmeticsType type, String unformattedName, int price){
-        CosmeticsAPI api = Cosmetics.getInstance().getApi();
+        CosmeticsAPI api = CosmeticsPlugin.getInstance().getApi();
         String selected = api.getSelectedCosmetic(p, type);
         if (selected.equals(unformattedName)){
             return ColorUtil.translate(Utility.getMSGLang(p, "cosmetics.selected"));
@@ -221,7 +220,7 @@ public class CategoryMenu extends ChestSystemGui {
             }
         }
 
-        if (Cosmetics.getInstance().getEconomy().getBalance(p) >= price){
+        if (CosmeticsPlugin.getInstance().getEconomy().getBalance(p) >= price){
             return ColorUtil.translate(Utility.getMSGLang(p, "cosmetics.click-to-purchase"));
         }
 
@@ -229,7 +228,7 @@ public class CategoryMenu extends ChestSystemGui {
     }
 
     public int onClick(Player p, CosmeticsType type, int price, String id, boolean isOnlyForCheck) {
-        CosmeticsAPI api = Cosmetics.getInstance().getApi();
+        CosmeticsAPI api = CosmeticsPlugin.getInstance().getApi();
         String selected = api.getSelectedCosmetic(p, type);
         String permissionFormat = type.getPermissionFormat();
         Economy eco = VaultUtils.getEconomy();

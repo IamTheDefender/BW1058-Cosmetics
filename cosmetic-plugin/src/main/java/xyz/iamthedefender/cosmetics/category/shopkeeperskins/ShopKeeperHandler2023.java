@@ -14,7 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.ShopKeeperSkin;
 import xyz.iamthedefender.cosmetics.api.handler.HandlerType;
@@ -33,7 +33,7 @@ public class ShopKeeperHandler2023 implements Listener {
     @EventHandler
     public void onGameStart2023(com.tomkeuper.bedwars.api.events.gameplay.GameStateChangeEvent event) {
 
-        boolean isShopkeepersEnabled = Cosmetics.getInstance().getConfig().getBoolean("shopkeeper-skins.enabled");
+        boolean isShopkeepersEnabled = CosmeticsPlugin.getInstance().getConfig().getBoolean("shopkeeper-skins.enabled");
         if (!isShopkeepersEnabled) return;
 
         if (event.getNewState().name().equals("playing")) {
@@ -56,7 +56,7 @@ public class ShopKeeperHandler2023 implements Listener {
 
                         // Choose random player from the team
                         Player player = team.getMembers().get(MathUtil.getRandom(0, team.getMembers().size() -1));
-                        String skin = Cosmetics.getInstance().getApi().getSelectedCosmetic(player, CosmeticsType.ShopKeeperSkin);
+                        String skin = CosmeticsPlugin.getInstance().getApi().getSelectedCosmetic(player, CosmeticsType.ShopKeeperSkin);
                         DebugUtil.addMessage("Selected skin: " + skin);
                         // Spawn new NPCs
                         for (ShopKeeperSkin skins : StartupUtils.shopKeeperSkinList) {
@@ -69,23 +69,23 @@ public class ShopKeeperHandler2023 implements Listener {
                         }
 
 
-                        if (Cosmetics.getInstance().getHandler().getHandlerType() != HandlerType.BUNGEE){
+                        if (CosmeticsPlugin.getInstance().getHandler().getHandlerType() != HandlerType.BUNGEE){
                             for (Player p : team.getMembers()) {
-                                IHandler handler = Cosmetics.getInstance().getHandler();
+                                IHandler handler = CosmeticsPlugin.getInstance().getHandler();
                                 handler.getScoreboardUtil().removePlayerScoreboard(p);
                                 handler.getScoreboardUtil().giveScoreboard(p, true);
                             }
                         }
                     }
                 }
-            }.runTaskLater(Cosmetics.getInstance(), 30L);
+            }.runTaskLater(CosmeticsPlugin.getInstance(), 30L);
         }
     }
 
     @EventHandler
     public void onGameStartEvent(GameStateChangeEvent event){
         if (event.getNewState() != GameState.playing) return;
-        getServer().getScheduler().runTaskLater(Cosmetics.getInstance(), () -> {
+        getServer().getScheduler().runTaskLater(CosmeticsPlugin.getInstance(), () -> {
             World world = event.getArena().getWorld();
             for (Entity entity : world.getEntities()) {
                 boolean isCitizensNPC = entity.hasMetadata("NPC");
@@ -103,7 +103,7 @@ public class ShopKeeperHandler2023 implements Listener {
     @EventHandler
     public void onPlayerTeleportEvent(PlayerTeleportEvent e){
 
-        boolean isShopkeepersEnabled = Cosmetics.getInstance().getConfig().getBoolean("shopkeeper-skins.enabled");
+        boolean isShopkeepersEnabled = CosmeticsPlugin.getInstance().getConfig().getBoolean("shopkeeper-skins.enabled");
         if (!isShopkeepersEnabled) return;
 
         if (e.getPlayer().hasMetadata("NPC2")){
@@ -116,7 +116,7 @@ public class ShopKeeperHandler2023 implements Listener {
     @EventHandler
     public void onGameEnd2023(com.tomkeuper.bedwars.api.events.gameplay.GameEndEvent e) {
 
-        boolean isShopkeepersEnabled = Cosmetics.getInstance().getConfig().getBoolean("shopkeeper-skins.enabled");
+        boolean isShopkeepersEnabled = CosmeticsPlugin.getInstance().getConfig().getBoolean("shopkeeper-skins.enabled");
         if (!isShopkeepersEnabled) return;
 
         String name = e.getArena().getWorldName();

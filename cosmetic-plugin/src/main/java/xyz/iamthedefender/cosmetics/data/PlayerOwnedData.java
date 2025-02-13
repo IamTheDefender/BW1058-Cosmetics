@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.bukkit.Bukkit;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.*;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
@@ -31,7 +31,7 @@ public class PlayerOwnedData{
 
     public void load() {
         try {
-            Connection connection = Cosmetics.getInstance().getRemoteDatabase().getConnection();
+            Connection connection = CosmeticsPlugin.getInstance().getRemoteDatabase().getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM player_owned_data WHERE uuid = ?");
             statement.setString(1, uuid.toString());
             ResultSet result = statement.executeQuery();
@@ -62,7 +62,7 @@ public class PlayerOwnedData{
         "VALUES (?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
 
         try{
-            Connection connection = Cosmetics.getInstance().getRemoteDatabase().getConnection();
+            Connection connection = CosmeticsPlugin.getInstance().getRemoteDatabase().getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, uuid.toString());
             statement.executeUpdate();
@@ -75,7 +75,7 @@ public class PlayerOwnedData{
 
     public void save() {
         try {
-            Connection connection = Cosmetics.getInstance().getRemoteDatabase().getConnection();
+            Connection connection = CosmeticsPlugin.getInstance().getRemoteDatabase().getConnection();
             PreparedStatement statement = connection.prepareStatement("UPDATE player_owned_data SET bed_destroy = ?, death_cry = ?, final_kill_effect = ?, glyph = ?, island_topper = ?, kill_message = ?, projectile_trail = ?, shopkeeper_skin = ?, spray = ?, victory_dance = ?, wood_skin = ? WHERE uuid = ?;");
             statement.setInt(1, bedDestroy);
             statement.setInt(2, deathCry);

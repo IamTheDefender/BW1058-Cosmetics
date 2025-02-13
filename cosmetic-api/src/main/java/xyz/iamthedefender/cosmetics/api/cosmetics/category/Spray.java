@@ -78,6 +78,10 @@ public abstract class Spray extends Cosmetics {
                 return RarityType.valueOf(config.getString(configPath + "rarity"));
             case ITEM_STACK:
                 return config.getItemStack(configPath + "item");
+            case FILE:
+                return get(type).getString(configPath + "file");
+            case URL:
+                return get(type).getString(configPath + "url");
             default:
                 return null;
         }

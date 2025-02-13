@@ -11,7 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.metadata.FixedMetadataValue;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.Spray;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
@@ -22,14 +22,14 @@ public class SpraysHandler1058 implements Listener
     @EventHandler
     public void onRightClick(PlayerInteractEntityEvent e) {
 
-        boolean isSpraysEnabled = Cosmetics.getInstance().getConfig().getBoolean("sprays.enabled");
+        boolean isSpraysEnabled = CosmeticsPlugin.getInstance().getConfig().getBoolean("sprays.enabled");
         if (!isSpraysEnabled) return;
 
          Player p = e.getPlayer();
         if (e.getRightClicked() instanceof ItemFrame) {
             ItemFrame itemFrame = (ItemFrame) e.getRightClicked();
             if (itemFrame.getItem() == null) return;
-            String selected = Cosmetics.getInstance().getApi().getSelectedCosmetic(p, CosmeticsType.Sprays);
+            String selected = CosmeticsPlugin.getInstance().getApi().getSelectedCosmetic(p, CosmeticsType.Sprays);
             XMaterial material = XMaterial.matchXMaterial(itemFrame.getItem());
             // AIR, MAP, FILLED_MAP
             if (material == XMaterial.AIR || material == XMaterial.MAP || material == XMaterial.FILLED_MAP) {
@@ -47,7 +47,7 @@ public class SpraysHandler1058 implements Listener
     @EventHandler
     public void onGameStart1058(GameStateChangeEvent event) {
 
-        boolean isSpraysEnabled = Cosmetics.getInstance().getConfig().getBoolean("sprays.enabled");
+        boolean isSpraysEnabled = CosmeticsPlugin.getInstance().getConfig().getBoolean("sprays.enabled");
         if (!isSpraysEnabled) return;
 
         if (event.getNewState().name().equals("playing")) {
@@ -59,7 +59,7 @@ public class SpraysHandler1058 implements Listener
                         stand.setVisible(false);
                         stand.setGravity(false);
                         stand.setCustomName(ColorUtil.translate("&eClick!"));
-                        stand.setMetadata("HOLO_ITEM_FRAME", new FixedMetadataValue(Cosmetics.getInstance(), ""));
+                        stand.setMetadata("HOLO_ITEM_FRAME", new FixedMetadataValue(CosmeticsPlugin.getInstance(), ""));
                         stand.setCustomNameVisible(true);
                         stand.setMarker(true);
                         stand.setSmall(true);

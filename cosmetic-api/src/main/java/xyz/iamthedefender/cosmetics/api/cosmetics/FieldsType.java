@@ -8,5 +8,5 @@ public enum FieldsType {
     RARITY,
     SOUND,
     PITCH,
-    VOLUME
+    URL, FILE, VOLUME
 }

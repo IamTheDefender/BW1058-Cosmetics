@@ -8,7 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.menu.impl.ChestSystemGui;
 import xyz.iamthedefender.cosmetics.api.util.ItemBuilder;
@@ -27,7 +27,7 @@ public class MainMenu extends ChestSystemGui {
     public void onOpen(@NotNull Player player) {
         String loc = "Main-Menu";
         String langLoc = "cosmetics.main-menu";
-        FileConfiguration config = Cosmetics.getInstance().getMenuData().getYml();
+        FileConfiguration config = CosmeticsPlugin.getInstance().getMenuData().getYml();
 
         for(String name : config.getConfigurationSection(loc).getKeys(false)) {
             try {

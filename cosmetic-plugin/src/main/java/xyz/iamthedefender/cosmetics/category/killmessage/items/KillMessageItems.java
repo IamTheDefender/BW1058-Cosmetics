@@ -3,7 +3,7 @@ package xyz.iamthedefender.cosmetics.category.killmessage.items;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
@@ -66,7 +66,7 @@ public class KillMessageItems {
                 };
                 killMessage.register();
             }catch (Exception e){
-                Cosmetics.getInstance().getLogger().warning("Error while loading KillMessage: " + id);
+                CosmeticsPlugin.getInstance().getLogger().warning("Error while loading KillMessage: " + id);
             }
         }
     }

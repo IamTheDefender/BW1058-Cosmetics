@@ -1,13 +1,11 @@
 package xyz.iamthedefender.cosmetics.category.finalkilleffects.items;
 
-import com.comphenix.protocol.wrappers.EnumWrappers;
-import com.comphenix.protocol.wrappers.WrappedParticle;
 import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-import xyz.iamthedefender.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
 import xyz.iamthedefender.cosmetics.api.particle.ParticleWrapper;
@@ -78,6 +76,6 @@ public class BurningShoesEffect extends FinalKillEffect {
                     }
                 }
             }
-        }).runTaskTimer(Cosmetics.getInstance(), 1L, 1L);
+        }).runTaskTimer(CosmeticsPlugin.getInstance(), 1L, 1L);
     }
 }
