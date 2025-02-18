@@ -111,7 +111,7 @@ public class BwcAPI implements CosmeticsAPI {
 
     @Override
     public List<CosmeticPreview> getPreviewList() {
-        return List.of();
+        return CosmeticsPlugin.getInstance().getPreviewList();
     }
 
     /**

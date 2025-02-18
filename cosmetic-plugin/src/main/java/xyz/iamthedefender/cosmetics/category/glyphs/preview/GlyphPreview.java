@@ -26,6 +26,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,7 +40,7 @@ public class GlyphPreview extends CosmeticPreview {
     public void showPreview(Player player, Cosmetics selected, Location previewLocation, Location playerLocation) throws IllegalArgumentException {
         handleLocation(player, playerLocation);
 
-        ArmorStand as = (ArmorStand) player.getWorld().spawnEntity(previewLocation, EntityType.ARMOR_STAND);
+        ArmorStand as = (ArmorStand) player.getWorld().spawnEntity(playerLocation, EntityType.ARMOR_STAND);
         as.setVisible(false);
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,
@@ -97,14 +98,20 @@ public class GlyphPreview extends CosmeticPreview {
         imageParticles.setAnchor(50, 10);
         imageParticles.setDisplayRatio(0.1);
 
-        location.add(0, 2, 0);
+        location.add(0.5, 2, 0.5);
 
         Map<Location, Color> particles = imageParticles.getParticles(location, location.getPitch(), 180.0f);
 
-        Run.delayedAsync(() -> {
+        long perIteration = 2L;
+        long time = getEndDelay() / perIteration;
+        AtomicLong counter = new AtomicLong(time);
+
+        Run.everyAsync((r) -> {
+            if (counter.decrementAndGet() < 0) r.cancel();
+
             for (Location spot : particles.keySet()) {
-                Run.sync(() -> GlyphUtil.sendRedstoneParticle(player, spot, particles.get(spot)));
+                GlyphUtil.sendRedstoneParticle(player, spot, particles.get(spot));
             }
-        }, 2L);
+        }, perIteration);
     }
 }

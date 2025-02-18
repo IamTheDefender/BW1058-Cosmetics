@@ -17,6 +17,7 @@ import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticPreview;
 import xyz.iamthedefender.cosmetics.api.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.VictoryDance;
 import xyz.iamthedefender.cosmetics.api.database.DatabaseType;
 import xyz.iamthedefender.cosmetics.api.database.IDatabase;
@@ -237,7 +238,13 @@ public class CosmeticsPlugin extends JavaPlugin {
         CosmeticsPlugin.placeholderAPI = placeholderAPI;
     }
 
-    public static @Nullable Cosmetics findCosmetic(String cosmeticId) {
+    /**
+     * Find cosmetic by id
+     * @param cosmeticId case-sensitive cosmetic id
+     * @param cosmeticsType cosmetic type
+     * @return null if not found or else the {@link Cosmetics} object
+     */
+    public static @Nullable Cosmetics findCosmetic(String cosmeticId, CosmeticsType cosmeticsType) {
         CosmeticsAPI cosmeticsAPI = instance.getApi();
 
         List<Cosmetics> cosmetics = new ArrayList<>();
@@ -253,7 +260,7 @@ public class CosmeticsPlugin extends JavaPlugin {
         cosmetics.addAll(cosmeticsAPI.getShopKeeperSkinList());
         cosmetics.addAll(cosmeticsAPI.getIslandTopperList());
 
-        return cosmetics.stream().filter(cosmetic -> cosmetic.getIdentifier().equals(cosmeticId)).findFirst().orElse(null);
+        return cosmetics.stream().filter(cosmetic -> cosmetic.getIdentifier().equals(cosmeticId) && cosmetic.getCosmeticType() == cosmeticsType).findFirst().orElse(null);
     }
 
 

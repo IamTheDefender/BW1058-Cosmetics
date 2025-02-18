@@ -22,12 +22,18 @@ import xyz.iamthedefender.cosmetics.api.util.config.ConfigUtils;
 import xyz.iamthedefender.cosmetics.api.versionsupport.IVersionSupport;
 import xyz.iamthedefender.cosmetics.category.bedbreakeffects.items.*;
 import xyz.iamthedefender.cosmetics.category.deathcries.items.DeathCryItems;
+import xyz.iamthedefender.cosmetics.category.deathcries.preview.DeathCryPreview;
 import xyz.iamthedefender.cosmetics.category.finalkilleffects.items.*;
+import xyz.iamthedefender.cosmetics.category.finalkilleffects.preview.FinalKillEffectPreview;
 import xyz.iamthedefender.cosmetics.category.glyphs.items.GlyphItems;
+import xyz.iamthedefender.cosmetics.category.glyphs.preview.GlyphPreview;
 import xyz.iamthedefender.cosmetics.category.islandtoppers.items.IslandTopperItems;
+import xyz.iamthedefender.cosmetics.category.islandtoppers.preview.IslandTopperPreview;
 import xyz.iamthedefender.cosmetics.category.killmessage.items.KillMessageItems;
+import xyz.iamthedefender.cosmetics.category.killmessage.preview.KillMessagePreview;
 import xyz.iamthedefender.cosmetics.category.projectiletrails.items.ProjectileTrailItems;
 import xyz.iamthedefender.cosmetics.category.shopkeeperskins.items.ShopKeeperItems;
+import xyz.iamthedefender.cosmetics.category.shopkeeperskins.preview.ShopKeeperPreview;
 import xyz.iamthedefender.cosmetics.category.sprays.items.SprayItems;
 import xyz.iamthedefender.cosmetics.category.victorydance.items.*;
 import xyz.iamthedefender.cosmetics.category.woodskin.items.*;
@@ -382,6 +388,14 @@ public class StartupUtils
         new JungleLog().register();
         new OakLog().register();
         new SpruceLog().register();
+
+        // Previews
+        new ShopKeeperPreview();
+        new GlyphPreview();
+        new KillMessagePreview();
+        new FinalKillEffectPreview();
+        new IslandTopperPreview();
+        new DeathCryPreview();
     }
 
 

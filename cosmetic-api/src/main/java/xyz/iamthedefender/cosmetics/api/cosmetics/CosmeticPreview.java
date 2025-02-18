@@ -9,9 +9,7 @@ import xyz.iamthedefender.cosmetics.api.menu.SystemGui;
 import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Getter
 public abstract class CosmeticPreview {
@@ -42,7 +40,9 @@ public abstract class CosmeticPreview {
         hidePlayer(player);
         player.teleport(newLocation);
 
-        inventoryStorage.put(player, List.of(player.getInventory().getContents()));
+        List<ItemStack> contents = new ArrayList<>(Arrays.asList(player.getInventory().getContents()));
+
+        inventoryStorage.put(player, contents);
         player.getInventory().clear();
 
         player.closeInventory();

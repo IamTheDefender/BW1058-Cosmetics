@@ -69,4 +69,10 @@ public abstract class Cosmetics {
      * Register this cosmetic.
      */
     public abstract void register();
+
+    /**
+     * Get the type of this cosmetic.
+     * @return the {@link CosmeticsType} of this cosmetic.
+     */
+    public abstract CosmeticsType getCosmeticType();
 }

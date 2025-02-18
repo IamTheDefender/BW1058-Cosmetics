@@ -1,12 +1,10 @@
 package xyz.iamthedefender.cosmetics.menu;
 
 import com.cryptomorin.xseries.XSound;
-import org.bukkit.Location;
-import xyz.iamthedefender.cosmetics.api.cosmetics.Cosmetics;
-import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
@@ -19,20 +17,15 @@ import org.jetbrains.annotations.NotNull;
 import xyz.iamthedefender.cosmetics.CosmeticsPlugin;
 import xyz.iamthedefender.cosmetics.api.CosmeticsAPI;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
+import xyz.iamthedefender.cosmetics.api.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.event.CosmeticPurchaseEvent;
 import xyz.iamthedefender.cosmetics.api.menu.ClickableItem;
 import xyz.iamthedefender.cosmetics.api.menu.impl.ChestSystemGui;
+import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
 import xyz.iamthedefender.cosmetics.api.util.ItemBuilder;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
-import xyz.iamthedefender.cosmetics.category.deathcries.preview.DeathCryPreview;
-import xyz.iamthedefender.cosmetics.category.finalkilleffects.preview.FinalKillEffectPreview;
-import xyz.iamthedefender.cosmetics.category.glyphs.preview.GlyphPreview;
-import xyz.iamthedefender.cosmetics.category.islandtoppers.preview.IslandTopperPreview;
-import xyz.iamthedefender.cosmetics.category.killmessage.preview.KillMessagePreview;
-import xyz.iamthedefender.cosmetics.category.shopkeeperskins.preview.ShopKeeperPreview;
-import xyz.iamthedefender.cosmetics.category.sprays.preview.SprayPreview;
 import xyz.iamthedefender.cosmetics.util.DebugUtil;
 import xyz.iamthedefender.cosmetics.util.StartupUtils;
 import xyz.iamthedefender.cosmetics.util.StringUtils;
@@ -274,7 +267,7 @@ public class CategoryMenu extends ChestSystemGui {
 
 
     public void previewClick(Player player, CosmeticsType type, String id, int price){
-        Cosmetics cosmetics = CosmeticsPlugin.findCosmetic(id);
+        Cosmetics cosmetics = CosmeticsPlugin.findCosmetic(id, type);
 
         if (cosmetics == null) return;
 
@@ -287,7 +280,7 @@ public class CategoryMenu extends ChestSystemGui {
         Location previewLocation = StartupUtils.getCosmeticLocation();
 
         AtomicBoolean found = new AtomicBoolean(false);
-        CosmeticsPlugin.getInstance().getPreviewList().stream().filter(p -> p.getType() == type).forEach(cosmeticPreview -> {
+        CosmeticsPlugin.getInstance().getPreviewList().stream().filter(preview -> preview.getType() == type).findAny().ifPresent(cosmeticPreview -> {
             cosmeticPreview.showPreview(player, cosmetics, previewLocation, playerLocation);
             found.set(true);
         });

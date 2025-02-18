@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import xyz.iamthedefender.cosmetics.api.configuration.ConfigManager;
 import xyz.iamthedefender.cosmetics.api.cosmetics.Cosmetics;
+import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.FieldsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.RarityType;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
@@ -106,5 +107,10 @@ public abstract class WoodSkin extends Cosmetics {
 
         // This will never return null!
         return null;
+    }
+
+    @Override
+    public CosmeticsType getCosmeticType() {
+        return CosmeticsType.WoodSkins;
     }
 }

@@ -28,6 +28,7 @@ import xyz.iamthedefender.cosmetics.api.cosmetics.Cosmetics;
 import xyz.iamthedefender.cosmetics.api.cosmetics.CosmeticsType;
 import xyz.iamthedefender.cosmetics.api.cosmetics.category.FinalKillEffect;
 import xyz.iamthedefender.cosmetics.api.util.ColorUtil;
+import xyz.iamthedefender.cosmetics.api.util.Run;
 import xyz.iamthedefender.cosmetics.api.util.Utility;
 
 import java.util.Arrays;
@@ -51,7 +52,7 @@ public class FinalKillEffectPreview extends CosmeticPreview {
         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,
                 100, 2));
 
-        sendKillEffect(player, previewLocation, (FinalKillEffect) selected);
+        Runnable onEnd = sendKillEffect(player, previewLocation, (FinalKillEffect) selected);
 
         PacketContainer cameraPacket = ProtocolLibrary.getProtocolManager().createPacket(PacketType.Play.Server.CAMERA);
         cameraPacket.getIntegers().write(0, as.getEntityId());
@@ -65,10 +66,12 @@ public class FinalKillEffectPreview extends CosmeticPreview {
 
             CosmeticsPlugin.getInstance().getProtocolManager().sendServerPacket(player, resetPacket);
             player.removePotionEffect(PotionEffectType.INVISIBILITY);
+
+            onEnd.run();
         });
     }
 
-    public void sendKillEffect(Player player, Location location, FinalKillEffect killEffect) {
+    public Runnable sendKillEffect(Player player, Location location, FinalKillEffect killEffect) {
         NPCRegistry registry = CitizensAPI.createAnonymousNPCRegistry(new MemoryNPCDataStore());
 
         Block block = location.getBlock();
@@ -121,40 +124,14 @@ public class FinalKillEffectPreview extends CosmeticPreview {
         derperinoNPC.getEntity().setMetadata("NPC1", new FixedMetadataValue(CosmeticsPlugin.getInstance(), ""));
         victimNPC.getNavigator().setTarget(derperinoNPC.getEntity(), true);
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                derperinoNPC.despawn();
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        killEffect.execute(player, player, leftLocation, true);
-                    }
-                }.runTask(CosmeticsPlugin.getInstance());
-            }
-        }.runTaskLater(CosmeticsPlugin.getInstance(), 22L);
+        Run.delayed(() -> {
+            derperinoNPC.despawn();
+            killEffect.execute(player, player, leftLocation, false);
+        }, 22L);
 
-        new BukkitRunnable() {
-            int tick = 5;
-            @Override
-            public void run() {
-                if (tick == 0){
-
-                    if (victimNPC.getEntity() != null){
-                        if (!victimNPC.getEntity().isDead()){
-                            victimNPC.despawn();
-                        }
-                    }
-                    if (derperinoNPC.getEntity() != null) {
-                        if (!derperinoNPC.getEntity().isDead()) {
-                            derperinoNPC.despawn();
-                        }
-                    }
-
-                    cancel();
-                }
-                tick--;
-            }
-        }.runTaskTimer(CosmeticsPlugin.getInstance(), 0, 20);
+        return () -> {
+            victimNPC.despawn();
+            derperinoNPC.despawn();
+        };
     }
 }
