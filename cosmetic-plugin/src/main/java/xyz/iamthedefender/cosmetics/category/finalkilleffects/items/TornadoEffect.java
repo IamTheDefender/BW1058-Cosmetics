@@ -69,15 +69,9 @@ public class TornadoEffect extends FinalKillEffect {
                         final double z = Math.sin(Math.toRadians((double) 360 / lines * l + y * 30.0 - this.angle)) * radius;
                         double finalY = y;
 
-                        if (onlyVictim) {
-                            ParticleWrapper.getParticle("CLOUD").ifPresent(particleWrapper -> {
-                                particleWrapper.support().displayParticle(null, location.clone().add(x, finalY, z), particleWrapper);
-                            });
-                        } else {
-                            ParticleWrapper.getParticle("CLOUD").ifPresent(particleWrapper -> {
-                                particleWrapper.support().displayParticle(null, location.clone().add(x, finalY, z), particleWrapper);
-                            });
-                        }
+                        ParticleWrapper.getParticle("CLOUD").ifPresent(particleWrapper -> {
+                            particleWrapper.support().displayParticle(onlyVictim ? victim : null, location.clone().add(x, finalY, z), particleWrapper, 1, 0.0f);
+                        });
                     }
                 }
                 ++this.angle;
